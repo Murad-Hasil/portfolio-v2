@@ -54,6 +54,7 @@ qdrant_storage/
 
 # Lighthouse temp directories
 lighthouse.*/
+C:\Users\*/
 
 # Claude MCP config (local paths)
 .claude/mcp-config.json

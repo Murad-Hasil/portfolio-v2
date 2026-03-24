@@ -12,7 +12,7 @@
 | Service | URL |
 |---------|-----|
 | Frontend | https://muradhasil.dev *(coming soon)* |
-| Backend API | https://portfolio-backend.onrender.com *(coming soon)* |
+| Backend API | https://mb-murad-portfolio-v2.hf.space |
 | API Docs | `/docs` |
 
 ## What This Portfolio Does
@@ -32,7 +32,7 @@
 | Database | Neon PostgreSQL |
 | Vector DB | Qdrant Cloud |
 | AI/LLM | Groq (Llama-3.3-70b), fastembed (BAAI/bge-small-en-v1.5) |
-| Deployment | Vercel (frontend), Render (backend) |
+| Deployment | Vercel (frontend), Hugging Face Spaces (backend) |
 | CI/CD | GitHub Actions |
 
 ## Project Structure
@@ -93,7 +93,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 ## Deployment
 
-See [render.yaml](./render.yaml) for backend deployment config.
+Backend is deployed on Hugging Face Spaces (Docker).
 Frontend deploys automatically to Vercel on push to `main`.
 
 ## Contact
