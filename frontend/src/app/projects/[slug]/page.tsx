@@ -1,0 +1,350 @@
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { ArrowLeft, ExternalLink } from "lucide-react";
+import { GithubIcon } from "@/components/icons";
+import fs from "fs";
+import path from "path";
+
+type Project = {
+  id: string;
+  title: string;
+  slug: string;
+  featured: boolean;
+  category: string;
+  description: string;
+  problem: string;
+  solution: string;
+  tech: string[];
+  live_url: string | null;
+  github_url: string | null;
+  image: string;
+  metrics: string[];
+  highlights: string[];
+  demo_note?: string;
+};
+
+const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:8000";
+
+function readProjectsJson(): { projects: Project[] } {
+  const jsonPath = path.resolve(
+    process.cwd(),
+    "..",
+    "context",
+    "projects-manifest.json"
+  );
+  return JSON.parse(fs.readFileSync(jsonPath, "utf-8")) as {
+    projects: Project[];
+  };
+}
+
+async function fetchProject(slug: string): Promise<Project | null> {
+  try {
+    const res = await fetch(`${BACKEND_URL}/projects/${slug}`, {
+      next: { revalidate: 60 },
+    });
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error("Backend unavailable");
+    return (await res.json()) as Project;
+  } catch {
+    // Fallback to JSON file
+    try {
+      const data = readProjectsJson();
+      return data.projects.find((p) => p.slug === slug) ?? null;
+    } catch {
+      return null;
+    }
+  }
+}
+
+export async function generateStaticParams() {
+  try {
+    const data = readProjectsJson();
+    return data.projects.map((p) => ({ slug: p.slug }));
+  } catch {
+    return [];
+  }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = await fetchProject(slug);
+  if (!project) return {};
+  return {
+    title: project.title,
+    description: project.description,
+  };
+}
+
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = await fetchProject(slug);
+  if (!project) notFound();
+
+  const hasLiveUrl =
+    project.live_url !== null &&
+    project.live_url !== "[your deployed URL]";
+  const hasGithub =
+    project.github_url !== null &&
+    project.github_url !== "[your GitHub repo URL]";
+
+  return (
+    <main
+      className="min-h-screen py-20 px-4 sm:px-6"
+      style={{ background: "var(--bg-primary)" }}
+    >
+      <div className="max-w-3xl mx-auto">
+        {/* Back */}
+        <Link
+          href="/#projects"
+          className="inline-flex items-center gap-2 text-sm mb-10 transition-colors duration-200 hover:text-[var(--accent-cyan)]"
+          style={{
+            color: "var(--text-muted)",
+            fontFamily: "var(--font-space-grotesk)",
+          }}
+        >
+          <ArrowLeft size={15} />
+          Back to Projects
+        </Link>
+
+        {/* Category badge */}
+        <div className="mb-4">
+          <span
+            className="text-xs px-2 py-0.5 rounded"
+            style={{
+              fontFamily: "var(--font-jetbrains-mono)",
+              color: "var(--accent-indigo)",
+              background: "rgba(99,102,241,0.1)",
+              border: "1px solid rgba(99,102,241,0.2)",
+            }}
+          >
+            {project.category}
+          </span>
+        </div>
+
+        {/* Title */}
+        <h1
+          className="font-bold leading-tight mb-4"
+          style={{
+            fontFamily: "var(--font-space-grotesk)",
+            fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
+            color: "var(--text-primary)",
+          }}
+        >
+          {project.title}
+        </h1>
+
+        {/* Description */}
+        <p
+          className="text-base mb-8 leading-relaxed"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          {project.description}
+        </p>
+
+        <hr
+          style={{
+            borderColor: "var(--border-subtle)",
+            marginBottom: "2rem",
+          }}
+        />
+
+        {/* Problem / Solution */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
+          <div
+            className="rounded-lg p-5"
+            style={{
+              background: "var(--bg-elevated)",
+              border: "1px solid var(--border-subtle)",
+            }}
+          >
+            <h2
+              className="text-xs tracking-widest uppercase mb-2"
+              style={{
+                fontFamily: "var(--font-jetbrains-mono)",
+                color: "var(--accent-cyan)",
+              }}
+            >
+              // Problem
+            </h2>
+            <p
+              className="text-sm leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {project.problem}
+            </p>
+          </div>
+          <div
+            className="rounded-lg p-5"
+            style={{
+              background: "var(--bg-elevated)",
+              border: "1px solid var(--border-subtle)",
+            }}
+          >
+            <h2
+              className="text-xs tracking-widest uppercase mb-2"
+              style={{
+                fontFamily: "var(--font-jetbrains-mono)",
+                color: "var(--accent-cyan)",
+              }}
+            >
+              // Solution
+            </h2>
+            <p
+              className="text-sm leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {project.solution}
+            </p>
+          </div>
+        </div>
+
+        {/* Tech Stack */}
+        <div className="mb-10">
+          <h2
+            className="text-xs tracking-widest uppercase mb-3"
+            style={{
+              fontFamily: "var(--font-jetbrains-mono)",
+              color: "var(--accent-cyan)",
+            }}
+          >
+            // Tech Stack
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map((t) => (
+              <span
+                key={t}
+                className="text-xs px-3 py-1 rounded"
+                style={{
+                  fontFamily: "var(--font-jetbrains-mono)",
+                  color: "var(--accent-indigo)",
+                  background: "rgba(99,102,241,0.1)",
+                  border: "1px solid rgba(99,102,241,0.2)",
+                }}
+              >
+                [{t}]
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Metrics */}
+        <div className="mb-10">
+          <h2
+            className="text-xs tracking-widest uppercase mb-3"
+            style={{
+              fontFamily: "var(--font-jetbrains-mono)",
+              color: "var(--accent-cyan)",
+            }}
+          >
+            // Metrics
+          </h2>
+          <ul className="space-y-2">
+            {project.metrics.map((m, i) => (
+              <li
+                key={i}
+                className="flex items-start gap-2 text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                <span
+                  style={{ color: "var(--accent-green)", flexShrink: 0 }}
+                >
+                  ✓
+                </span>
+                {m}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Highlights */}
+        <div className="mb-10">
+          <h2
+            className="text-xs tracking-widest uppercase mb-3"
+            style={{
+              fontFamily: "var(--font-jetbrains-mono)",
+              color: "var(--accent-cyan)",
+            }}
+          >
+            // Highlights
+          </h2>
+          <ul className="space-y-2">
+            {project.highlights.map((h, i) => (
+              <li
+                key={i}
+                className="flex items-start gap-2 text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                <span
+                  style={{ color: "var(--accent-indigo)", flexShrink: 0 }}
+                >
+                  →
+                </span>
+                {h}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Links */}
+        {(hasLiveUrl || hasGithub || project.demo_note) && (
+          <div className="flex flex-wrap gap-3">
+            {hasLiveUrl && (
+              <a
+                href={project.live_url!}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-semibold transition-opacity duration-200 hover:opacity-90"
+                style={{
+                  background: "var(--accent-cyan)",
+                  color: "#08080F",
+                  fontFamily: "var(--font-space-grotesk)",
+                }}
+              >
+                <ExternalLink size={14} />
+                Live Demo
+              </a>
+            )}
+            {hasGithub && (
+              <a
+                href={project.github_url!}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-semibold transition-all duration-200 hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
+                style={{
+                  border: "1px solid var(--border-subtle)",
+                  color: "var(--text-primary)",
+                  fontFamily: "var(--font-space-grotesk)",
+                }}
+              >
+                <GithubIcon size={14} />
+                GitHub
+              </a>
+            )}
+            {project.demo_note && !hasLiveUrl && (
+              <span
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded text-xs"
+                style={{
+                  fontFamily: "var(--font-jetbrains-mono)",
+                  color: "var(--text-muted)",
+                  background: "var(--bg-elevated)",
+                  border: "1px solid var(--border-subtle)",
+                }}
+              >
+                {project.demo_note}
+              </span>
+            )}
+          </div>
+        )}
+      </div>
+    </main>
+  );
+}
