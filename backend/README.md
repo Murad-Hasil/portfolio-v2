@@ -1,3 +1,12 @@
+---
+title: Portfolio API
+emoji: 🚀
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
+
 # Portfolio Backend — FastAPI
 
 REST API powering Murad Hasil's portfolio. Handles projects, skills, contact form, RAG chatbot, and analytics.
