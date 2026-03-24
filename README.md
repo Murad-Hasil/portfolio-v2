@@ -11,7 +11,7 @@
 
 | Service | URL |
 |---------|-----|
-| Frontend | https://muradhasil.dev *(coming soon)* |
+| Frontend | https://murad-hasil-portfolio-v2-xi.vercel.app |
 | Backend API | https://mb-murad-portfolio-v2.hf.space |
 | API Docs | `/docs` |
 

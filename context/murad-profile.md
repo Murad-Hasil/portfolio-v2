@@ -32,4 +32,4 @@ Focus: Applied AI, Cloud-Native Development, Autonomous Agents
 ## Freelancing Goals
 - Platform: Upwork and Fiverr (international clients)
 - Niche: AI Automation, Chatbot Development, Full-Stack Web Apps
-- Availability: [your hours per week]
+- Availability: 40 hours/week
