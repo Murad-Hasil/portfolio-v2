@@ -1,0 +1,52 @@
+{
+  "services": [
+    {
+      "id": "ai-chatbot-agent",
+      "name": "AI Chatbot & Agent Development",
+      "target_client": "Businesses wanting 24/7 customer support or internal automation",
+      "description": "Custom AI chatbots and autonomous agents built with OpenAI Agents SDK, RAG pipelines, and MCP tools. From simple FAQ bots to multi-channel omnichannel agents.",
+      "deliverables": [
+        "Production-ready AI agent or chatbot with your knowledge base",
+        "RAG pipeline connected to your documents and data",
+        "Deployment to your preferred platform (Vercel, Railway, or cloud)"
+      ],
+      "cta": "#contact"
+    },
+    {
+      "id": "business-automation",
+      "name": "Business Automation",
+      "target_client": "Small businesses spending hours on repetitive manual tasks",
+      "description": "End-to-end automation systems using Python, n8n, and AI agents. Automate email processing, report generation, data pipelines, and routine workflows so your team focuses on what matters.",
+      "deliverables": [
+        "Automated workflow replacing your most time-consuming manual process",
+        "Monitoring dashboard and alerting for the automation",
+        "Documentation and handover so your team can manage it"
+      ],
+      "cta": "#contact"
+    },
+    {
+      "id": "fullstack-web-apps",
+      "name": "Full-Stack Web Apps",
+      "target_client": "Startups and SMEs needing custom web applications",
+      "description": "Complete web applications built with Next.js and FastAPI. From SaaS dashboards to internal tools, delivered with TypeScript, PostgreSQL, and production CI/CD on Vercel + Railway.",
+      "deliverables": [
+        "Fully functional web app with frontend and backend",
+        "PostgreSQL database with proper schema and migrations",
+        "CI/CD pipeline with GitHub Actions and auto-deployment"
+      ],
+      "cta": "#contact"
+    },
+    {
+      "id": "rag-knowledge-base",
+      "name": "RAG / Knowledge Base Systems",
+      "target_client": "Companies wanting AI that answers from their own data",
+      "description": "Retrieval-Augmented Generation systems that give AI accurate, grounded answers from your company documents, FAQs, and knowledge bases — without hallucination.",
+      "deliverables": [
+        "Vector database populated with your company's knowledge",
+        "AI query interface returning grounded, cited answers",
+        "Update pipeline so new documents are indexed automatically"
+      ],
+      "cta": "#contact"
+    }
+  ]
+}

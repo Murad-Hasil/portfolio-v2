@@ -1,0 +1,152 @@
+{
+  "projects": [
+    {
+      "id": "crm-digital-fte",
+      "title": "CRM Digital FTE \u2014 Omnichannel AI Customer Success Agent",
+      "slug": "crm-digital-fte",
+      "status": "completed",
+      "featured": true,
+      "category": "AI Agents",
+      "description": "Autonomous AI customer success agent handling Gmail, WhatsApp, and Web Form simultaneously. Built with OpenAI Agents SDK, FastAPI, PostgreSQL with pgvector, Kafka event streaming, and deployed on Kubernetes with auto-scaling.",
+      "problem": "A SaaS company needs 24/7 customer support across 3 channels but human FTEs cost $75,000/year. This Digital FTE operates at under $1,000/year.",
+      "solution": "MCP-powered agent with 5 specialized tools, cross-channel customer identity resolution, sentiment-based escalation, and production Kubernetes deployment.",
+      "tech": [
+        "OpenAI Agents SDK",
+        "FastAPI",
+        "PostgreSQL",
+        "Qdrant",
+        "Kafka",
+        "Next.js",
+        "Docker",
+        "Kubernetes",
+        "Twilio",
+        "Gmail API"
+      ],
+      "live_url": "[your deployed URL]",
+      "github_url": "[your GitHub repo URL]",
+      "image": "/projects/crm-digital-fte.png",
+      "metrics": [
+        "Handles 3 channels simultaneously",
+        "P95 response time < 3 seconds",
+        "Cross-channel identification > 95% accuracy",
+        "24/7 uptime with Kubernetes auto-scaling"
+      ],
+      "highlights": [
+        "Built custom PostgreSQL CRM with pgvector",
+        "Kafka event streaming for decoupled channel processing",
+        "MCP Server exposing 5 tools to the agent",
+        "HPA auto-scaling: 3-30 pods based on load"
+      ]
+    },
+    {
+      "id": "todo-cloud-ai",
+      "title": "Todo App \u2192 Cloud-Native AI Agent (Spec-Driven Evolution)",
+      "slug": "todo-cloud-ai",
+      "status": "completed",
+      "featured": true,
+      "category": "Full-Stack + AI",
+      "description": "5-phase evolution from a simple Python CLI todo list to a full cloud-native AI agent on Kubernetes. Demonstrates spec-driven development methodology from first principles to production.",
+      "problem": "Show a complete software evolution journey \u2014 from console CLI to AI-powered app to Kubernetes-deployed microservices.",
+      "solution": "5 progressive phases: CLI \u2192 Web App \u2192 AI Chatbot Interface \u2192 Local Kubernetes \u2192 Cloud Kubernetes with Kafka and Dapr.",
+      "tech": [
+        "Python",
+        "Next.js",
+        "FastAPI",
+        "SQLModel",
+        "Neon PostgreSQL",
+        "OpenAI Agents SDK",
+        "MCP",
+        "Docker",
+        "Minikube",
+        "Kubernetes",
+        "Kafka",
+        "Dapr",
+        "GitHub Actions"
+      ],
+      "live_url": "[your deployed URL]",
+      "github_url": "[your GitHub repo URL]",
+      "image": "/projects/todo-cloud-ai.png",
+      "metrics": [
+        "5 complete evolution phases",
+        "Natural language task management",
+        "Cloud-native Kubernetes deployment",
+        "Full CI/CD with GitHub Actions"
+      ],
+      "highlights": [
+        "Spec-driven development throughout all phases",
+        "Natural language interface: 'Reschedule morning meetings to 2 PM'",
+        "Dapr for service mesh abstraction",
+        "Kafka for event-driven architecture"
+      ]
+    },
+    {
+      "id": "personal-ai-employee",
+      "title": "Personal AI Employee \u2014 Autonomous Digital FTE",
+      "slug": "personal-ai-employee",
+      "status": "completed",
+      "featured": true,
+      "category": "AI Automation",
+      "description": "A 24/7 autonomous AI agent managing personal and business affairs using Claude Code + Obsidian. Monitors Gmail and WhatsApp, processes incoming messages, generates weekly business reports, and handles routine tasks with human-in-the-loop safety.",
+      "problem": "Repetitive personal and business tasks consume hours weekly. A human VA costs $4,000-$8,000/month and only works 40 hours/week.",
+      "solution": "Local-first autonomous agent with Python watchers, MCP servers, HITL approval workflow, and weekly CEO briefing reports.",
+      "tech": [
+        "Claude Code",
+        "Python",
+        "MCP Servers",
+        "Playwright",
+        "Obsidian",
+        "Gmail API",
+        "WhatsApp API"
+      ],
+      "live_url": null,
+      "github_url": "[your GitHub repo URL]",
+      "image": "/projects/personal-ai-employee.png",
+      "demo_note": "Local deployment \u2014 GitHub repo + architecture walkthrough available",
+      "metrics": [
+        "Works 168 hours/week (24/7)",
+        "Costs $500-$2,000/month vs $4,000-$8,000 for human",
+        "85-90% cost savings per task",
+        "HITL safety for sensitive operations"
+      ],
+      "highlights": [
+        "Watchers pattern for Gmail and WhatsApp monitoring",
+        "Human-in-the-Loop approval workflow",
+        "Weekly 'Monday Morning CEO Briefing' reports",
+        "Subscription audit for cost optimization"
+      ]
+    },
+    {
+      "id": "ai-chatbot-demo",
+      "title": "AI Chatbot Demo",
+      "slug": "ai-chatbot-demo",
+      "status": "completed",
+      "featured": false,
+      "category": "AI / Frontend",
+      "description": "Interactive chatbot built with Next.js and Gemini 2.0 Flash API with real-time responses, message history, and dark/light theme.",
+      "problem": "Demonstrate real-time AI chat integration with a polished, production-grade frontend.",
+      "solution": "Next.js App Router with Gemini 2.0 Flash streaming, Framer Motion animations, and persistent dark/light theme.",
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Gemini API",
+        "Framer Motion"
+      ],
+      "live_url": "https://ai-chatbot-demo-eight.vercel.app",
+      "github_url": "https://github.com/Murad-Hasil/ai-chatbot-demo",
+      "image": "/projects/ai-chatbot-demo.png",
+      "metrics": [
+        "Real-time streaming responses",
+        "Persistent message history",
+        "Dark/light mode support",
+        "Production deployed on Vercel"
+      ],
+      "highlights": [
+        "Gemini 2.0 Flash API integration",
+        "Framer Motion message animations",
+        "Mobile-responsive design",
+        "One-click Vercel deployment"
+      ]
+    }
+  ]
+}
