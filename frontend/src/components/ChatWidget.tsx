@@ -153,7 +153,7 @@ export function ChatWidget() {
       const botText: string =
         res.ok && data.message
           ? data.message
-          : "Sorry, I'm having trouble responding right now. Please reach Murad at muradhasil.business@gmail.com";
+          : "Sorry, I'm having trouble responding right now. Please reach Murad at mbmuradhasil@gmail.com";
       setMessages((prev) => [
         ...prev,
         { id: crypto.randomUUID(), role: "assistant", content: botText },
@@ -165,7 +165,7 @@ export function ChatWidget() {
           id: crypto.randomUUID(),
           role: "assistant",
           content:
-            "Sorry, I'm having trouble responding right now. Please reach Murad at muradhasil.business@gmail.com",
+            "Sorry, I'm having trouble responding right now. Please reach Murad at mbmuradhasil@gmail.com",
         },
       ]);
     } finally {
