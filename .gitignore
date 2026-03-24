@@ -62,5 +62,8 @@ C:\Users\*/
 # PDF files (resume will be added manually)
 *.pdf
 
+# Personal guide — local only, never push
+PERSONAL-GUIDE.md
+
 # fastembed model cache
 .fastembed_cache/
