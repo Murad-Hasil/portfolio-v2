@@ -6,10 +6,10 @@
 Murad Hasil is an AI Automation Engineer and Full-Stack Developer. He builds autonomous AI agents, RAG chatbots, business automation systems, and full-stack web applications. His specialisation is taking a business problem that currently requires human time and building an AI system that handles it automatically.
 
 **Q: Where is Murad located?**
-Murad is based in Karachi, Pakistan. He works fully remotely with international clients on Upwork and Fiverr across all time zones.
+Murad is based in Karachi, Pakistan. He works fully remotely with clients worldwide across all time zones.
 
 **Q: How long has Murad been building AI systems?**
-Murad has 2+ years of experience with AI and full-stack development. He has completed 10+ projects and 4 major hackathons, all with production deployments.
+Murad has 2+ years of experience with AI and full-stack development. He has completed 5+ projects and 4 major hackathons, all with production deployments.
 
 **Q: Can Murad build a customer support chatbot?**
 Yes. The CRM Digital FTE project is an omnichannel AI customer success agent handling Gmail, WhatsApp, and Web Form simultaneously, 24/7, at under $1,000/year. Murad builds custom chatbots powered by RAG pipelines so answers are grounded in your actual business knowledge — not hallucinated.

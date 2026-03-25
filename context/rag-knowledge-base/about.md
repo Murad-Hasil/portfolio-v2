@@ -2,13 +2,13 @@
 
 ## Who Is Murad Hasil?
 
-Murad Hasil is an AI Automation Engineer and Full-Stack Developer based in Karachi, Pakistan. He specialises in building autonomous AI systems, intelligent chatbots, and scalable full-stack web applications for international clients on Upwork and Fiverr.
+Murad Hasil is an AI Automation Engineer and Full-Stack Developer based in Karachi, Pakistan. He specialises in building autonomous AI systems, intelligent chatbots, and scalable full-stack web applications for businesses worldwide.
 
 With 2+ years of hands-on experience, Murad has built production-grade systems that handle real business workloads — from a 24/7 omnichannel AI customer support agent to a cloud-native todo app evolved through 5 Kubernetes phases. His work is grounded in spec-driven development, meaning every project starts with a clear specification before any code is written.
 
 ## Professional Background
 
-Murad is a graduate of the Governor Initiative for AI, Web3 & Metaverse (GIAIC) in Karachi, Pakistan, with a focus on Applied AI, Cloud-Native Development, and Autonomous Agents. He is currently enrolled in the Clawdbot Crash Course (3-month intensive, in progress).
+Murad is an AI Engineering graduate with a focus on Applied AI, Cloud-Native Development, and Autonomous Agents.
 
 He has completed 4 major hackathons, each resulting in a production-deployed project rather than a prototype.
 
@@ -21,7 +21,7 @@ He has completed 4 major hackathons, each resulting in a production-deployed pro
 ## Career Stats
 
 - **2+ years** of experience with AI and full-stack development
-- **10+ projects** completed across AI agents, web apps, and automation
+- **5+ projects** completed across AI agents, web apps, and automation
 - **20+ technologies** used in production
 - **4 hackathons** completed (all with production deployments)
 

@@ -25,7 +25,7 @@ Focus: Applied AI, Cloud-Native Development, Autonomous Agents
 
 ## Stats (Accurate)
 - Experience: 2+ Years
-- Projects Completed: 10+
+- Projects Completed: 5+
 - Technologies Used: 20+
 - Hackathons Completed: 4
 

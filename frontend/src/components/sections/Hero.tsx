@@ -142,7 +142,7 @@ export function Hero() {
         >
           I build AI systems that run 24/7 — at a fraction of the cost of a
           human employee. From autonomous agents to RAG pipelines and
-          production-grade web apps for international clients.
+          production-grade web applications for businesses worldwide.
         </motion.p>
 
         {/* Tech pills */}

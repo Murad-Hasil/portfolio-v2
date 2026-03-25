@@ -11,7 +11,7 @@ const ease: Transition = { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] };
 /* ── Data sourced from context/murad-profile.md ───────────────────────────── */
 const stats = [
   { value: "2+", label: "Years Experience" },
-  { value: "10+", label: "Projects Completed" },
+  { value: "5+", label: "Projects Completed" },
   { value: "20+", label: "Technologies" },
   { value: "4", label: "Hackathons" },
 ] as const;
@@ -149,9 +149,8 @@ export function About() {
                 className="text-base leading-relaxed"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Specialising in AI automation, autonomous agents, and scalable
-                web applications for international clients on Upwork and
-                Fiverr.
+                Specialising in AI automation, autonomous agents, and
+                production-grade web applications for businesses worldwide.
               </p>
             </motion.div>
 
@@ -176,7 +175,7 @@ export function About() {
                   border: "1px solid rgba(99,102,241,0.2)",
                 }}
               >
-                GIAIC Graduate
+                AI Engineering Graduate
               </span>
             </motion.div>
 
