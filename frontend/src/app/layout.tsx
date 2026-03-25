@@ -32,16 +32,20 @@ export const metadata: Metadata = {
   description:
     "AI Automation Engineer and Full-Stack Developer specialising in autonomous AI agents, RAG chatbots, and scalable web applications. Available for international freelance projects.",
   keywords: [
-    "AI Automation",
+    "AI Automation Engineer",
+    "AI Agent Developer",
+    "Autonomous AI Agents",
+    "RAG Chatbot Developer",
+    "OpenAI Agents SDK",
+    "MCP Model Context Protocol",
+    "FastAPI Developer",
+    "Next.js Developer",
     "Full-Stack Developer",
-    "FastAPI",
-    "Next.js",
-    "RAG",
-    "OpenAI Agents",
     "Kubernetes",
-    "MCP",
-    "Freelance",
-    "Fiverr",
+    "Python Developer",
+    "Freelance AI Developer",
+    "Fiverr AI Developer",
+    "Hire AI Developer",
   ],
   authors: [{ name: "Murad Hasil", url: siteUrl }],
   creator: "Murad Hasil",
@@ -55,7 +59,7 @@ export const metadata: Metadata = {
       "I build AI systems that run 24/7 — at a fraction of the cost of a human employee.",
     images: [
       {
-        url: `${siteUrl}/og-image.png`,
+        url: `${siteUrl}/opengraph-image`,
         width: 1200,
         height: 630,
         alt: "Murad Hasil — AI Automation Engineer",
@@ -67,7 +71,7 @@ export const metadata: Metadata = {
     title: "Murad Hasil — AI Automation Engineer & Full-Stack Developer",
     description:
       "I build AI systems that run 24/7 — at a fraction of the cost of a human employee.",
-    images: [`${siteUrl}/og-image.png`],
+    images: [`${siteUrl}/opengraph-image`],
   },
   robots: { index: true, follow: true },
 };
