@@ -30,6 +30,6 @@ Focus: Applied AI, Cloud-Native Development, Autonomous Agents
 - Hackathons Completed: 4
 
 ## Freelancing Goals
-- Platform: Upwork and Fiverr (international clients)
+- Platform: Fiverr (https://www.fiverr.com/murad_hasil)
 - Niche: AI Automation, Chatbot Development, Full-Stack Web Apps
 - Availability: 40 hours/week

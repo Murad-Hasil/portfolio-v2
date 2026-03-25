@@ -172,7 +172,7 @@ export function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
         >
           <a
-            href="https://www.upwork.com"
+            href="https://www.fiverr.com/murad_hasil"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto px-6 py-3 rounded-md font-semibold text-sm transition-all duration-200"
@@ -183,7 +183,7 @@ export function Hero() {
               boxShadow: "0 0 20px rgba(0,212,255,0.25)",
             }}
           >
-            Hire Me on Upwork
+            Hire Me on Fiverr
           </a>
           <a
             href="#projects"

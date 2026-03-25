@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     "Kubernetes",
     "MCP",
     "Freelance",
-    "Upwork",
+    "Fiverr",
   ],
   authors: [{ name: "Murad Hasil", url: siteUrl }],
   creator: "Murad Hasil",

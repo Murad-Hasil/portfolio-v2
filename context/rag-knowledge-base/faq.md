@@ -45,7 +45,7 @@ MCP is Anthropic's open protocol for connecting AI models to external tools and 
 ## Hiring Questions
 
 **Q: How do I hire Murad?**
-The best way to start is to submit a project inquiry via the contact form on this page. Describe your project, timeline, and budget. Murad will respond within 24 hours with questions and a proposed approach. You can also reach him directly at mbmuradhasil@gmail.com or WhatsApp at +923142241393.
+The best way to start is to submit a project inquiry via the contact form on this page. You can also hire Murad directly on Fiverr at https://www.fiverr.com/murad_hasil, or reach him at mbmuradhasil@gmail.com or WhatsApp at +923142241393.
 
 **Q: What services does Murad offer?**
 Murad offers four main services:
