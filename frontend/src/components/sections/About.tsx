@@ -68,7 +68,7 @@ export function About() {
               color: "var(--accent-cyan)",
             }}
           >
-            // About
+            {"// About"}
           </p>
           <h2
             className="text-3xl sm:text-4xl font-bold"

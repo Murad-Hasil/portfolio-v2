@@ -99,7 +99,7 @@ export default function OgImage() {
               letterSpacing: 1,
             }}
           >
-            // AI Automation Engineer
+            {"// AI Automation Engineer"}
           </div>
 
           {/* Name */}

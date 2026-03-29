@@ -90,7 +90,7 @@ export function Hero() {
             color: "var(--accent-cyan)",
           }}
         >
-          // AI Automation Engineer
+          {"// AI Automation Engineer"}
         </motion.p>
 
         {/* Main headline */}

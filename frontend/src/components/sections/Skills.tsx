@@ -88,7 +88,7 @@ export function Skills() {
               color: "var(--accent-cyan)",
             }}
           >
-            // Skills
+            {"// Skills"}
           </p>
           <h2
             className="text-3xl sm:text-4xl font-bold"
