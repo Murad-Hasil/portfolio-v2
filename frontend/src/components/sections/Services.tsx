@@ -98,7 +98,7 @@ export function Services() {
               color: "var(--accent-cyan)",
             }}
           >
-            // Services
+            {"// Services"}
           </p>
           <h2
             className="text-3xl sm:text-4xl font-bold"

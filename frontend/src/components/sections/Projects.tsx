@@ -89,7 +89,7 @@ export function Projects() {
               color: "var(--accent-cyan)",
             }}
           >
-            // Projects
+            {"// Projects"}
           </p>
           <h2
             className="text-3xl sm:text-4xl font-bold"

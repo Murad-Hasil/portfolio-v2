@@ -173,7 +173,7 @@ export default async function ProjectPage({
                 color: "var(--accent-cyan)",
               }}
             >
-              // Problem
+              {"// Problem"}
             </h2>
             <p
               className="text-sm leading-relaxed"
@@ -196,7 +196,7 @@ export default async function ProjectPage({
                 color: "var(--accent-cyan)",
               }}
             >
-              // Solution
+              {"// Solution"}
             </h2>
             <p
               className="text-sm leading-relaxed"
@@ -216,7 +216,7 @@ export default async function ProjectPage({
               color: "var(--accent-cyan)",
             }}
           >
-            // Tech Stack
+            {"// Tech Stack"}
           </h2>
           <div className="flex flex-wrap gap-2">
             {project.tech.map((t) => (
@@ -245,7 +245,7 @@ export default async function ProjectPage({
               color: "var(--accent-cyan)",
             }}
           >
-            // Metrics
+            {"// Metrics"}
           </h2>
           <ul className="space-y-2">
             {project.metrics.map((m, i) => (
@@ -274,7 +274,7 @@ export default async function ProjectPage({
               color: "var(--accent-cyan)",
             }}
           >
-            // Highlights
+            {"// Highlights"}
           </h2>
           <ul className="space-y-2">
             {project.highlights.map((h, i) => (

@@ -109,7 +109,7 @@ export function Contact() {
               color: "var(--accent-cyan)",
             }}
           >
-            // Contact
+            {"// Contact"}
           </p>
           <h2
             className="text-3xl sm:text-4xl font-bold"
@@ -235,7 +235,7 @@ export function Contact() {
                   color: "var(--accent-cyan)",
                 }}
               >
-                // Available for freelance
+                {"// Available for freelance"}
               </p>
               <p
                 className="text-sm mt-1"
