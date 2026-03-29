@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-v2",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"bash -c 'cd backend && source .venv/bin/activate && uvicorn app.main:app --reload --port 8000'\" --names frontend,backend --prefix-colors cyan,yellow",
+    "build": "npm run build --prefix frontend",
+    "lint": "npm run lint --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

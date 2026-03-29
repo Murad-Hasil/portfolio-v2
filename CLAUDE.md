@@ -208,3 +208,10 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Active Technologies
+- Python 3.12 (backend), TypeScript / Node.js 22 (frontend) (001-portfolio-vision)
+- Neon PostgreSQL (relational data), Qdrant Cloud (vector embeddings) (001-portfolio-vision)
+
+## Recent Changes
+- 001-portfolio-vision: Added Python 3.12 (backend), TypeScript / Node.js 22 (frontend)
