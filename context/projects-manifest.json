@@ -116,36 +116,51 @@
       ]
     },
     {
-      "id": "ai-chatbot-demo",
-      "title": "AI Chatbot Demo",
-      "slug": "ai-chatbot-demo",
+      "id": "physical-ai-textbook",
+      "title": "Physical AI & Humanoid Robotics Textbook",
+      "slug": "physical-ai-textbook",
       "status": "completed",
-      "featured": false,
-      "category": "AI / Frontend",
-      "description": "Interactive chatbot built with Next.js and Gemini 2.0 Flash API with real-time responses, message history, and dark/light theme.",
-      "problem": "Demonstrate real-time AI chat integration with a polished, production-grade frontend.",
-      "solution": "Next.js App Router with Gemini 2.0 Flash streaming, Framer Motion animations, and persistent dark/light theme.",
+      "featured": true,
+      "category": "Full-Stack + AI",
+      "description": "Panaversity Hackathon I submission: a production-grade AI-native textbook platform teaching Physical AI and Humanoid Robotics across 13 weeks. Covers ROS 2, Gazebo, NVIDIA Isaac Sim, and a Conversational Humanoid capstone. Built with Docusaurus v3, FastAPI, Neon PostgreSQL, Qdrant Cloud, LangChain, and Groq LLaMA 3.3 70B.",
+      "problem": "Physical AI — AI systems that operate in the real physical world — is the next frontier after LLMs, yet no structured, accessible textbook exists for it. Existing robotics courses are scattered across dozens of resources, assume identical hardware for every learner, and offer zero in-context AI help when a student gets stuck. The challenge is compounded by three simultaneously heavy computational domains: Physics Simulation (Isaac Sim / Gazebo), Visual Perception (SLAM / Computer Vision), and Generative AI (LLMs). A student with an RTX 4080 workstation and one with a Jetson Orin Nano edge kit need entirely different guidance — but every existing resource gives them the same content. Pakistani learners face an additional barrier: dense English-only material with no mechanism to get real-time clarification in their native language.",
+      "solution": "A full-stack AI-native textbook platform with four progressive modules: (1) ROS 2 — the Robotic Nervous System, covering nodes, topics, services, URDF, and Python-ROS controllers; (2) Gazebo & Unity — physics simulation with LiDAR, depth cameras, and IMUs; (3) NVIDIA Isaac — photorealistic sim, Isaac ROS, hardware-accelerated VSLAM, Nav2 path planning, and sim-to-real RL; (4) Conversational Humanoid capstone — integrating LLMs for natural language robot interaction. Platform features: RAG chatbot built with LangChain + Qdrant + Groq LLaMA 3.3 70B with FastEmbed (any highlighted text → Ask AI instantly); hardware-aware personalization at signup across 3 rig profiles (RTX Sim Workstation / Jetson Edge Kit / Unitree G1 Robot); one-click Roman Urdu chapter translation; JWT auth with 3-step hardware onboarding; admin dashboard for curriculum ingestion and Qdrant reindexing.",
       "tech": [
-        "Next.js",
+        "Docusaurus v3",
+        "React 19",
         "TypeScript",
         "Tailwind CSS",
-        "Gemini API",
-        "Framer Motion"
+        "FastAPI",
+        "Python 3.12",
+        "LangChain",
+        "Sentence Transformers",
+        "FastEmbed",
+        "Qdrant Cloud",
+        "Groq API (LLaMA 3.3 70B)",
+        "Neon PostgreSQL",
+        "SQLAlchemy",
+        "PyJWT",
+        "GitHub Actions",
+        "GitHub Pages",
+        "Docker",
+        "Hugging Face Spaces"
       ],
-      "live_url": "https://ai-chatbot-demo-eight.vercel.app",
-      "github_url": "https://github.com/Murad-Hasil/ai-chatbot-demo",
-      "image": "/projects/ai-chatbot-demo.png",
+      "live_url": "https://Murad-Hasil.github.io/physical-ai-humanoid-robotics-textbook/",
+      "github_url": "https://github.com/Murad-Hasil/physical-ai-humanoid-robotics-textbook",
+      "image": "/projects/physical-ai-textbook.png",
       "metrics": [
-        "Real-time streaming responses",
-        "Persistent message history",
-        "Dark/light mode support",
-        "Production deployed on Vercel"
+        "13-week curriculum across 4 modules (ROS 2 → Gazebo → Isaac → Conversational Humanoid)",
+        "180 vectors indexed in Qdrant Cloud for RAG across all 13 weeks",
+        "12-table Neon PostgreSQL schema (users, profiles, sessions, curriculum)",
+        "3 hardware profiles with fully personalized content paths",
+        "All hackathon bonus deliverables completed: Auth + Personalization + Urdu Translation"
       ],
       "highlights": [
-        "Gemini 2.0 Flash API integration",
-        "Framer Motion message animations",
-        "Mobile-responsive design",
-        "One-click Vercel deployment"
+        "RAG chatbot with LangChain + Qdrant: highlight any text → Ask AI for instant clarification",
+        "Hardware-aware onboarding at signup: content adapts to RTX workstation, Jetson edge kit, or Unitree G1",
+        "One-click Roman Urdu translation for every chapter — built for Pakistani learners",
+        "Admin dashboard with curriculum ingestion pipeline and Qdrant reindexing",
+        "Full CI/CD: GitHub Actions auto-deploys to GitHub Pages on every push"
       ]
     }
   ]
