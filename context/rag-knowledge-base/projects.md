@@ -75,22 +75,29 @@ Local deployment (not cloud-hosted). GitHub repository and architecture walkthro
 
 ---
 
-## Project 4: AI Chatbot Demo
+## Project 4: Physical AI & Humanoid Robotics Textbook
 
-**Category**: AI / Frontend | **Status**: Completed | **Featured**: No
+**Category**: Full-Stack + AI | **Status**: Completed | **Featured**: Yes
 
 ### What It Does
-A polished, production-deployed AI chatbot built with Next.js and the Gemini 2.0 Flash API. Features real-time streaming responses, persistent message history, and dark/light theme toggle.
+A production-grade AI-native textbook platform teaching Physical AI and Humanoid Robotics across 13 weeks. Covers ROS 2, Gazebo, NVIDIA Isaac Sim, and a Conversational Humanoid capstone. Features a RAG chatbot (highlight any text → Ask AI), hardware-aware personalization across 3 rig profiles, and one-click Roman Urdu translation for Pakistani learners.
 
 ### The Business Problem
-Demonstrate that a professional, production-grade AI chat interface can be built and deployed quickly using modern frontend tooling and a capable AI API.
+Physical AI — AI systems that operate in the real physical world — is the next frontier after LLMs, yet no structured, accessible textbook exists for it. Existing robotics courses are scattered, assume identical hardware for every learner, and offer zero in-context AI help when a student gets stuck. Pakistani learners face an additional barrier: dense English-only material with no mechanism for real-time clarification in their native language.
 
 ### Technical Solution
-Next.js App Router with Gemini 2.0 Flash API for streaming responses. Framer Motion for message entrance animations. Tailwind CSS for responsive styling. Deployed on Vercel for instant global CDN.
+Four progressive modules: (1) ROS 2 — the Robotic Nervous System; (2) Gazebo & Unity — physics simulation with LiDAR, depth cameras, and IMUs; (3) NVIDIA Isaac — photorealistic sim, Isaac ROS, hardware-accelerated VSLAM, Nav2 path planning, and sim-to-real RL; (4) Conversational Humanoid capstone integrating LLMs for natural language robot interaction. RAG chatbot built with LangChain + Qdrant + Groq LLaMA 3.3 70B with FastEmbed. Hardware-aware personalization at signup across 3 rig profiles (RTX Sim Workstation / Jetson Edge Kit / Unitree G1 Robot). JWT auth with 3-step hardware onboarding. Admin dashboard for curriculum ingestion and Qdrant reindexing.
 
 ### Technologies Used
-Next.js, TypeScript, Tailwind CSS, Gemini API, Framer Motion
+Docusaurus v3, React 19, TypeScript, Tailwind CSS, FastAPI, Python 3.12, LangChain, Sentence Transformers, FastEmbed, Qdrant Cloud, Groq API (LLaMA 3.3 70B), Neon PostgreSQL, SQLAlchemy, PyJWT, GitHub Actions, GitHub Pages, Docker, Hugging Face Spaces
+
+### Measurable Outcomes
+- 13-week curriculum across 4 modules (ROS 2 → Gazebo → Isaac → Conversational Humanoid)
+- 180 vectors indexed in Qdrant Cloud for RAG across all 13 weeks
+- 12-table Neon PostgreSQL schema (users, profiles, sessions, curriculum)
+- 3 hardware profiles with fully personalized content paths
+- All Panaversity Hackathon I bonus deliverables completed: Auth + Personalization + Urdu Translation
 
 ### Live Demo
-Live URL: https://ai-chatbot-demo-eight.vercel.app
-GitHub: https://github.com/Murad-Hasil/ai-chatbot-demo
+Live URL: https://Murad-Hasil.github.io/physical-ai-humanoid-robotics-textbook/
+GitHub: https://github.com/Murad-Hasil/physical-ai-humanoid-robotics-textbook
