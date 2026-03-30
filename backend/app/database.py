@@ -18,7 +18,11 @@ def get_engine():
         url = os.getenv("DATABASE_URL")
         if not url:
             raise RuntimeError("DATABASE_URL not set")
-        _engine = create_engine(url)
+        _engine = create_engine(
+            url,
+            pool_pre_ping=True,   # detects stale connections (Neon closes idle ones)
+            pool_recycle=300,     # recycle connections every 5 min
+        )
     if not _tables_created:
         # Import models to register metadata before create_all
         from app import models  # noqa: F401

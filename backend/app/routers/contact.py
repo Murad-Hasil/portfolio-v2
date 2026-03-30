@@ -3,9 +3,9 @@
 import logging
 import os
 import re
-import smtplib
+import urllib.request
+import json as _json
 from datetime import datetime, timezone
-from email.mime.text import MIMEText
 from typing import Literal
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Request, Response
@@ -67,37 +67,41 @@ class ContactForm(BaseModel):
 
 
 def _send_notification(contact: Contact) -> None:
-    """Send email notification to site owner — runs in background."""
-    smtp_host = os.getenv("SMTP_HOST", "smtp.gmail.com")
-    smtp_port = int(os.getenv("SMTP_PORT", "587"))
-    smtp_user = os.getenv("SMTP_USER", "")
-    smtp_pass = os.getenv("SMTP_PASS", "")
-    notify_email = os.getenv("NOTIFY_EMAIL", smtp_user)
+    """Send email notification via Resend API — runs in background."""
+    api_key = os.getenv("RESEND_API_KEY", "")
+    notify_email = os.getenv("NOTIFY_EMAIL", "")
 
-    if not smtp_user or not smtp_pass:
-        log.warning("SMTP credentials not configured — skipping email notification")
+    if not api_key or not notify_email:
+        log.warning("RESEND_API_KEY or NOTIFY_EMAIL not configured — skipping email notification")
         return
 
     body = (
-        f"New contact form submission\n"
-        f"Reference: {contact.reference}\n\n"
-        f"Name:    {contact.name}\n"
-        f"Email:   {contact.email}\n"
-        f"Service: {contact.service}\n"
-        f"Subject: {contact.subject}\n\n"
-        f"Message:\n{contact.message}\n"
+        f"<h2>New contact form submission</h2>"
+        f"<p><strong>Reference:</strong> {contact.reference}</p>"
+        f"<p><strong>Name:</strong> {contact.name}</p>"
+        f"<p><strong>Email:</strong> {contact.email}</p>"
+        f"<p><strong>Service:</strong> {contact.service}</p>"
+        f"<p><strong>Subject:</strong> {contact.subject}</p>"
+        f"<p><strong>Message:</strong><br>{contact.message}</p>"
     )
-    msg = MIMEText(body)
-    msg["Subject"] = f"[Portfolio] New message from {contact.name} ({contact.reference})"
-    msg["From"] = smtp_user
-    msg["To"] = notify_email
+    payload = _json.dumps({
+        "from": "Portfolio <onboarding@resend.dev>",
+        "to": [notify_email],
+        "subject": f"[Portfolio] New message from {contact.name} ({contact.reference})",
+        "html": body,
+    }).encode()
 
+    req = urllib.request.Request(
+        "https://api.resend.com/emails",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
+    )
     try:
-        with smtplib.SMTP(smtp_host, smtp_port) as server:
-            server.starttls()
-            server.login(smtp_user, smtp_pass)
-            server.sendmail(smtp_user, [notify_email], msg.as_string())
-        log.info("Notification email sent for %s", contact.reference)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            log.info("Notification email sent for %s (status %s)", contact.reference, resp.status)
     except Exception as exc:  # noqa: BLE001
         log.error("Failed to send notification email: %s", exc)
 
