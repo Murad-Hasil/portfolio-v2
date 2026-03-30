@@ -15,9 +15,19 @@ function readSkillsFromJson() {
 
 export async function GET() {
   try {
-    const res = await fetch(`${BACKEND_URL}/skills`, {
-      next: { revalidate: 60 },
-    });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 5000);
+    let res: Response;
+    try {
+      res = await fetch(`${BACKEND_URL}/skills`, {
+        next: { revalidate: 60 },
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+    } catch {
+      clearTimeout(timer);
+      throw new Error("Backend unavailable");
+    }
     const data = await res.json();
     return NextResponse.json(data, { status: res.status });
   } catch {
