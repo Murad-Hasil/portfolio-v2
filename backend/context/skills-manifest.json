@@ -1,0 +1,59 @@
+{
+  "skills": {
+    "ai_and_agents": {
+      "label": "AI & Agents",
+      "items": [
+        { "name": "OpenAI Agents SDK", "level": "advanced" },
+        { "name": "OpenAI API (GPT-4o)", "level": "advanced" },
+        { "name": "Gemini API", "level": "advanced" },
+        { "name": "MCP (Model Context Protocol)", "level": "advanced" },
+        { "name": "RAG Systems", "level": "advanced" },
+        { "name": "Qdrant Vector DB", "level": "intermediate" },
+        { "name": "LangChain", "level": "intermediate" },
+        { "name": "Autonomous AI Agents", "level": "advanced" }
+      ]
+    },
+    "frontend": {
+      "label": "Frontend",
+      "items": [
+        { "name": "Next.js 15", "level": "advanced" },
+        { "name": "React 19", "level": "advanced" },
+        { "name": "TypeScript", "level": "advanced" },
+        { "name": "Tailwind CSS", "level": "advanced" },
+        { "name": "Framer Motion", "level": "intermediate" },
+        { "name": "shadcn/ui", "level": "advanced" }
+      ]
+    },
+    "backend": {
+      "label": "Backend",
+      "items": [
+        { "name": "FastAPI", "level": "advanced" },
+        { "name": "Python", "level": "advanced" },
+        { "name": "SQLModel", "level": "intermediate" },
+        { "name": "PostgreSQL", "level": "intermediate" },
+        { "name": "REST APIs", "level": "advanced" },
+        { "name": "Kafka / Redpanda", "level": "intermediate" }
+      ]
+    },
+    "devops_and_cloud": {
+      "label": "DevOps & Cloud",
+      "items": [
+        { "name": "Docker", "level": "intermediate" },
+        { "name": "Kubernetes", "level": "intermediate" },
+        { "name": "Helm Charts", "level": "intermediate" },
+        { "name": "GitHub Actions CI/CD", "level": "intermediate" },
+        { "name": "Vercel", "level": "advanced" },
+        { "name": "Railway", "level": "intermediate" }
+      ]
+    },
+    "automation": {
+      "label": "Automation",
+      "items": [
+        { "name": "n8n", "level": "intermediate" },
+        { "name": "Playwright", "level": "intermediate" },
+        { "name": "Python Scripting", "level": "advanced" },
+        { "name": "Webhook Integrations", "level": "advanced" }
+      ]
+    }
+  }
+}

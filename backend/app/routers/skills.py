@@ -5,7 +5,7 @@ from fastapi import APIRouter
 
 router = APIRouter(prefix="/skills", tags=["skills"])
 
-_MANIFEST = Path(__file__).parents[3] / "context" / "skills-manifest.json"
+_MANIFEST = Path(__file__).parents[2] / "context" / "skills-manifest.json"
 
 
 @router.get("")

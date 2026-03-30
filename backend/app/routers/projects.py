@@ -5,7 +5,7 @@ from fastapi import APIRouter, HTTPException
 
 router = APIRouter(prefix="/projects", tags=["projects"])
 
-_MANIFEST = Path(__file__).parents[3] / "context" / "projects-manifest.json"
+_MANIFEST = Path(__file__).parents[2] / "context" / "projects-manifest.json"
 
 
 def _load() -> list[dict]:
