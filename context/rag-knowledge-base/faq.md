@@ -19,7 +19,7 @@ Murad's main AI projects are:
 1. CRM Digital FTE — an omnichannel AI customer success agent (OpenAI Agents SDK + Kafka + Kubernetes)
 2. Personal AI Employee — a 24/7 autonomous agent for personal and business task management
 3. Todo Cloud-Native AI Agent — 5-phase evolution from CLI to Kubernetes-deployed AI agent
-4. AI Chatbot Demo — a real-time Gemini 2.0 Flash chatbot deployed on Vercel
+4. Physical AI & Humanoid Robotics Textbook — a production-grade AI-native textbook platform with RAG chatbot (LangChain + Qdrant + Groq LLaMA 3.3 70B), hardware-aware personalization across 3 rig profiles, and one-click Roman Urdu translation (Panaversity Hackathon I submission)
 
 ## Technical Questions
 
@@ -34,7 +34,7 @@ Primary stack:
 - **DevOps**: Docker, Kubernetes, GitHub Actions, Vercel, Railway
 
 **Q: Does Murad use the OpenAI API?**
-Yes. Murad has advanced experience with OpenAI's APIs — GPT-4o for generation, text-embedding-3-small for embeddings, and the Agents SDK for multi-agent orchestration. He also uses Groq (Llama 3.3 70B) for fast, cost-efficient inference and Gemini API for some projects.
+Yes. Murad has advanced experience with OpenAI's APIs — GPT-4o for generation, text-embedding-3-small for embeddings, and the Agents SDK for multi-agent orchestration. He also uses Groq (Llama 3.3 70B) for fast, cost-efficient inference across several projects including the Physical AI & Humanoid Robotics Textbook.
 
 **Q: What is RAG and does Murad work with it?**
 RAG (Retrieval-Augmented Generation) is a technique where an AI model retrieves relevant documents from a knowledge base before generating a response — so answers are grounded in real data rather than hallucinated. Murad builds production RAG systems: this portfolio's chatbot runs on a RAG pipeline powered by fastembed and Qdrant. He also built a full RAG layer for the CRM Digital FTE project.

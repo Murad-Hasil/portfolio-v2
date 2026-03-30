@@ -6,7 +6,7 @@ Murad's primary specialisation. He builds autonomous AI agents and RAG systems p
 
 - **OpenAI Agents SDK** — Advanced. Used in production for multi-agent orchestration in the CRM Digital FTE project. Built custom MCP servers exposing tools to agents.
 - **OpenAI API (GPT-4o)** — Advanced. Deep familiarity with prompt engineering, function calling, streaming, and token optimisation.
-- **Gemini API** — Advanced. Used in the AI Chatbot Demo project for real-time streaming responses.
+- **Groq API** — Advanced. Used for fast, cost-efficient LLM inference (LLaMA 3.3 70B). Powers the RAG chatbot in both this portfolio and the Physical AI & Humanoid Robotics Textbook project.
 - **MCP (Model Context Protocol)** — Advanced. Built custom MCP servers for portfolio management and the CRM Digital FTE project. Understands the full tool-calling lifecycle.
 - **RAG Systems** — Advanced. End-to-end RAG pipelines: document ingestion, chunking strategies, embedding generation, vector search, context injection, and grounded response generation.
 - **Qdrant Vector DB** — Intermediate. Used in production for storing and querying embeddings. Familiar with collection management, cosine similarity search, and payload filtering.
