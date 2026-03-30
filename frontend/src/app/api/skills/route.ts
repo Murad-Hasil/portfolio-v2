@@ -7,7 +7,6 @@ const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:8000";
 function readSkillsFromJson() {
   const jsonPath = path.resolve(
     process.cwd(),
-    "..",
     "context",
     "skills-manifest.json"
   );

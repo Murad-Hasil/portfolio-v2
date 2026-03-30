@@ -7,7 +7,6 @@ const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:8000";
 function readProjectsFromJson() {
   const jsonPath = path.resolve(
     process.cwd(),
-    "..",
     "context",
     "projects-manifest.json"
   );
