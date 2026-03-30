@@ -24,8 +24,6 @@ type Project = {
   demo_note?: string;
 };
 
-const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:8000";
-
 function readProjectsJson(): { projects: Project[] } {
   const jsonPath = path.resolve(
     process.cwd(),
@@ -37,31 +35,12 @@ function readProjectsJson(): { projects: Project[] } {
   };
 }
 
-async function fetchProject(slug: string): Promise<Project | null> {
+function fetchProject(slug: string): Project | null {
   try {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 5000);
-    try {
-      const res = await fetch(`${BACKEND_URL}/projects/${slug}`, {
-        next: { revalidate: 60 },
-        signal: controller.signal,
-      });
-      clearTimeout(timer);
-      if (res.status === 404) return null;
-      if (!res.ok) throw new Error("Backend unavailable");
-      return (await res.json()) as Project;
-    } catch {
-      clearTimeout(timer);
-      throw new Error("Backend unavailable");
-    }
+    const data = readProjectsJson();
+    return data.projects.find((p) => p.slug === slug) ?? null;
   } catch {
-    // Fallback to JSON file
-    try {
-      const data = readProjectsJson();
-      return data.projects.find((p) => p.slug === slug) ?? null;
-    } catch {
-      return null;
-    }
+    return null;
   }
 }
 
@@ -80,7 +59,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = await fetchProject(slug);
+  const project = fetchProject(slug);
   if (!project) return {};
   return {
     title: project.title,
@@ -94,7 +73,7 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = await fetchProject(slug);
+  const project = fetchProject(slug);
   if (!project) notFound();
 
   const hasLiveUrl =
