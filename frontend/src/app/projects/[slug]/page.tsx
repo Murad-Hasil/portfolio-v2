@@ -29,7 +29,6 @@ const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:8000";
 function readProjectsJson(): { projects: Project[] } {
   const jsonPath = path.resolve(
     process.cwd(),
-    "..",
     "context",
     "projects-manifest.json"
   );
@@ -40,12 +39,21 @@ function readProjectsJson(): { projects: Project[] } {
 
 async function fetchProject(slug: string): Promise<Project | null> {
   try {
-    const res = await fetch(`${BACKEND_URL}/projects/${slug}`, {
-      next: { revalidate: 60 },
-    });
-    if (res.status === 404) return null;
-    if (!res.ok) throw new Error("Backend unavailable");
-    return (await res.json()) as Project;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 5000);
+    try {
+      const res = await fetch(`${BACKEND_URL}/projects/${slug}`, {
+        next: { revalidate: 60 },
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error("Backend unavailable");
+      return (await res.json()) as Project;
+    } catch {
+      clearTimeout(timer);
+      throw new Error("Backend unavailable");
+    }
   } catch {
     // Fallback to JSON file
     try {
