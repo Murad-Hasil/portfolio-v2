@@ -7,7 +7,7 @@ const projectSlugs = [
   "crm-digital-fte",
   "todo-cloud-ai",
   "personal-ai-employee",
-  "ai-chatbot-demo",
+  "physical-ai-textbook",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

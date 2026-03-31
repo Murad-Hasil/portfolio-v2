@@ -54,6 +54,7 @@ function ProficiencyDots({ level }: { level: "advanced" | "intermediate" }) {
 export function Skills() {
   const [data, setData] = useState<SkillsData | null>(null);
   const [activeTab, setActiveTab] = useState<string>("");
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetch("/api/skills")
@@ -64,11 +65,24 @@ export function Skills() {
         const firstKey = Object.keys(d.skills)[0];
         if (firstKey) setActiveTab(firstKey);
       })
-      .catch(console.error);
+      .catch(() => setError(true));
   }, []);
 
   const tabs = data?.skills ? Object.entries(data.skills) : [];
   const activeItems = data?.skills[activeTab]?.items ?? [];
+
+  if (error) {
+    return (
+      <section id="skills" className="py-24 px-4 sm:px-6">
+        <div
+          className="max-w-4xl mx-auto text-center text-sm"
+          style={{ color: "var(--text-muted)", fontFamily: "var(--font-jetbrains-mono)" }}
+        >
+          Failed to load skills. Please refresh the page.
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="skills" className="py-24 px-4 sm:px-6">
