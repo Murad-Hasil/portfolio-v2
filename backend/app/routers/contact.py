@@ -101,6 +101,7 @@ def _send_notification(
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
+            "User-Agent": "python-resend/1.0",
         },
     )
     try:
