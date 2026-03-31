@@ -10,8 +10,8 @@ international freelancing clients on Upwork and Fiverr. The portfolio demonstrat
 the same technologies Murad sells (Next.js, FastAPI, RAG, MCP) by being built with
 them. A floating AI chatbot powered by a RAG pipeline answers visitor questions from
 a curated knowledge base. A custom MCP server allows Murad to update portfolio content
-without touching code. Deployed to Vercel (frontend) + Railway (backend) with GitHub
-Actions CI/CD.
+without touching code. Deployed to Vercel (frontend) + Hugging Face Spaces (backend)
+with GitHub Actions CI/CD.
 
 ## Technical Context
 
@@ -24,7 +24,7 @@ Actions CI/CD.
 
 **Storage**: Neon PostgreSQL (relational data), Qdrant Cloud (vector embeddings)
 **Testing**: pytest + httpx (backend API), Playwright MCP (E2E browser)
-**Target Platform**: Web — Vercel (frontend), Railway (backend); WSL Ubuntu for dev
+**Target Platform**: Web — Vercel (frontend), Hugging Face Spaces (backend); WSL Ubuntu for dev
 **Project Type**: Web application (frontend + backend + MCP server)
 **Performance Goals**: Interactive state < 3s, Lighthouse ≥ 90, chat response p95 < 3s
 **Constraints**: Groq free tier (1000 req/day limit), fastembed runs locally (zero API
@@ -143,7 +143,7 @@ portfolio-v2/
 │   ├── tests/
 │   │   └── test_endpoints.py
 │   ├── Dockerfile
-│   ├── railway.json
+│   ├── Dockerfile.hf                      ← HF Spaces container config
 │   ├── requirements.txt
 │   └── .env.example
 │
@@ -158,7 +158,7 @@ portfolio-v2/
 │
 └── .github/
     └── workflows/
-        └── deploy.yml                 ← CI/CD: lint + test → Vercel + Railway
+        └── deploy.yml                 ← CI/CD: lint + test → Vercel + HF Spaces
 ```
 
 **Structure Decision**: Web application — Option 2 (frontend + backend). Chosen
@@ -187,7 +187,7 @@ portfolio; not acceptable for high-traffic production.
 
 ### 3. Embedding Provider Default — fastembed local
 **Decision**: Default to `fastembed` with `BAAI/bge-small-en-v1.5` (384 dims).
-**Rationale**: Zero API cost, runs in the Railway container, good quality for the
+**Rationale**: Zero API cost, runs in the HF Spaces container, good quality for the
 small portfolio knowledge base (~10-20 chunks). Switching to OpenAI requires only
 `EMBEDDING_PROVIDER=openai` env var change + re-running `seed-rag.py`.
 **Trade-off**: 384-dim vectors have lower retrieval quality than 1536-dim OpenAI

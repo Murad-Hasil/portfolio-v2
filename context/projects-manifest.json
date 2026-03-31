@@ -63,8 +63,8 @@
         "Dapr",
         "GitHub Actions"
       ],
-      "live_url": "[your deployed URL]",
-      "github_url": "[your GitHub repo URL]",
+      "live_url": "https://murad-hasil-todo-ai.vercel.app",
+      "github_url": "https://github.com/Murad-Hasil/Todo-AI-Assistant",
       "image": "/projects/todo-cloud-ai.png",
       "metrics": [
         "5 complete evolution phases",
@@ -99,7 +99,7 @@
         "WhatsApp API"
       ],
       "live_url": null,
-      "github_url": "[your GitHub repo URL]",
+      "github_url": "https://github.com/Murad-Hasil/personal-ai-employee",
       "image": "/projects/personal-ai-employee.png",
       "demo_note": "Local deployment \u2014 GitHub repo + architecture walkthrough available",
       "metrics": [
