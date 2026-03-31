@@ -106,6 +106,9 @@ def _send_notification(
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
             log.warning("Email sent for %s — Resend status %s", reference, resp.status)
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        log.warning("Failed to send email for %s: %s — %s", reference, exc, body)
     except Exception as exc:  # noqa: BLE001
         log.warning("Failed to send email for %s: %s", reference, exc)
 
