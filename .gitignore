@@ -67,3 +67,4 @@ PERSONAL-GUIDE.md
 
 # fastembed model cache
 .fastembed_cache/
+.playwright-mcp/
