@@ -2,10 +2,11 @@
 
 import uuid
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, field_validator
 from sqlmodel import Session, select
 
+from app._limiter import limiter
 from app.models import ChatMessage, ChatSession
 
 router = APIRouter(prefix="/chat", tags=["chat"])
@@ -95,7 +96,8 @@ def _ensure_session(db: Session, session_id: str) -> None:
 
 
 @router.post("")
-async def post_chat(body: ChatRequest) -> dict:
+@limiter.limit("20/hour")
+async def post_chat(request: Request, body: ChatRequest) -> dict:
     from app.database import get_engine
     from app.providers.embeddings import get_embedding
     from app.providers.llm import get_llm_client, get_llm_model

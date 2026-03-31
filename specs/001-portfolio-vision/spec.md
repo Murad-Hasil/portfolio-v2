@@ -2,7 +2,11 @@
 
 **Feature Branch**: `001-portfolio-vision`
 **Created**: 2026-03-23
-**Status**: Draft
+**Status**: Shipped ✅
+**Shipped**: 2026-03-31
+**Live URLs**:
+- Frontend: `https://muradhasil.vercel.app`
+- Backend API: `https://mb-murad-portfolio-v2.hf.space`
 **Input**: User description: "Portfolio Vision — Murad Hasil full-stack AI portfolio for international freelancing"
 
 ## User Scenarios & Testing *(mandatory)*

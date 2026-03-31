@@ -44,4 +44,22 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
 
+  deploy-backend:
+    name: Deploy Backend to HF Spaces
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Push backend subtree to Hugging Face
+        env:
+          HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
+        run: |
+          git config user.email "mbmuradhasil@gmail.com"
+          git config user.name "Murad Hasil"
+          git remote add hf https://Mb-Murad:${HUGGINGFACE_TOKEN}@huggingface.co/spaces/Mb-Murad/portfolio-v2
+          git subtree push --prefix=backend hf main
+
 

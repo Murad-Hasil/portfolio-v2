@@ -1,20 +1,16 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version change: (template) → 1.0.0
-Modified principles: N/A (initial ratification)
+Version change: 1.0.0 → 1.1.0
+Modified sections:
+  - Tech Stack & Architecture: corrected Next.js version, backend deploy platform
+  - Principle VII: corrected deployment platform reference
 Added sections:
-  - Core Principles (7 principles)
-  - Tech Stack & Architecture
-  - Development Workflow
-  - Governance
-Removed sections: N/A (template placeholders replaced)
-Templates updated:
-  - .specify/templates/plan-template.md ✅ — Constitution Check gates align
-  - .specify/templates/spec-template.md ✅ — Scope constraints aligned
-  - .specify/templates/tasks-template.md ✅ — Task categories reflect principles
-Deferred TODOs:
-  - RATIFICATION_DATE set to first-use date 2026-03-23 (no prior record found)
+  - Deployment Architecture (new — commands, remote config, CI/CD)
+  - Known Platform Constraints (new — HF Spaces, Cloudflare, Neon gotchas)
+  - Environment Variables (new — complete list for all services)
+Removed: N/A
+Deferred TODOs (carried forward):
   - Upwork/Fiverr profile URLs: add to context/murad-profile.md when available
   - LinkedIn URL: marked in murad-profile.md as [your LinkedIn URL]
 -->
@@ -148,7 +144,7 @@ or incorrect promises would damage Murad's professional reputation with clients.
 - All required environment variables MUST be documented in `.env.example` with
   placeholder values and comments explaining each variable.
 - Production environment variables MUST be set in the deployment platform
-  (Vercel for frontend, Railway for backend) — never in committed files.
+  (Vercel for frontend, Hugging Face Spaces for backend) — never in committed files.
 
 **Rationale**: A portfolio is a public-facing project. Leaked credentials in a
 public GitHub repo would be immediately exploited and cause real damage.
@@ -160,22 +156,124 @@ constitution.
 
 | Layer | Technology | Notes |
 |---|---|---|
-| Frontend | Next.js 15 (App Router) + TypeScript | `/frontend/` |
+| Frontend | Next.js 16.2.1 (App Router) + TypeScript | `/frontend/` |
 | Styling | Tailwind CSS 4 + shadcn/ui | Design system tokens in `globals.css` |
 | Animations | Framer Motion | See Principle III for constraints |
-| Backend | FastAPI (Python) + SQLModel | `/backend/` |
+| Backend | FastAPI (Python 3.12) + SQLModel | `/backend/` |
 | Database | Neon PostgreSQL | Tables: contacts, chat_sessions, chat_messages, page_views |
 | Vector DB | Qdrant Cloud | Collection: `portfolio-knowledge` |
 | LLM | Groq (Llama 3.3 70B) → OpenAI GPT-4o-mini | Switchable via `LLM_PROVIDER` |
 | Embeddings | fastembed (local) → OpenAI text-embedding-3-small | Switchable via `EMBEDDING_PROVIDER` |
+| Email | Resend HTTP API | `onboarding@resend.dev` → account email. User-Agent: `python-resend/1.0` required |
 | Browser Testing | Playwright MCP | Required after every UI component |
-| Frontend Deploy | Vercel | |
-| Backend Deploy | Railway | |
-| CI/CD | GitHub Actions | `.github/workflows/deploy.yml` |
+| Frontend Deploy | Vercel | Auto-deploys on push to `main` |
+| Backend Deploy | Hugging Face Spaces | Docker container, port 7860. Deploy via git subtree (see below) |
+| CI/CD | GitHub Actions | `.github/workflows/deploy.yml` — lint + test + auto-deploy to HF |
 | MCP Server | Python MCP SDK | `/mcp-server/` — 6 portfolio management tools |
 
-**Architecture**: Next.js (Vercel) ↔ HTTPS ↔ FastAPI (Railway) ↔ Neon PostgreSQL
-FastAPI also connects to Qdrant Cloud and LLM provider APIs.
+**Architecture**: Next.js (Vercel) ↔ HTTPS ↔ FastAPI (HF Spaces) ↔ Neon PostgreSQL
+FastAPI also connects to Qdrant Cloud and LLM/embedding provider APIs.
+
+## Deployment Architecture
+
+### Frontend (Vercel)
+- Auto-deploys on every push to `main` — no manual step needed.
+- Live URL: `https://muradhasil.vercel.app` (or custom domain when configured)
+- Environment variables set in Vercel dashboard: `BACKEND_URL`, `NEXT_PUBLIC_SITE_URL`
+
+### Backend (Hugging Face Spaces)
+- Space: `https://huggingface.co/spaces/Mb-Murad/portfolio-v2`
+- Live URL: `https://mb-murad-portfolio-v2.hf.space`
+- Runtime: Docker container from `/backend/Dockerfile`, port 7860
+- **Deploy command** (local): `git subtree push --prefix=backend hf main`
+- **Deploy via CI**: GitHub Actions `deploy-backend` job runs automatically on push to `main`
+  (requires `HUGGINGFACE_TOKEN` secret in GitHub repo settings)
+- **Setup HF remote** (first time or after cloning):
+  ```
+  git remote add hf https://Mb-Murad:<YOUR_TOKEN>@huggingface.co/spaces/Mb-Murad/portfolio-v2
+  ```
+
+### How to generate HUGGINGFACE_TOKEN
+1. Go to https://huggingface.co → Settings → Access Tokens
+2. Create new token with **Write** permission
+3. Add to GitHub: repo Settings → Secrets and variables → Actions → `HUGGINGFACE_TOKEN`
+
+### Keep-Alive
+Backend sleeps after ~15 minutes of inactivity on HF free tier.
+GitHub Actions cron (`.github/workflows/keep-alive.yml`) pings `/health` every 8 minutes.
+
+---
+
+## Known Platform Constraints
+
+These are hard-won lessons from production debugging. Future agents MUST read this before troubleshooting email, DB, or HTTP issues.
+
+### HF Spaces — Outbound Port Blocking
+- **Ports 587 and 465 are BLOCKED** on HF Spaces (and most cloud platforms).
+- This means Gmail SMTP and any SMTP-based email sending WILL FAIL silently or with connection refused.
+- **Solution**: Use HTTP-based email APIs only (Resend, SendGrid, Mailgun, etc.)
+
+### Resend API — Cloudflare WAF Block
+- Python's `urllib.request` sends no User-Agent by default.
+- Cloudflare (in front of `api.resend.com`) returns **error code 1010** (client banned by signature).
+- **Solution**: Always include `"User-Agent": "python-resend/1.0"` in the request headers.
+- This is already in `backend/app/routers/contact.py` — do NOT remove it.
+
+### Resend API — Sender Restrictions (No Custom Domain)
+- `onboarding@resend.dev` can only send TO the Resend account's registered email.
+- Sending to any other address with this from-address returns **403 Forbidden**.
+- **Current setup**: `NOTIFY_EMAIL` must equal the Resend account email (`mbmuradhasil@gmail.com`).
+- **Upgrade path**: Verify a custom domain on Resend → change `from` to `noreply@yourdomain.com`.
+
+### Neon PostgreSQL — Idle Connection Timeouts
+- Neon closes idle connections after a short timeout (serverless behavior).
+- SQLAlchemy will throw `SSL connection has been closed unexpectedly` on the next query.
+- **Solution**: Engine must be created with `pool_pre_ping=True, pool_recycle=300`.
+- This is already configured in `backend/app/database.py` — do NOT remove these params.
+- Use `DATABASE_URL` (pooled) for app queries. Use `DATABASE_DIRECT_URL` for Alembic migrations.
+
+### RAG Knowledge Base — Partial Updates
+- When replacing a project or technology, ALL knowledge base files must be updated.
+- References can exist in: `projects.md`, `faq.md`, `skills.md`, `about.md`.
+- **Always grep ALL files** in `context/rag-knowledge-base/` before declaring an update complete.
+- After updating any KB file, re-run `scripts/seed-rag.py` to refresh Qdrant vectors.
+
+---
+
+## Environment Variables
+
+### HF Spaces (Backend) — Required
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | Neon pooled connection URL (use for app queries) |
+| `DATABASE_DIRECT_URL` | Neon direct URL (use for Alembic migrations only) |
+| `QDRANT_URL` | Qdrant Cloud cluster URL |
+| `QDRANT_API_KEY` | Qdrant API key |
+| `GROQ_API_KEY` | Groq API key (default LLM provider) |
+| `RESEND_API_KEY` | Resend API key for email notifications |
+| `NOTIFY_EMAIL` | Email to receive contact form notifications (must match Resend account email) |
+| `ALLOWED_ORIGINS` | Comma-separated CORS origins (e.g., `https://muradhasil.vercel.app`) |
+
+### HF Spaces (Backend) — Optional
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `LLM_PROVIDER` | `groq` or `openai` | `groq` |
+| `GROQ_MODEL` | Groq model name | `llama-3.3-70b-versatile` |
+| `OPENAI_API_KEY` | OpenAI key (if LLM_PROVIDER=openai) | — |
+| `OPENAI_MODEL` | OpenAI model name | `gpt-4o-mini` |
+| `EMBEDDING_PROVIDER` | `fastembed` or `openai` | `fastembed` |
+| `EMBEDDING_MODEL` | Model name for embeddings | `BAAI/bge-small-en-v1.5` |
+
+### Vercel (Frontend) — Required
+| Variable | Description |
+|----------|-------------|
+| `BACKEND_URL` | HF Spaces URL: `https://mb-murad-portfolio-v2.hf.space` |
+| `NEXT_PUBLIC_SITE_URL` | Public site URL for OG tags and canonical links |
+
+### Removed (no longer used)
+- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` — removed when migrating from SMTP to Resend
+
+---
 
 ## Development Workflow
 
@@ -224,4 +322,4 @@ FastAPI also connects to Qdrant Cloud and LLM provider APIs.
 - Compliance is verified by the agent before each `/sp.plan` execution
   (Constitution Check gate in `plan-template.md`).
 
-**Version**: 1.0.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-23
+**Version**: 1.1.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-31

@@ -49,6 +49,7 @@ export function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [activeFilter, setActiveFilter] = useState<Filter>("All");
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetch("/api/projects")
@@ -62,7 +63,7 @@ export function Projects() {
         );
         setProjects(list);
       })
-      .catch(console.error)
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, []);
 
@@ -143,6 +144,16 @@ export function Projects() {
             }}
           >
             Loading projects...
+          </div>
+        ) : error ? (
+          <div
+            className="text-center py-16 text-sm"
+            style={{
+              color: "var(--text-muted)",
+              fontFamily: "var(--font-jetbrains-mono)",
+            }}
+          >
+            Failed to load projects. Please refresh the page.
           </div>
         ) : (
           <AnimatePresence mode="wait">
