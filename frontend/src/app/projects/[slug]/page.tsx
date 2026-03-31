@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
@@ -136,6 +137,23 @@ export default async function ProjectPage({
         >
           {project.description}
         </p>
+
+        {/* Project screenshot */}
+        {project.image && (
+          <div
+            className="rounded-lg overflow-hidden mb-8"
+            style={{ border: "1px solid var(--border-subtle)" }}
+          >
+            <Image
+              src={project.image}
+              alt={project.title}
+              width={900}
+              height={500}
+              className="w-full h-auto object-cover"
+              priority
+            />
+          </div>
+        )}
 
         <hr
           style={{

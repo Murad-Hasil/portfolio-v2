@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   motion,
   AnimatePresence,
@@ -21,6 +22,7 @@ type Project = {
   tech: string[];
   live_url: string | null;
   github_url: string | null;
+  image?: string;
   demo_note?: string;
 };
 
@@ -204,6 +206,22 @@ function ProjectCard({ project }: { project: Project }) {
           "var(--border-subtle)";
       }}
     >
+      {/* Thumbnail */}
+      {project.image && (
+        <div
+          className="rounded-md overflow-hidden mb-4 -mx-6 -mt-6"
+          style={{ borderBottom: "1px solid var(--border-subtle)" }}
+        >
+          <Image
+            src={project.image}
+            alt={project.title}
+            width={600}
+            height={300}
+            className="w-full h-40 object-cover object-top"
+          />
+        </div>
+      )}
+
       {/* Category + featured */}
       <div className="flex items-center justify-between mb-3">
         <span
