@@ -187,6 +187,9 @@ export function ChatWidget() {
         {open && (
           <motion.div
             key="chat-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="chat-dialog-title"
             initial={{ opacity: 0, y: 20, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.97 }}
@@ -225,6 +228,7 @@ export function ChatWidget() {
                 </div>
                 <div>
                   <p
+                    id="chat-dialog-title"
                     className="text-sm font-semibold leading-none"
                     style={{
                       fontFamily: "var(--font-space-grotesk)",
@@ -255,7 +259,13 @@ export function ChatWidget() {
             </div>
 
             {/* Message list */}
-            <div className="flex-1 overflow-y-auto px-4 pt-4 pb-2" style={{ scrollbarWidth: "thin" }}>
+            <div
+              role="log"
+              aria-live="polite"
+              aria-label="Chat messages"
+              className="flex-1 overflow-y-auto px-4 pt-4 pb-2"
+              style={{ scrollbarWidth: "thin" }}
+            >
               {messages.length === 0 && !loading && (
                 <div>
                   <p
@@ -314,6 +324,7 @@ export function ChatWidget() {
                 placeholder="Type a message…"
                 maxLength={500}
                 disabled={loading}
+                aria-label="Chat message input"
                 className="flex-1 bg-transparent text-sm outline-none"
                 style={{
                   fontFamily: "var(--font-space-grotesk)",

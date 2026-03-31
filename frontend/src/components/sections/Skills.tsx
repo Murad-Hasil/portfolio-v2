@@ -117,6 +117,8 @@ export function Skills() {
 
         {/* Category tabs — horizontal scroll on mobile */}
         <motion.div
+          role="tablist"
+          aria-label="Skill categories"
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -127,6 +129,10 @@ export function Skills() {
           {tabs.map(([key, cat]) => (
             <button
               key={key}
+              role="tab"
+              id={`skills-tab-${key}`}
+              aria-selected={activeTab === key}
+              aria-controls={`skills-panel-${key}`}
               onClick={() => setActiveTab(key)}
               className="flex-shrink-0 px-4 py-1.5 rounded text-sm transition-all duration-200"
               style={{
@@ -151,6 +157,9 @@ export function Skills() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
+            role="tabpanel"
+            id={`skills-panel-${activeTab}`}
+            aria-labelledby={`skills-tab-${activeTab}`}
             variants={container}
             initial="hidden"
             animate="show"

@@ -387,17 +387,25 @@ export function Contact() {
 
                 {/* Name + Email row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Field label="Name" error={errors.name?.message}>
+                  <Field label="Name" error={errors.name?.message} id="contact-name">
                     <input
+                      id="contact-name"
+                      aria-required="true"
+                      aria-invalid={!!errors.name}
+                      aria-describedby={errors.name ? "contact-name-error" : undefined}
                       {...register("name")}
                       placeholder="John Smith"
                       className={inputClass(!!errors.name)}
                     />
                   </Field>
-                  <Field label="Email" error={errors.email?.message}>
+                  <Field label="Email" error={errors.email?.message} id="contact-email">
                     <input
-                      {...register("email")}
+                      id="contact-email"
                       type="email"
+                      aria-required="true"
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? "contact-email-error" : undefined}
+                      {...register("email")}
                       placeholder="john@company.com"
                       className={inputClass(!!errors.email)}
                     />
@@ -405,8 +413,12 @@ export function Contact() {
                 </div>
 
                 {/* Subject */}
-                <Field label="Subject" error={errors.subject?.message}>
+                <Field label="Subject" error={errors.subject?.message} id="contact-subject">
                   <input
+                    id="contact-subject"
+                    aria-required="true"
+                    aria-invalid={!!errors.subject}
+                    aria-describedby={errors.subject ? "contact-subject-error" : undefined}
                     {...register("subject")}
                     placeholder="AI chatbot for customer support"
                     className={inputClass(!!errors.subject)}
@@ -414,8 +426,15 @@ export function Contact() {
                 </Field>
 
                 {/* Service */}
-                <Field label="Service" error={errors.service?.message}>
-                  <select {...register("service")} className={inputClass(!!errors.service)}>
+                <Field label="Service" error={errors.service?.message} id="contact-service">
+                  <select
+                    id="contact-service"
+                    aria-required="true"
+                    aria-invalid={!!errors.service}
+                    aria-describedby={errors.service ? "contact-service-error" : undefined}
+                    {...register("service")}
+                    className={inputClass(!!errors.service)}
+                  >
                     <option value="">Select a service…</option>
                     <option value="AI Chatbot">AI Chatbot</option>
                     <option value="Automation">Automation</option>
@@ -426,8 +445,12 @@ export function Contact() {
                 </Field>
 
                 {/* Message */}
-                <Field label="Message" error={errors.message?.message}>
+                <Field label="Message" error={errors.message?.message} id="contact-message">
                   <textarea
+                    id="contact-message"
+                    aria-required="true"
+                    aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? "contact-message-error" : undefined}
                     {...register("message")}
                     rows={5}
                     placeholder="Tell me about your project…"
@@ -487,15 +510,18 @@ function inputClass(hasError: boolean) {
 function Field({
   label,
   error,
+  id,
   children,
 }: {
   label: string;
   error?: string;
+  id: string;
   children: React.ReactNode;
 }) {
   return (
     <div className="flex flex-col gap-1.5">
       <label
+        htmlFor={id}
         className="text-xs font-medium"
         style={{
           fontFamily: "var(--font-space-grotesk)",
@@ -507,6 +533,8 @@ function Field({
       {children}
       {error && (
         <p
+          id={`${id}-error`}
+          role="alert"
           className="text-xs"
           style={{
             fontFamily: "var(--font-space-grotesk)",
