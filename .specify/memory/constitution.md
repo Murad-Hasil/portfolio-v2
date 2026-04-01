@@ -1,18 +1,19 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version change: 1.0.0 → 1.1.0
+Version change: 1.1.0 → 1.2.0
 Modified sections:
-  - Tech Stack & Architecture: corrected Next.js version, backend deploy platform
-  - Principle VII: corrected deployment platform reference
-Added sections:
-  - Deployment Architecture (new — commands, remote config, CI/CD)
-  - Known Platform Constraints (new — HF Spaces, Cloudflare, Neon gotchas)
-  - Environment Variables (new — complete list for all services)
+  - Principle VI (RAG Chatbot): added planned improvements — streaming responses
+    and conversation memory; added note that /chat endpoint upgrade tracked in
+    specs/002-chatbot-rag/
+  - Known Platform Constraints: added RAG chunking strategy note
+  - Version policy footer updated
+Added sections: none
 Removed: N/A
 Deferred TODOs (carried forward):
   - Upwork/Fiverr profile URLs: add to context/murad-profile.md when available
   - LinkedIn URL: marked in murad-profile.md as [your LinkedIn URL]
+  - Conversation memory (Redis/DB backend): deferred — tracked in specs/002-chatbot-rag/tasks.md
 -->
 
 # Murad Hasil Portfolio v2 — Constitution
@@ -133,6 +134,22 @@ no code changes needed to switch between Groq and OpenAI:
 
 **Note**: Switching embedding provider requires re-running `scripts/seed-rag.py`
 and recreating the Qdrant collection (dimension mismatch).
+
+**Current RAG pipeline state** (as of v1.2.0):
+- Chunking: word-count (375 words, 40 word overlap) — sufficient for current corpus size (15 vectors)
+- Retrieval: pure vector search (cosine similarity, top 5 chunks)
+- Memory: stateless — each request is independent (no conversation history sent to LLM)
+- Streaming: not yet implemented — response returned in single batch
+
+**Planned improvements** (tracked in `specs/002-chatbot-rag/`):
+- Streaming responses via Server-Sent Events (SSE) — approved, next to implement
+- Conversation memory (last N turns) — approved, next to implement after streaming
+- Hybrid search / reranking — deferred until corpus exceeds ~200 vectors
+
+**Knowledge base update protocol**: After editing any file in
+`context/rag-knowledge-base/`, ALWAYS re-run `scripts/seed-rag.py` to refresh
+Qdrant. Also grep all KB files for stale references before declaring an update
+complete.
 
 **Rationale**: The chatbot is the portfolio's key differentiator. Hallucination
 or incorrect promises would damage Murad's professional reputation with clients.
@@ -322,4 +339,4 @@ These are hard-won lessons from production debugging. Future agents MUST read th
 - Compliance is verified by the agent before each `/sp.plan` execution
   (Constitution Check gate in `plan-template.md`).
 
-**Version**: 1.1.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-31
+**Version**: 1.2.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-04-01

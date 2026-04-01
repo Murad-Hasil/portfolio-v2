@@ -109,7 +109,8 @@ export function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // true = typing indicator visible
+  const [streaming, setStreaming] = useState(false); // true = stream in progress
   const [sessionId, setSessionId] = useState<string>("");
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -137,11 +138,15 @@ export function ChatWidget() {
   }, [open]);
 
   async function sendMessage(text: string) {
-    if (!text.trim() || loading || !sessionId) return;
+    if (!text.trim() || streaming || !sessionId) return;
     const userMsg: Message = { id: crypto.randomUUID(), role: "user", content: text.trim() };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setLoading(true);
+    setStreaming(true);
+
+    const botId = crypto.randomUUID();
+    let firstToken = true;
 
     try {
       const res = await fetch("/api/chat", {
@@ -149,29 +154,89 @@ export function ChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ session_id: sessionId, message: userMsg.content }),
       });
-      const data = await res.json();
-      const botText: string =
-        res.ok && data.message
-          ? data.message
-          : "Sorry, I'm having trouble responding right now. Please reach Murad at mbmuradhasil@gmail.com";
-      setMessages((prev) => [
-        ...prev,
-        { id: crypto.randomUUID(), role: "assistant", content: botText },
-      ]);
+
+      if (!res.ok || !res.body) {
+        throw new Error("Stream unavailable");
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      // Add empty assistant message placeholder
+      setMessages((prev) => [...prev, { id: botId, role: "assistant", content: "" }]);
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() ?? "";
+
+        for (const line of lines) {
+          if (!line.startsWith("data: ")) continue;
+          try {
+            const event = JSON.parse(line.slice(6)) as {
+              token: string;
+              done: boolean;
+              session_id?: string;
+              sources?: string[];
+            };
+
+            if (!event.done && event.token) {
+              if (firstToken) {
+                setLoading(false); // hide typing indicator on first token
+                firstToken = false;
+              }
+              setMessages((prev) =>
+                prev.map((m) =>
+                  m.id === botId ? { ...m, content: m.content + event.token } : m
+                )
+              );
+            }
+          } catch {
+            // malformed SSE line — skip
+          }
+        }
+      }
+
+      // If no tokens arrived at all (empty stream), show fallback
+      if (firstToken) {
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === botId
+              ? { ...m, content: "Sorry, I'm having trouble responding. Please reach Murad at mbmuradhasil@gmail.com" }
+              : m
+          )
+        );
+      }
     } catch {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: crypto.randomUUID(),
-          role: "assistant",
-          content:
-            "Sorry, I'm having trouble responding right now. Please reach Murad at mbmuradhasil@gmail.com",
-        },
-      ]);
+      setMessages((prev) => {
+        const existing = prev.find((m) => m.id === botId);
+        if (existing) {
+          return prev.map((m) =>
+            m.id === botId
+              ? { ...m, content: "Sorry, I'm having trouble responding. Please reach Murad at mbmuradhasil@gmail.com" }
+              : m
+          );
+        }
+        return [
+          ...prev,
+          {
+            id: botId,
+            role: "assistant" as const,
+            content: "Sorry, I'm having trouble responding. Please reach Murad at mbmuradhasil@gmail.com",
+          },
+        ];
+      });
     } finally {
       setLoading(false);
+      setStreaming(false);
     }
   }
+
+  const isDisabled = streaming;
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -323,7 +388,7 @@ export function ChatWidget() {
                 onKeyDown={handleKeyDown}
                 placeholder="Type a message…"
                 maxLength={500}
-                disabled={loading}
+                disabled={isDisabled}
                 aria-label="Chat message input"
                 className="flex-1 bg-transparent text-sm outline-none"
                 style={{
@@ -333,12 +398,12 @@ export function ChatWidget() {
               />
               <button
                 onClick={() => sendMessage(input)}
-                disabled={!input.trim() || loading}
+                disabled={!input.trim() || isDisabled}
                 aria-label="Send message"
                 className="p-2 rounded-lg transition-all duration-150 flex-shrink-0"
                 style={{
-                  background: input.trim() && !loading ? "var(--accent-cyan)" : "var(--bg-elevated)",
-                  color: input.trim() && !loading ? "#08080F" : "var(--text-muted)",
+                  background: input.trim() && !isDisabled ? "var(--accent-cyan)" : "var(--bg-elevated)",
+                  color: input.trim() && !isDisabled ? "#08080F" : "var(--text-muted)",
                   border: "1px solid var(--border-subtle)",
                 }}
               >

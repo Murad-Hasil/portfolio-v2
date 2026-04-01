@@ -11,11 +11,11 @@
 | **Primary Tool** | Claude Code CLI |
 | **Author** | Murad Hasil |
 | **Target** | International Freelancing (Upwork / Fiverr) |
-| **Status** | Version 1.2 — **SHIPPED ✅** (2026-03-31) |
+| **Status** | Version 1.3 — **IN PROGRESS 🔧** (chatbot improvements) |
 | **Live Frontend** | https://murad-hasil-portfolio-v2-xi.vercel.app |
 | **Live Backend** | https://mb-murad-portfolio-v2.hf.space |
 | **Development Environment** | WSL Ubuntu (required — see Phase 0) |
-| **Last Updated** | 2026-03-31 |
+| **Last Updated** | 2026-04-01 |
 
 ---
 
@@ -41,6 +41,7 @@
 18. [Deliverables Checklist](#18-deliverables-checklist)
 19. [Success Criteria](#19-success-criteria)
 20. [Version History](#20-version-history)
+21. [Phase 8 — Chatbot Improvements](#21-phase-8--chatbot-improvements)
 
 ---
 
@@ -1471,6 +1472,7 @@ The portfolio itself demonstrates competency:
 | 1.0 | 2026-03-20 | Initial spec — 4 projects, 5 phases |
 | 1.1 | 2026-03-20 | Added UI/UX Design System (Section 8) |
 | 1.2 | 2026-03-31 | **SHIPPED** — Corrected backend platform (HF Spaces, not Railway), Next.js 16.2.1, added email (Resend), platform constraints, CI/CD auto-deploy, production hardening (error pages, rate limits, error states) |
+| 1.3 | 2026-04-01 | **IN PROGRESS** — Phase 8: chatbot improvements (streaming SSE + FAQ knowledge base expansion). Constitution v1.2.0. Spec: `specs/002-chatbot-rag/` |
 | 2.0 | TBD | After 5+ freelance projects completed |
 
 ---
@@ -1548,6 +1550,91 @@ The portfolio itself demonstrates competency:
 | Backend not updating after push | Pushed to GitHub only | Run `git subtree push --prefix=backend hf main` |
 | Rate limited during local testing | 3/hour on contact, 20/hour on chat | Restart backend to reset in-memory rate limits |
 | `/resume.pdf` returns 404 | File not uploaded | Add PDF to `frontend/public/resume.pdf` |
+
+---
+
+---
+
+## 21. Phase 8 — Chatbot Improvements
+
+**Status**: In Progress (v1.3) | **Spec**: `specs/002-chatbot-rag/`
+**Estimated Time:** 2–3 hours
+**Claude Code Role:** Builder
+
+### Background
+The RAG chatbot was shipped in v1.2 as a stateless, batch-response system. Two
+improvements have been approved for v1.3 based on real UX impact:
+
+1. **Streaming responses** — tokens stream to the user as they are generated
+   instead of waiting for the full response. Highest UX impact, lowest complexity.
+2. **FAQ knowledge base expansion** — recruiter and client Q&As added to
+   `faq.md` so the chatbot can answer common portfolio questions accurately.
+
+Deferred for a future version: conversation memory, hybrid search, reranking.
+See `specs/002-chatbot-rag/spec.md` for full rationale.
+
+### 21.1 FAQ Knowledge Base Update
+
+**What to add to `context/rag-knowledge-base/faq.md`:**
+Comprehensive Q&As covering:
+- All 4 projects (hackathon context, tech stack, live URLs)
+- Tech stack questions (Kubernetes, RAG, agents, full-stack)
+- Availability, timezone, pricing range
+- Spec-driven development methodology
+- Freelancing platforms and collaboration style
+
+**After updating:**
+```bash
+EMBEDDING_PROVIDER=fastembed python scripts/seed-rag.py
+```
+
+### 21.2 Streaming — Backend (FastAPI)
+
+Change `POST /chat` to return a `StreamingResponse` using Server-Sent Events:
+
+```
+Content-Type: text/event-stream
+Cache-Control: no-cache
+Connection: keep-alive
+```
+
+Each SSE event carries one token chunk:
+```
+data: {"token": "Hello", "done": false}\n\n
+data: {"token": " world", "done": false}\n\n
+data: {"token": "", "done": true, "session_id": "...", "sources": [...]}\n\n
+```
+
+The final event (`done: true`) carries `session_id` and `sources`.
+PostgreSQL save (tokens_used) happens after stream completes.
+
+**Provider support:**
+- Groq: `client.chat.completions.create(..., stream=True)` — yields `chunk.choices[0].delta.content`
+- OpenAI: same pattern — `client.chat.completions.create(..., stream=True)`
+
+### 21.3 Streaming — Frontend (Next.js)
+
+**API Route** (`/frontend/src/app/api/chat/route.ts`):
+- Forward SSE stream from FastAPI to browser — pass through `ReadableStream`
+- Set `Content-Type: text/event-stream` on response
+
+**ChatWidget** (`/frontend/src/components/chat/ChatWidget.tsx`):
+- Replace `fetch().then(r => r.json())` with `fetch()` + `ReadableStream` reader
+- Append tokens to message as they arrive (React state update per chunk)
+- Show typing indicator until first token arrives, then hide it
+- On `done: true` event: finalise message, save sources
+
+### 21.4 Deliverables Checklist — Phase 8
+
+- [ ] `faq.md` updated with 15+ recruiter/client Q&As
+- [ ] `scripts/seed-rag.py` re-run successfully after FAQ update
+- [ ] `POST /chat` returns `StreamingResponse` (SSE)
+- [ ] Groq provider streams tokens correctly
+- [ ] `/api/chat` route handler proxies stream to browser
+- [ ] `ChatWidget` renders tokens as they arrive
+- [ ] Typing indicator shows until first token, then disappears
+- [ ] Message saves to PostgreSQL after stream completes
+- [ ] Tested on desktop and mobile viewports via Playwright MCP
 
 ---
 
