@@ -59,8 +59,9 @@ C:\Users\*/
 # Claude MCP config (local paths)
 .claude/mcp-config.json
 
-# PDF files (resume will be added manually)
+# PDF files (root level only — resume in public/ is tracked)
 *.pdf
+!frontend/public/resume.pdf
 
 # Personal guide — local only, never push
 PERSONAL-GUIDE.md
