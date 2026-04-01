@@ -108,8 +108,11 @@ export default async function ProjectPage({
     project.github_url !== null &&
     project.github_url !== "[your GitHub repo URL]";
 
-  const gallery = project.gallery?.filter((g) => g.src) ?? [];
-  const hasGallery = gallery.length > 1;
+  // Exclude the hero image from gallery to avoid showing it twice
+  const gallery = (project.gallery ?? []).filter(
+    (g) => g.src && g.src !== project.image
+  );
+  const hasGallery = gallery.length > 0;
 
   return (
     <main
@@ -184,7 +187,7 @@ export default async function ProjectPage({
                 color: "var(--accent-cyan)",
               }}
             >
-              // Context
+              {'// Context'}
             </span>
             {project.context}
           </div>
