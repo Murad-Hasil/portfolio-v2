@@ -1472,7 +1472,8 @@ The portfolio itself demonstrates competency:
 | 1.0 | 2026-03-20 | Initial spec — 4 projects, 5 phases |
 | 1.1 | 2026-03-20 | Added UI/UX Design System (Section 8) |
 | 1.2 | 2026-03-31 | **SHIPPED** — Corrected backend platform (HF Spaces, not Railway), Next.js 16.2.1, added email (Resend), platform constraints, CI/CD auto-deploy, production hardening (error pages, rate limits, error states) |
-| 1.3 | 2026-04-01 | **IN PROGRESS** — Phase 8: chatbot improvements (streaming SSE + FAQ knowledge base expansion). Constitution v1.2.0. Spec: `specs/002-chatbot-rag/` |
+| 1.3 | 2026-04-01 | **SHIPPED** — Phase 8: chatbot streaming SSE + FAQ expansion. Constitution v1.2.0. Spec: `specs/002-chatbot-rag/` |
+| 1.4 | 2026-04-02 | **IN PROGRESS** — Phase 9: availability badge (FR-014) ✅ + Phase 10: dynamic OG image (FR-015). Specs: `specs/003-availability-badge/`, `specs/004-og-image/` |
 | 2.0 | TBD | After 5+ freelance projects completed |
 
 ---
@@ -1626,15 +1627,227 @@ PostgreSQL save (tokens_used) happens after stream completes.
 
 ### 21.4 Deliverables Checklist — Phase 8
 
-- [ ] `faq.md` updated with 15+ recruiter/client Q&As
-- [ ] `scripts/seed-rag.py` re-run successfully after FAQ update
-- [ ] `POST /chat` returns `StreamingResponse` (SSE)
-- [ ] Groq provider streams tokens correctly
-- [ ] `/api/chat` route handler proxies stream to browser
-- [ ] `ChatWidget` renders tokens as they arrive
-- [ ] Typing indicator shows until first token, then disappears
-- [ ] Message saves to PostgreSQL after stream completes
-- [ ] Tested on desktop and mobile viewports via Playwright MCP
+- [x] `faq.md` updated with 15+ recruiter/client Q&As
+- [x] `scripts/seed-rag.py` re-run successfully after FAQ update
+- [x] `POST /chat` returns `StreamingResponse` (SSE)
+- [x] Groq provider streams tokens correctly
+- [x] `/api/chat` route handler proxies stream to browser
+- [x] `ChatWidget` renders tokens as they arrive
+- [x] Typing indicator shows until first token, then disappears
+- [x] Message saves to PostgreSQL after stream completes
+- [x] Fallback message streamed when LLM returns empty response
+
+**Status: ✅ SHIPPED 2026-04-01**
+
+---
+
+## 22. Phase 9 — Availability Badge + Dynamic OG Image
+
+**Status**: In Progress (v1.4) | **Spec**: `specs/003-availability-badge/`
+**Estimated Time:** 1–2 hours
+**Claude Code Role:** Builder
+
+### FR-014 — Availability Status Badge
+
+**Requirement**: The Hero section MUST display the developer's current availability
+status as a visual badge so clients can immediately see whether Murad is open to
+new projects — without scrolling or reading body text.
+
+**Behaviour rules**:
+- Badge reads `Status` from `context/murad-profile.md` → `## Availability` section.
+- Three possible status values and their visual treatment:
+
+| Status value | Badge colour | Dot colour | Label shown |
+|---|---|---|---|
+| `available` | green tint bg | `#10b981` pulsing green | Label from `murad-profile.md` |
+| `busy` | amber tint bg | `#f59e0b` amber | Label from `murad-profile.md` |
+| `unavailable` | red tint bg | `#ef4444` red (static) | Label from `murad-profile.md` |
+
+- Badge is read from the `/api/about` endpoint (or derived from `/api/profile`).
+  If no endpoint exists, the backend exposes a lightweight `GET /profile` route
+  that returns the parsed availability block.
+- Badge must NOT be hardcoded in any component. Status and label come from
+  `context/murad-profile.md` → served via backend → consumed by `Hero.tsx`.
+- The pulsing dot animation uses Tailwind `animate-pulse` and MUST respect
+  `prefers-reduced-motion` (stop animation if reduced motion is preferred).
+- Badge placement: immediately below the name/headline, above the role
+  TypeAnimation line — the first thing a scanning eye hits after the name.
+
+**Acceptance criteria**:
+- [ ] `context/murad-profile.md` contains `## Availability` section with `Status`,
+  `Label`, `Note`, `Hours per week` fields.
+- [ ] Backend exposes `GET /profile` returning `{ availability: { status, label, note } }`.
+- [ ] `Hero.tsx` fetches availability on mount; renders correct colour + label.
+- [ ] Changing `Status: available` → `Status: busy` in `murad-profile.md` and
+  restarting backend changes badge without any frontend code change.
+- [ ] Badge is visible at 375px, 768px, and 1440px viewports.
+- [ ] `prefers-reduced-motion` stops the pulse animation.
+
+### 22.1 Backend — GET /profile
+
+Add `backend/app/routers/profile.py`:
+
+```
+GET /profile
+Response: {
+  "name": "Murad Hasil",
+  "title": "AI Automation Engineer & Full-Stack Developer",
+  "availability": {
+    "status": "available",       // available | busy | unavailable
+    "label": "Available for Freelance Work",
+    "note": "Open to AI automation, chatbot, and full-stack projects",
+    "hours_per_week": 40
+  }
+}
+```
+
+Reads `context/murad-profile.md` at startup (same pattern as projects/skills routers).
+Register router in `backend/app/main.py`.
+Add Next.js proxy at `frontend/src/app/api/profile/route.ts`.
+
+### 22.2 Frontend — Hero.tsx Badge
+
+Badge component (inline, no separate file — one small addition to Hero.tsx):
+
+```tsx
+{/* Availability badge — reads from /api/profile */}
+<div className="availability-badge">
+  <span className="pulse-dot" />          {/* pulsing colour dot */}
+  <span>{availability.label}</span>        {/* "Available for Freelance Work" */}
+</div>
+```
+
+Position: between the name `<h1>` and the `<TypeAnimation>` role line.
+Tailwind classes: `inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm border`
+with colour variants per status (green/amber/red).
+
+### 22.3 Deliverables Checklist — Phase 9
+
+- [ ] `context/murad-profile.md` — `## Availability` section present and correct
+- [ ] `backend/app/routers/profile.py` — `GET /profile` reads murad-profile.md
+- [ ] `backend/app/main.py` — profile router registered
+- [ ] `frontend/src/app/api/profile/route.ts` — Next.js proxy
+- [ ] `Hero.tsx` — badge renders with correct colour + pulsing dot + label
+- [ ] `prefers-reduced-motion` respected (Tailwind `motion-safe:animate-pulse`)
+- [ ] Responsive at 375px / 768px / 1440px
+- [x] `context/murad-profile.md` — `## Availability` section present and correct
+- [x] `backend/app/routers/profile.py` — `GET /profile` reads murad-profile.md
+- [x] `backend/app/main.py` — profile router registered
+- [x] `frontend/src/app/api/profile/route.ts` — Next.js proxy via fs.readFileSync
+- [x] `Hero.tsx` — badge renders with correct colour + pulsing dot + label
+- [x] `prefers-reduced-motion` respected (`motion-safe:animate-pulse`)
+- [x] Responsive at 375px / 768px / 1440px — verified via Playwright MCP
+- [x] Status change in murad-profile.md → reflected in UI without code change
+
+**Status: ✅ SHIPPED 2026-04-02**
+
+---
+
+## 23. Phase 10 — Dynamic OG Image
+
+**Status**: In Progress (v1.4) | **Spec**: `specs/004-og-image/`
+**Estimated Time:** 1–2 hours
+**Claude Code Role:** Builder
+
+### Background
+
+The portfolio already has an `opengraph-image.tsx` file but it is **fully
+hardcoded** — tech tags, name, subtitle, and URL are all static strings. This
+means when `context/skills-manifest.json` or `context/projects-manifest.json`
+change, the OG image shown when the link is shared on LinkedIn, Twitter, or
+WhatsApp does NOT update.
+
+Two OG images are needed:
+
+1. **Homepage OG** — shows Murad's name, title, top skills from
+   `skills-manifest.json`, email, and site URL. One image for the root `/` route.
+2. **Per-project OG** — each project case study page (`/projects/[slug]`) gets
+   its own OG image: project title, category badge, top 4 tech tags, and the
+   first metric from `projects-manifest.json`.
+
+Both images use the portfolio design system (dark `#08080F` background,
+`#00D4FF` cyan, `#6366F1` indigo, JetBrains Mono for code elements).
+
+### FR-015 — Dynamic OG Image
+
+**Requirement**: The portfolio MUST generate dynamic Open Graph images that
+reflect actual content from `context/` files — not hardcoded strings. Every
+public-facing page MUST have a unique, visually branded OG image.
+
+**Acceptance criteria**:
+- [ ] `GET /opengraph-image` returns a 1200×630 PNG with top skills sourced
+  from `context/skills-manifest.json` (all `"level": "advanced"` skills,
+  max 6 displayed).
+- [ ] `GET /projects/[slug]/opengraph-image` returns a unique 1200×630 PNG per
+  project with title, category, tech tags, and metric from
+  `context/projects-manifest.json`.
+- [ ] Both images use only portfolio design tokens (no new colours introduced).
+- [ ] No skill name, project title, or tech tag is hardcoded in any OG file.
+- [ ] `next build` completes with zero errors after changes.
+- [ ] `next.config.ts` includes `outputFileTracingRoot` pointing to repo root
+  so Vercel includes `context/` files in the serverless bundle.
+
+### 23.1 Homepage OG — Dynamic Skills
+
+Switch `runtime` from `"edge"` to `"nodejs"`. Read skills at request time:
+
+```ts
+import fs from "fs"
+import path from "path"
+
+const raw = fs.readFileSync(
+  path.resolve(process.cwd(), "..", "context", "skills-manifest.json"),
+  "utf-8"
+)
+const manifest = JSON.parse(raw)
+
+// Extract all "advanced" skills across categories, limit to 6
+const topSkills = Object.values(manifest.skills)
+  .flatMap((cat: any) => cat.items.filter((s: any) => s.level === "advanced"))
+  .slice(0, 6)
+  .map((s: any) => s.name)
+```
+
+Display as cyan/indigo alternating tag pills — same visual style as Hero.tsx.
+
+### 23.2 Per-Project OG — One Image Per Slug
+
+New file: `frontend/src/app/projects/[slug]/opengraph-image.tsx`
+
+```ts
+export async function generateImageMetadata({ params }) {
+  return [{ id: params.slug, alt: `${project.title} — Murad Hasil` }]
+}
+```
+
+Layout (1200×630):
+```
+┌──────────────────────────────────────────────────────────────────┐
+│▓ top accent bar (cyan → indigo gradient)                         │
+│                                                                  │
+│  [AI Agents]                    ← category badge (indigo)        │
+│                                                                  │
+│  CRM Digital FTE                ← project title (large, white)   │
+│  Omnichannel AI Customer Success Agent                           │
+│                                                                  │
+│  [OpenAI Agents SDK]  [FastAPI]  [Kubernetes]  [Kafka]          │
+│                                                                  │
+│  ✦ Handles 3 channels simultaneously   ← first metric (cyan)    │
+│                                                                  │
+│  mbmuradhasil@gmail.com          muradhasil.vercel.app/projects/ │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+### 23.3 Deliverables Checklist — Phase 10
+
+- [x] `frontend/next.config.ts` — `outputFileTracingRoot` added
+- [x] `frontend/src/app/opengraph-image.tsx` — nodejs runtime, top 6 advanced skills from manifest
+- [x] `frontend/src/app/projects/[slug]/opengraph-image.tsx` — new file, per-project dynamic
+- [x] `next build` clean (zero TypeScript/lint errors)
+- [x] Homepage OG screenshot — skills from `skills-manifest.json` verified
+- [x] Per-project OG: crm-digital-fte ✅, todo-cloud-ai ✅
+
+**Status: ✅ SHIPPED 2026-04-02**
 
 ---
 

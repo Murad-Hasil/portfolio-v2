@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, type Variants, type Transition } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { Mail, MessageCircle, ArrowDown } from "lucide-react";
@@ -19,6 +20,31 @@ const container: Variants = {
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: ease },
+};
+
+/* ── Availability badge ─────────────────────────────────────────────────── */
+interface Availability {
+  status: string;
+  label: string;
+}
+
+const BADGE_STYLES: Record<
+  string,
+  { wrapper: string; dot: string }
+> = {
+  available: {
+    wrapper:
+      "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+    dot: "bg-emerald-400 motion-safe:animate-pulse",
+  },
+  busy: {
+    wrapper: "border-amber-500/30 bg-amber-500/10 text-amber-400",
+    dot: "bg-amber-400",
+  },
+  unavailable: {
+    wrapper: "border-red-500/30 bg-red-500/10 text-red-400",
+    dot: "bg-red-400",
+  },
 };
 
 /* ── Data (static — sourced from context/murad-profile.md) ──────────────── */
@@ -48,6 +74,17 @@ const socialLinks = [
 ] as const;
 
 export function Hero() {
+  const [availability, setAvailability] = useState<Availability | null>(null);
+
+  useEffect(() => {
+    fetch("/api/profile")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (data?.availability) setAvailability(data.availability);
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <section
       id="hero"
@@ -109,6 +146,27 @@ export function Hero() {
             &amp; Full-Stack Developer
           </span>
         </motion.h1>
+
+        {/* Availability badge — sourced from /api/profile → murad-profile.md */}
+        {availability && (
+          <motion.div variants={fadeUp} className="flex justify-center mb-4">
+            <span
+              className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium border ${
+                BADGE_STYLES[availability.status]?.wrapper ??
+                BADGE_STYLES.available.wrapper
+              }`}
+              style={{ fontFamily: "var(--font-space-grotesk)" }}
+            >
+              <span
+                className={`w-2 h-2 rounded-full shrink-0 ${
+                  BADGE_STYLES[availability.status]?.dot ??
+                  BADGE_STYLES.available.dot
+                }`}
+              />
+              {availability.label}
+            </span>
+          </motion.div>
+        )}
 
         {/* TypeAnimation — rotating roles */}
         <motion.div variants={fadeUp} className="h-8 mb-6">

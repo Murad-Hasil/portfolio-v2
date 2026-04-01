@@ -29,6 +29,12 @@ Focus: Applied AI, Cloud-Native Development, Autonomous Agents
 - Technologies Used: 20+
 - Hackathons Completed: 4
 
+## Availability
+- Status: available
+- Label: Available for Freelance Work
+- Note: Open to AI automation, chatbot, and full-stack projects
+- Hours per week: 40
+
 ## Freelancing Goals
 - Platform: Fiverr (https://www.fiverr.com/murad_hasil)
 - Niche: AI Automation, Chatbot Development, Full-Stack Web Apps

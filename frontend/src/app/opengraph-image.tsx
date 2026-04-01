@@ -1,11 +1,49 @@
 import { ImageResponse } from "next/og";
+import fs from "fs";
+import path from "path";
 
-export const runtime = "edge";
-export const alt = "Murad Hasil — AI Automation Engineer & Full-Stack Developer";
+export const runtime = "nodejs";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+interface SkillItem {
+  name: string;
+  level: string;
+}
+
+interface SkillCategory {
+  label: string;
+  items: SkillItem[];
+}
+
+interface SkillsManifest {
+  skills: Record<string, SkillCategory>;
+}
+
+function getTopSkills(): string[] {
+  try {
+    const raw = fs.readFileSync(
+      path.resolve(process.cwd(), "..", "context", "skills-manifest.json"),
+      "utf-8"
+    );
+    const manifest: SkillsManifest = JSON.parse(raw);
+    return Object.values(manifest.skills)
+      .flatMap((cat) => cat.items.filter((s) => s.level === "advanced"))
+      .slice(0, 6)
+      .map((s) => s.name);
+  } catch {
+    return ["OpenAI Agents SDK", "MCP", "FastAPI", "Next.js", "RAG Systems", "Python"];
+  }
+}
+
 export default function OgImage() {
+  const topSkills = getTopSkills();
+
+  const tagStyles = [
+    { color: "#6366f1", bg: "rgba(99,102,241,0.12)", border: "rgba(99,102,241,0.3)" },
+    { color: "#00d4ff", bg: "rgba(0,212,255,0.10)",  border: "rgba(0,212,255,0.3)" },
+  ];
+
   return new ImageResponse(
     (
       <div
@@ -52,7 +90,6 @@ export default function OgImage() {
           height="630"
           viewBox="0 0 520 630"
         >
-          {/* Lines */}
           <line x1="380" y1="120" x2="260" y2="220" stroke="#00d4ff" strokeWidth="1" />
           <line x1="380" y1="120" x2="460" y2="280" stroke="#6366f1" strokeWidth="1" />
           <line x1="260" y1="220" x2="180" y2="360" stroke="#00d4ff" strokeWidth="1" />
@@ -62,16 +99,14 @@ export default function OgImage() {
           <line x1="460" y1="280" x2="500" y2="400" stroke="#6366f1" strokeWidth="1" />
           <line x1="260" y1="220" x2="320" y2="340" stroke="#10b981" strokeWidth="1" />
           <line x1="320" y1="340" x2="380" y2="420" stroke="#00d4ff" strokeWidth="1" />
-          {/* Nodes */}
           <circle cx="380" cy="120" r="10" fill="#6366f1" />
-          <circle cx="260" cy="220" r="8" fill="#00d4ff" />
+          <circle cx="260" cy="220" r="8"  fill="#00d4ff" />
           <circle cx="460" cy="280" r="12" fill="#6366f1" />
-          <circle cx="180" cy="360" r="7" fill="#10b981" />
-          <circle cx="320" cy="340" r="6" fill="#00d4ff" />
-          <circle cx="380" cy="420" r="9" fill="#6366f1" />
+          <circle cx="180" cy="360" r="7"  fill="#10b981" />
+          <circle cx="320" cy="340" r="6"  fill="#00d4ff" />
+          <circle cx="380" cy="420" r="9"  fill="#6366f1" />
           <circle cx="300" cy="480" r="11" fill="#00d4ff" />
-          <circle cx="500" cy="400" r="7" fill="#10b981" />
-          {/* Outer glow rings */}
+          <circle cx="500" cy="400" r="7"  fill="#10b981" />
           <circle cx="380" cy="120" r="22" fill="none" stroke="#6366f1" strokeWidth="1" opacity="0.4" />
           <circle cx="460" cy="280" r="26" fill="none" stroke="#6366f1" strokeWidth="1" opacity="0.4" />
           <circle cx="300" cy="480" r="24" fill="none" stroke="#00d4ff" strokeWidth="1" opacity="0.4" />
@@ -88,7 +123,7 @@ export default function OgImage() {
             maxWidth: 720,
           }}
         >
-          {/* Code comment label */}
+          {/* Code comment eyebrow */}
           <div
             style={{
               display: "flex",
@@ -99,7 +134,7 @@ export default function OgImage() {
               letterSpacing: 1,
             }}
           >
-            {"// AI Automation Engineer"}
+            {"// AI Automation Engineer & Full-Stack Developer"}
           </div>
 
           {/* Name */}
@@ -110,52 +145,47 @@ export default function OgImage() {
               fontWeight: 800,
               color: "#e2e8f0",
               lineHeight: 1.1,
-              marginBottom: 16,
+              marginBottom: 12,
               letterSpacing: -1,
             }}
           >
             Murad Hasil
           </div>
 
-          {/* Title */}
+          {/* Subtitle */}
           <div
             style={{
               display: "flex",
-              fontSize: 26,
+              fontSize: 22,
               color: "#94a3b8",
-              marginBottom: 40,
-              lineHeight: 1.4,
+              marginBottom: 36,
             }}
           >
             AI Agents · RAG Pipelines · Full-Stack · Kubernetes
           </div>
 
-          {/* Tech tags */}
+          {/* Top skills — dynamic from skills-manifest.json */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-            {[
-              { label: "OpenAI Agents SDK", color: "#6366f1", bg: "rgba(99,102,241,0.12)" },
-              { label: "MCP", color: "#00d4ff", bg: "rgba(0,212,255,0.1)" },
-              { label: "FastAPI", color: "#10b981", bg: "rgba(16,185,129,0.1)" },
-              { label: "Next.js", color: "#e2e8f0", bg: "rgba(226,232,240,0.08)" },
-              { label: "RAG", color: "#6366f1", bg: "rgba(99,102,241,0.12)" },
-              { label: "Kubernetes", color: "#00d4ff", bg: "rgba(0,212,255,0.1)" },
-            ].map((tag) => (
-              <div
-                key={tag.label}
-                style={{
-                  display: "flex",
-                  color: tag.color,
-                  background: tag.bg,
-                  border: `1px solid ${tag.color}33`,
-                  borderRadius: 6,
-                  padding: "6px 14px",
-                  fontSize: 15,
-                  fontFamily: "monospace",
-                }}
-              >
-                {tag.label}
-              </div>
-            ))}
+            {topSkills.map((skill, i) => {
+              const style = tagStyles[i % 2];
+              return (
+                <div
+                  key={skill}
+                  style={{
+                    display: "flex",
+                    color: style.color,
+                    background: style.bg,
+                    border: `1px solid ${style.border}`,
+                    borderRadius: 6,
+                    padding: "6px 14px",
+                    fontSize: 15,
+                    fontFamily: "monospace",
+                  }}
+                >
+                  {skill}
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -168,7 +198,14 @@ export default function OgImage() {
             padding: "0 80px 36px",
           }}
         >
-          <div style={{ display: "flex", color: "#64748b", fontSize: 16, fontFamily: "monospace" }}>
+          <div
+            style={{
+              display: "flex",
+              color: "#64748b",
+              fontSize: 16,
+              fontFamily: "monospace",
+            }}
+          >
             mbmuradhasil@gmail.com
           </div>
           <div
@@ -182,7 +219,7 @@ export default function OgImage() {
               padding: "6px 16px",
             }}
           >
-            murad-hasil-portfolio-v2-xi.vercel.app
+            muradhasil.vercel.app
           </div>
         </div>
       </div>

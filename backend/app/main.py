@@ -80,6 +80,13 @@ try:
 except ImportError:
     pass
 
+try:
+    from app.routers import profile
+
+    app.include_router(profile.router)
+except ImportError:
+    pass
+
 
 # ── Health ────────────────────────────────────────────────────────────────────
 @app.get("/health", tags=["health"])

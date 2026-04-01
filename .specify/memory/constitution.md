@@ -1,12 +1,11 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version change: 1.1.0 → 1.2.0
+Version change: 1.3.0 → 1.4.0
 Modified sections:
-  - Principle VI (RAG Chatbot): added planned improvements — streaming responses
-    and conversation memory; added note that /chat endpoint upgrade tracked in
-    specs/002-chatbot-rag/
-  - Known Platform Constraints: added RAG chunking strategy note
+  - Principle III (Design System): added OG image rule — both homepage and
+    per-project OG images must use only portfolio design tokens and read content
+    from context/ files via fs; no hardcoded strings in opengraph-image files.
   - Version policy footer updated
 Added sections: none
 Removed: N/A
@@ -48,6 +47,11 @@ intent and implementation and destroys the proof-of-methodology narrative.
 - Placeholder content (Lorem ipsum, fake metrics, "[your LinkedIn URL]") MUST
   NOT appear in any rendered output.
 - A testimonials section MUST NOT be created — no real testimonials exist yet.
+- **Availability badge**: The Hero section availability status and label MUST be
+  read from `context/murad-profile.md` → `## Availability` block, served via
+  `GET /profile` backend endpoint. Hardcoding `"Available for hire"` or any
+  status string in a component is PROHIBITED. Changing the markdown file is the
+  only update path.
 - Stats MUST match `context/murad-profile.md` exactly:
   - Experience: 2+ Years
   - Projects Completed: 10+
@@ -83,6 +87,18 @@ All UI components MUST conform to the "Robotic but Professional" design system
 
 After building any component, the agent MUST use Playwright MCP to screenshot
 at 1440px (desktop) and 375px (mobile) and verify compliance.
+
+**OG Images** — Open Graph images for every public page MUST:
+- Use only the defined design tokens above (dark bg, cyan, indigo, mono font).
+- Read all dynamic content (skills, project titles, tech tags, metrics) from
+  `context/` files via `fs.readFileSync` at request time — never hardcode names.
+- Use `runtime = "nodejs"` (not `"edge"`) to enable `fs` access.
+- Homepage OG reads `context/skills-manifest.json` — top `"advanced"` skills,
+  max 6 displayed as tag pills.
+- Per-project OG reads `context/projects-manifest.json` by slug — title,
+  category, tech tags (first 4), first metric.
+- `next.config.ts` must set `outputFileTracingRoot` to the repo root so Vercel
+  bundles `context/` files in the serverless function.
 
 **Rationale**: The design system is the portfolio's professional signal. One
 inconsistent component undermines the entire impression.
@@ -135,15 +151,14 @@ no code changes needed to switch between Groq and OpenAI:
 **Note**: Switching embedding provider requires re-running `scripts/seed-rag.py`
 and recreating the Qdrant collection (dimension mismatch).
 
-**Current RAG pipeline state** (as of v1.2.0):
-- Chunking: word-count (375 words, 40 word overlap) — sufficient for current corpus size (15 vectors)
+**Current RAG pipeline state** (as of v1.3.0):
+- Chunking: word-count (375 words, 40 word overlap) — sufficient for current corpus size (15+ vectors)
 - Retrieval: pure vector search (cosine similarity, top 5 chunks)
 - Memory: stateless — each request is independent (no conversation history sent to LLM)
-- Streaming: not yet implemented — response returned in single batch
+- Streaming: ✅ SHIPPED 2026-04-01 — SSE (Server-Sent Events), tokens stream word-by-word
 
-**Planned improvements** (tracked in `specs/002-chatbot-rag/`):
-- Streaming responses via Server-Sent Events (SSE) — approved, next to implement
-- Conversation memory (last N turns) — approved, next to implement after streaming
+**Deferred improvements** (tracked in `specs/002-chatbot-rag/`):
+- Conversation memory (last N turns) — deferred until after freelance projects begin
 - Hybrid search / reranking — deferred until corpus exceeds ~200 vectors
 
 **Knowledge base update protocol**: After editing any file in
