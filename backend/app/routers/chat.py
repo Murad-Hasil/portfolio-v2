@@ -134,6 +134,12 @@ async def _stream_response(
 
     response_text = "".join(full_response)
 
+    # If LLM returned nothing (e.g. off-topic greeting), stream the fallback
+    if not response_text:
+        fallback = "I don't have that information, but you can reach Murad directly at mbmuradhasil@gmail.com"
+        yield _sse({"token": fallback, "done": False})
+        response_text = fallback
+
     # Final event: done=True carries session_id and sources
     yield _sse({"token": "", "done": True, "session_id": body.session_id, "sources": sources})
 
