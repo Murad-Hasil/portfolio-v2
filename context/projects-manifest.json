@@ -47,7 +47,7 @@
       "category": "Full-Stack + AI",
       "description": "5-phase evolution from a simple Python CLI todo list to a full cloud-native AI agent on Kubernetes. Demonstrates spec-driven development methodology from first principles to production.",
       "problem": "Show a complete software evolution journey \u2014 from console CLI to AI-powered app to Kubernetes-deployed microservices.",
-      "solution": "5 progressive phases: CLI \u2192 Web App \u2192 AI Chatbot Interface \u2192 Local Kubernetes \u2192 Cloud Kubernetes with Kafka and Dapr.",
+      "solution": "5 progressive phases: CLI \u2192 Web App \u2192 AI Chatbot Interface \u2192 Local Kubernetes + HF Spaces with Kafka and Dapr.",
       "tech": [
         "Python",
         "Next.js",
@@ -60,8 +60,7 @@
         "Minikube",
         "Kubernetes",
         "Kafka",
-        "Dapr",
-        "GitHub Actions"
+        "Dapr"
       ],
       "live_url": "https://murad-hasil-todo-ai.vercel.app",
       "github_url": "https://github.com/Murad-Hasil/Todo-AI-Assistant",
@@ -69,12 +68,13 @@
       "metrics": [
         "5 complete evolution phases",
         "Natural language task management",
-        "Cloud-native Kubernetes deployment",
-        "Full CI/CD with GitHub Actions"
+        "Local Kubernetes on Minikube; production backend on Hugging Face Spaces",
+        "Vercel auto-deploy on push to main; backend deployed via HF Space"
       ],
       "highlights": [
         "Spec-driven development throughout all phases",
         "Natural language interface: 'Reschedule morning meetings to 2 PM'",
+        "Real-time browser notifications — in-app toast + OS push on reminder tasks, powered by DB polling",
         "Dapr for service mesh abstraction",
         "Kafka for event-driven architecture"
       ]

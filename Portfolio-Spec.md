@@ -369,20 +369,21 @@ Focus: Applied AI, Cloud-Native Development, Autonomous Agents
       "category": "Full-Stack + AI",
       "description": "5-phase evolution from a simple Python CLI todo list to a full cloud-native AI agent on Kubernetes. Demonstrates spec-driven development methodology from first principles to production.",
       "problem": "Show a complete software evolution journey — from console CLI to AI-powered app to Kubernetes-deployed microservices.",
-      "solution": "5 progressive phases: CLI → Web App → AI Chatbot Interface → Local Kubernetes → Cloud Kubernetes with Kafka and Dapr.",
-      "tech": ["Python", "Next.js", "FastAPI", "SQLModel", "Neon PostgreSQL", "OpenAI Agents SDK", "MCP", "Docker", "Minikube", "Kubernetes", "Kafka", "Dapr", "GitHub Actions"],
+      "solution": "5 progressive phases: CLI → Web App → AI Chatbot Interface → Local Kubernetes + HF Spaces with Kafka and Dapr.",
+      "tech": ["Python", "Next.js", "FastAPI", "SQLModel", "Neon PostgreSQL", "OpenAI Agents SDK", "MCP", "Docker", "Minikube", "Kubernetes", "Kafka", "Dapr"],
       "live_url": "[your deployed URL]",
       "github_url": "[your GitHub repo URL]",
       "image": "/projects/todo-cloud-ai.png",
       "metrics": [
         "5 complete evolution phases",
         "Natural language task management",
-        "Cloud-native Kubernetes deployment",
-        "Full CI/CD with GitHub Actions"
+        "Local Kubernetes on Minikube; production backend on Hugging Face Spaces",
+        "Vercel auto-deploy on push to main; backend deployed via HF Space"
       ],
       "highlights": [
         "Spec-driven development throughout all phases",
         "Natural language interface: 'Reschedule morning meetings to 2 PM'",
+        "Real-time browser notifications — in-app toast + OS push on reminder tasks, powered by DB polling",
         "Dapr for service mesh abstraction",
         "Kafka for event-driven architecture"
       ]
