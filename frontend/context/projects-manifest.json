@@ -152,38 +152,49 @@
       "status": "completed",
       "featured": true,
       "category": "AI Automation",
-      "context": "Built to replace a $4,000-$8,000/month virtual assistant with a 24/7 autonomous agent that costs $500-$2,000/month and never sleeps.",
-      "description": "A 24/7 autonomous AI agent managing personal and business affairs using Claude Code + Obsidian. Monitors Gmail and WhatsApp, processes incoming messages, generates weekly business reports, and handles routine tasks with human-in-the-loop safety.",
-      "problem": "Repetitive personal and business tasks consume hours weekly. A human VA costs $4,000-$8,000/month and only works 40 hours/week.",
-      "solution": "Local-first autonomous agent with Python watchers, MCP servers, HITL approval workflow, and weekly CEO briefing reports.",
+      "context": "A personal project to replace a $4,000–$8,000/month virtual assistant with a 24/7 autonomous AI agent costing $500–$2,000/month. Built across 4 progressive tiers — Bronze → Silver → Gold → Platinum — each adding a new layer of autonomy.",
+      "description": "A local-first autonomous AI agent that acts as a Digital Full-Time Employee. It monitors Gmail and WhatsApp, triages emails, drafts Odoo invoices, publishes social media posts, and generates weekly CEO briefings — all autonomously, with Human-in-the-Loop approval gates before any irreversible action.",
+      "problem": "Repetitive business tasks (email triage, invoice creation, social media posting, weekly reporting) consume 10–15 hours/week. A human VA costs $4,000–$8,000/month, works 40 hours/week, and takes days off. The tasks are rule-based enough to automate — but sensitive enough to require human oversight before execution.",
+      "solution": "A 4-tier autonomous agent system built on an Obsidian vault as the source of truth. Tasks flow through 9 folders (Inbox → Needs_Action → In_Progress → Pending_Approval → Approved → Done). The agent claims tasks atomically via os.rename(), processes them with Groq + Claude, then halts at Pending_Approval for human sign-off before any irreversible action — email send, invoice confirm, social post publish.",
       "tech": [
-        "Claude Code",
-        "Python",
+        "Python 3.12",
+        "Claude (claude-sonnet-4-6)",
+        "Groq (llama-3.1-8b-instant)",
         "MCP Servers",
         "Playwright",
-        "Obsidian",
+        "Obsidian Vault",
         "Gmail API",
-        "WhatsApp API"
+        "Odoo XML-RPC",
+        "PM2",
+        "uv"
       ],
       "live_url": null,
       "github_url": "https://github.com/Murad-Hasil/personal-ai-employee",
-      "image": "/projects/personal-ai-employee.png",
+      "image": "/projects/personal-ai-employee-linkedin-live.png",
       "gallery": [
-        { "src": "/projects/personal-ai-employee.png", "caption": "GitHub repository — 4 completed phases (Bronze → Silver → Gold → Platinum)" }
+        { "src": "/projects/personal-ai-employee-linkedin-published.png", "caption": "LinkedIn post published live — 'Post successful!' confirmation after autonomous Playwright execution" },
+        { "src": "/projects/personal-ai-employee-linkedin-live.png", "caption": "Live post on Murad's LinkedIn profile — agent-drafted and published without manual intervention" },
+        { "src": "/projects/personal-ai-employee-linkedin-preview.png", "caption": "Agent drafting the post — Playwright session active, content reviewed before publish" },
+        { "src": "/projects/personal-ai-employee-hitl.png", "caption": "HITL approval gate — $3,500 invoice drafted in Odoo, awaiting human approval in Pending_Approval/" },
+        { "src": "/projects/personal-ai-employee-briefing.png", "caption": "Monday Morning CEO Briefing — auto-generated: pipeline metrics, channel status, system health across all 4 tiers" },
+        { "src": "/projects/personal-ai-employee.png", "caption": "GitHub repo — 4-tier architecture: Bronze → Silver → Gold → Platinum, fully documented" }
       ],
-      "demo_note": "Local deployment — GitHub repo + architecture walkthrough available",
+      "demo_note": "Local-first deployment — no public URL. GitHub repo + live proof screenshots above.",
       "metrics": [
-        "Works 168 hours/week (24/7) vs 40 hours for human VA",
-        "Costs $500-$2,000/month vs $4,000-$8,000 for human",
-        "85-90% cost savings per task",
-        "HITL safety for all sensitive operations"
+        "168 hours/week uptime (24/7) vs 40 hours for a human VA",
+        "85–90% cost reduction — $500–2,000/month vs $4,000–8,000/month human VA",
+        "4 tiers completed: Bronze (Vault) → Silver (Gmail) → Gold (Odoo + Social) → Platinum (Cloud Brain)",
+        "22 emails auto-triaged in one week; 10 tasks completed autonomously",
+        "LinkedIn post published live via Playwright — zero manual steps",
+        "Atomic task claiming via os.rename() — safe multi-agent coordination without a message broker"
       ],
       "highlights": [
-        "Watchers pattern for Gmail and WhatsApp monitoring",
-        "Human-in-the-Loop approval workflow for sensitive actions",
-        "Weekly 'Monday Morning CEO Briefing' reports",
-        "Subscription audit for cost optimization",
-        "4-phase architecture: Bronze (basic) → Silver → Gold → Platinum (full autonomy)"
+        "9-folder Obsidian vault pipeline: every task flows Inbox → Needs_Action → In_Progress → Pending_Approval → Done — full audit trail in plain Markdown",
+        "HITL approval gate: agent halts at Pending_Approval/ before any irreversible action — email send, invoice confirm, social post publish",
+        "Dual-brain architecture: Groq cloud (llama-3.1-8b-instant) for fast triage + Claude local (claude-sonnet-4-6) for complex reasoning",
+        "Playwright social automation: agent opens LinkedIn/X/Facebook sessions, drafts posts, and publishes — proved live with real posts",
+        "Odoo XML-RPC integration: invoice drafted automatically from a natural language email request ($3,500 Ahmad Ali — Development Services)",
+        "Monday Morning CEO Briefing: auto-generated every week — pipeline metrics, email counts, financial overview, system health across all 4 tiers"
       ]
     },
     {
