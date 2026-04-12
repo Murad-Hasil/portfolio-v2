@@ -2,73 +2,52 @@
   "projects": [
     {
       "id": "crm-digital-fte",
-      "title": "CRM Digital FTE — Omnichannel AI Customer Success Agent",
+      "title": "CRM Digital FTE \u2014 Omnichannel AI Customer Success Agent",
       "slug": "crm-digital-fte",
       "status": "completed",
       "featured": true,
       "category": "AI Agents",
-      "context": "Panaversity Hackathon 5 — CRM Digital FTE Factory Program. Built a production-grade autonomous AI agent to replace a $75,000/year human customer success role with a system costing under $1,000/year.",
-      "description": "Autonomous AI customer success agent handling Gmail, WhatsApp, and Web Form simultaneously — 24/7, no human in the loop. Built with OpenAI Agents SDK (Groq LLaMA 3.3 70B), FastAPI, Neon PostgreSQL + pgvector for semantic search, Apache Kafka for event streaming, and deployed on Hugging Face Spaces + Vercel.",
-      "problem": "A SaaS company needs 24/7 customer support across 3 channels simultaneously. A human FTE costs $75,000/year, works 40 hours/week, handles one channel at a time, and can't maintain consistent tone at 3 AM. The company also needs every interaction logged, escalated intelligently, and searchable — none of which a human naturally produces.",
-      "solution": "A single AI agent receives every inbound message (Email via Gmail Pub/Sub, WhatsApp via Twilio, Web Form via Next.js), normalizes it into one Kafka event, then runs 5 OpenAI Agents SDK tools in sequence: create_ticket → get_customer_history → search_knowledge_base (pgvector cosine similarity) → send_response (or escalate_to_human). Sentiment guardrails auto-detect 5 escalation triggers before the LLM even runs. Total operating cost: ~$1,000/year.",
+      "description": "Autonomous AI customer success agent handling Gmail, WhatsApp, and Web Form simultaneously. Built with OpenAI Agents SDK, FastAPI, PostgreSQL with pgvector, Kafka event streaming, and deployed on Kubernetes with auto-scaling.",
+      "problem": "A SaaS company needs 24/7 customer support across 3 channels but human FTEs cost $75,000/year. This Digital FTE operates at under $1,000/year.",
+      "solution": "MCP-powered agent with 5 specialized tools, cross-channel customer identity resolution, sentiment-based escalation, and production Kubernetes deployment.",
       "tech": [
         "OpenAI Agents SDK",
-        "Groq (LLaMA 3.3 70B)",
         "FastAPI",
-        "Neon PostgreSQL",
-        "pgvector",
-        "Apache Kafka",
-        "Next.js 15",
-        "Tailwind CSS",
-        "Gmail API",
-        "Google Pub/Sub",
-        "Twilio WhatsApp",
+        "PostgreSQL",
+        "Qdrant",
+        "Kafka",
+        "Next.js",
         "Docker",
         "Kubernetes",
-        "Hugging Face Spaces",
-        "Vercel",
-        "MCP (FastMCP)"
+        "Twilio",
+        "Gmail API"
       ],
-      "live_url": "https://web-form-rouge.vercel.app",
-      "github_url": "https://github.com/Murad-Hasil/crm-digital-fte",
-      "image": "/projects/crm-fte-webform.png",
-      "gallery": [
-        { "src": "/projects/crm-fte-webform.png", "caption": "Web Support Form — glassmorphism UI (Next.js 15 + Tailwind, deployed on Vercel)" },
-        { "src": "/projects/crm-fte-webform-filled.png", "caption": "Form filled — Technical Support ticket, High priority, real submission" },
-        { "src": "/projects/crm-fte-ticket-success.png", "caption": "Ticket submitted — AI agent queued, ticket ID returned in < 200ms" },
-        { "src": "/projects/crm-fte-swagger.png", "caption": "Swagger UI — 6 live endpoints across Email, WhatsApp, and Web Form channels" },
-        { "src": "/projects/crm-fte-health.png", "caption": "Health check — local_queue mode, all 3 channels active on Hugging Face Spaces" },
-        { "src": "/projects/crm-fte-github.png", "caption": "GitHub repo — full source: FastAPI backend, Next.js frontend, Kubernetes manifests, 45 tests" }
-      ],
+      "live_url": "[your deployed URL]",
+      "github_url": "[your GitHub repo URL]",
+      "image": "/projects/crm-digital-fte.png",
       "metrics": [
-        "3 channels handled simultaneously — Email, WhatsApp, Web Form — from a single agent",
-        "< 3s P95 response time via Groq LLaMA 3.3 70B (vs 2–5 min human first-response)",
-        "98.7% cost reduction — ~$1,000/year AI operating cost vs $75,000/year human FTE",
-        "45/45 tests passing — 18 agent guardrail, 21 channel formatter, 6 end-to-end",
-        "8-table Neon PostgreSQL schema with 384-dim pgvector embeddings for semantic KB search",
-        "5 escalation triggers: pricing, refund, legal threat, profanity, human request"
+        "Handles 3 channels simultaneously",
+        "P95 response time < 3 seconds",
+        "Cross-channel identification > 95% accuracy",
+        "24/7 uptime with Kubernetes auto-scaling"
       ],
       "highlights": [
-        "USE_LOCAL_QUEUE toggle: same codebase runs on Apache Kafka (production) or asyncio.Queue (HF Spaces) — no Java needed for demo deployment",
-        "MCP Server (FastMCP) exposes all 5 agent tools as a Model Context Protocol server — connect any MCP-compatible host (Claude Desktop, Cursor)",
-        "Cross-channel customer identity: same customer tracked across Email, WhatsApp, and Web Form via unified customer_identifiers table",
-        "Sentiment guardrails run before the LLM — 5 keyword buckets (pricing, refund, legal, aggressive, human_requested) escalate deterministically in O(1)",
-        "pgvector cosine similarity search with all-MiniLM-L6-v2 (384-dim) + ILIKE fallback when vector search returns no results",
-        "Gmail credentials injected from HF Space secrets at container startup — zero credentials in the Docker image",
-        "Kubernetes manifests included with HPA auto-scaling (3–30 pods) for production load"
+        "Built custom PostgreSQL CRM with pgvector",
+        "Kafka event streaming for decoupled channel processing",
+        "MCP Server exposing 5 tools to the agent",
+        "HPA auto-scaling: 3-30 pods based on load"
       ]
     },
     {
       "id": "todo-cloud-ai",
-      "title": "Todo App → Cloud-Native AI Agent (Spec-Driven Evolution)",
+      "title": "Todo App \u2192 Cloud-Native AI Agent (Spec-Driven Evolution)",
       "slug": "todo-cloud-ai",
       "status": "completed",
       "featured": true,
       "category": "Full-Stack + AI",
-      "context": "Panaversity Hackathon II submission. Goal: master spec-driven development by evolving a simple CLI app into a fully distributed, event-driven, Kubernetes-deployed AI agent. Zero manual coding — every line generated by Claude Code from written specs.",
       "description": "5-phase evolution from a simple Python CLI todo list to a full cloud-native AI agent on Kubernetes. Demonstrates spec-driven development methodology from first principles to production.",
-      "problem": "Show a complete software evolution journey — from console CLI to AI-powered app to Kubernetes-deployed microservices, built entirely through spec-driven development with Claude Code.",
-      "solution": "5 progressive phases: CLI → Web App → AI Chatbot (MCP + OpenAI Agents SDK) → Local Kubernetes (Minikube + Helm) → Kafka + Dapr event-driven architecture with production backend on Hugging Face Spaces.",
+      "problem": "Show a complete software evolution journey \u2014 from console CLI to AI-powered app to Kubernetes-deployed microservices.",
+      "solution": "5 progressive phases: CLI \u2192 Web App \u2192 AI Chatbot Interface \u2192 Local Kubernetes + HF Spaces with Kafka and Dapr.",
       "tech": [
         "Python",
         "Next.js",
@@ -86,63 +65,18 @@
       "live_url": "https://murad-hasil-todo-ai.vercel.app",
       "github_url": "https://github.com/Murad-Hasil/Todo-AI-Assistant",
       "image": "/projects/todo-cloud-ai.png",
-      "gallery": [
-        { "src": "/projects/todo-cloud-ai.png", "caption": "Hero — AI-powered task management landing page" },
-        { "src": "/projects/todo-cloud-ai-features.png", "caption": "Features — AI Chatbot, MCP Integration, JWT Auth, Roman Urdu support" },
-        { "src": "/projects/todo-cloud-ai-login.png", "caption": "Auth — Better Auth JWT login with gradient UI" },
-        { "src": "/projects/todo-cloud-ai-register.png", "caption": "Register — Account creation with Better Auth" }
-      ],
-      "phases": [
-        {
-          "phase": "I",
-          "title": "Python CLI Console App",
-          "tech": "Python 3.13, Claude Code, Spec-Kit Plus",
-          "points": 100,
-          "description": "In-memory todo app with Add, Delete, Update, View, Mark Complete. Built with 100% spec-driven development — no manual code. Spec written first, Claude Code generates everything."
-        },
-        {
-          "phase": "II",
-          "title": "Full-Stack Web Application",
-          "tech": "Next.js 16, FastAPI, SQLModel, Neon PostgreSQL, Better Auth",
-          "points": 150,
-          "description": "Multi-user web app with JWT authentication (Better Auth), RESTful API with 6 endpoints, persistent Neon Serverless PostgreSQL database, and responsive Tailwind UI."
-        },
-        {
-          "phase": "III",
-          "title": "AI Chatbot Interface",
-          "tech": "OpenAI Agents SDK, Official MCP SDK, OpenAI ChatKit",
-          "points": 200,
-          "description": "Natural language task management — just say 'Reschedule my morning meetings to 2 PM.' MCP server exposes 5 tools (add_task, list_tasks, complete_task, delete_task, update_task). Stateless server architecture with DB-persisted conversation state."
-        },
-        {
-          "phase": "IV",
-          "title": "Local Kubernetes Deployment",
-          "tech": "Docker, Minikube, Helm Charts, kubectl-ai, Kagent, Gordon",
-          "points": 250,
-          "description": "Containerized frontend and backend. Helm charts generated via AI (kubectl-ai). Gordon (Docker AI Agent) for AI-assisted Docker operations. AIOps with kubectl-ai for intelligent cluster management."
-        },
-        {
-          "phase": "V",
-          "title": "Advanced Cloud Deployment",
-          "tech": "Kafka, Dapr, Redpanda, Hugging Face Spaces",
-          "points": 300,
-          "description": "Event-driven architecture with 3 Kafka topics (task-events, reminders, task-updates). Dapr sidecars abstract Kafka, DB, and secrets. Recurring task engine and real-time multi-client sync. Production backend on Hugging Face Spaces; local Kubernetes via Minikube + Helm."
-        }
-      ],
       "metrics": [
-        "5 complete evolution phases — CLI to Cloud in one project",
-        "Natural language task management via MCP + Agents SDK",
-        "Local Kubernetes on Minikube with Helm; production backend on Hugging Face Spaces",
+        "5 complete evolution phases",
+        "Natural language task management",
+        "Local Kubernetes on Minikube; production backend on Hugging Face Spaces",
         "Vercel auto-deploy on push to main; backend deployed via HF Space"
       ],
       "highlights": [
-        "100% spec-driven — every line written by Claude Code, no manual coding",
-        "MCP server with 5 tools: add, list, complete, delete, update tasks",
-        "Stateless server architecture — horizontally scalable, resilient to restarts",
-        "Kafka event-driven: reminder engine, recurring tasks, real-time multi-client sync",
-        "Dapr sidecar pattern: swap Kafka/DB without touching application code",
+        "Spec-driven development throughout all phases",
+        "Natural language interface: 'Reschedule morning meetings to 2 PM'",
         "Real-time browser notifications — in-app toast + OS push on reminder tasks, powered by DB polling",
-        "Roman Urdu chatbot support for multilingual workflows"
+        "Dapr for service mesh abstraction",
+        "Kafka for event-driven architecture"
       ]
     },
     {
@@ -152,42 +86,100 @@
       "status": "completed",
       "featured": true,
       "category": "AI Automation",
-      "context": "A personal project to replace a $4,000–$8,000/month virtual assistant with a 24/7 autonomous AI agent costing $500–$2,000/month. Built across 4 progressive tiers — Bronze → Silver → Gold → Platinum — each adding a new layer of autonomy.",
-      "description": "A local-first autonomous AI agent that acts as a Digital Full-Time Employee. It monitors Gmail and WhatsApp, triages emails, drafts Odoo invoices, publishes social media posts, and generates weekly CEO briefings — all autonomously, with Human-in-the-Loop approval gates before any irreversible action.",
-      "problem": "Repetitive business tasks (email triage, invoice creation, social media posting, weekly reporting) consume 10–15 hours/week. A human VA costs $4,000–$8,000/month, works 40 hours/week, and takes days off. The tasks are rule-based enough to automate — but sensitive enough to require human oversight before execution.",
-      "solution": "A 4-tier autonomous agent system built on an Obsidian vault as the source of truth. Tasks flow through 9 folders (Inbox → Needs_Action → In_Progress → Pending_Approval → Approved → Done). The agent claims tasks atomically via os.rename(), processes them with Groq + Claude, then halts at Pending_Approval for human sign-off before any irreversible action — email send, invoice confirm, social post publish.",
+      "description": "A production-grade, local-first autonomous AI system built in 4 progressive tiers — from a file-watching foundation to a distributed dual-agent cloud executive. Handles email triage, Odoo invoicing, social media drafting, and CEO briefings with atomic multi-agent coordination and Human-in-the-Loop safety gates.",
+      "problem": "Small business owners spend 15-20 hours/week on repetitive administrative tasks — email triage, invoice entry, social media, financial reporting. A human VA costs $4,000–$8,000/month and works 40 hrs/week. Autonomous AI tools either lack safety controls or require expensive cloud infrastructure.",
+      "solution": "A 4-tier autonomous agent system: lightweight Groq cloud agent handles high-frequency triage 24/7 while a local Claude agent executes sensitive operations (Odoo, Gmail). Two agents coordinate via atomic os.rename() filesystem claims — no message broker, no database. Every irreversible action requires explicit human approval.",
       "tech": [
         "Python 3.12",
-        "Claude (claude-sonnet-4-6)",
-        "Groq (llama-3.1-8b-instant)",
-        "MCP Servers",
+        "Claude Sonnet 4.6",
+        "Groq Llama-3",
+        "OpenRouter",
+        "Anthropic SDK",
         "Playwright",
         "Obsidian Vault",
         "Gmail API",
         "Odoo XML-RPC",
         "PM2",
-        "uv"
+        "uv",
+        "pytest",
+        "Git"
       ],
       "live_url": null,
       "github_url": "https://github.com/Murad-Hasil/personal-ai-employee",
       "image": "/projects/personal-ai-employee.png",
-      "gallery": [],
-      "demo_note": "Local-first deployment — no public URL. GitHub repo + live proof screenshots above.",
+      "demo_note": "Local deployment — GitHub repo + live E2E demo available",
+      "context": "Built as a real production tool for autonomous business operations. All 13 unit tests pass. Live E2E verified: task dropped into Obsidian vault → Groq API triage → AI-drafted reply surfaced in Pending_Approval within 60 seconds.",
+      "phases": [
+        {
+          "phase": "T1",
+          "title": "Bronze — Foundation & Vault",
+          "tech": "Python 3.12, watchdog, Obsidian Markdown",
+          "points": 25,
+          "description": "Established the Obsidian vault with 9 canonical folders (Needs_Action, In_Progress, Pending_Approval, Done, Logs, Plans, Briefings, Approved, Rejected). Built a filesystem watcher that detects new task files, parses YAML front-matter, and routes to skill handlers. All state is plain Markdown — no external database."
+        },
+        {
+          "phase": "T2",
+          "title": "Silver — Intelligent Assistant",
+          "tech": "Gmail API, MCP Servers, Claude Sonnet, HITL Workflow",
+          "points": 50,
+          "description": "Integrated Gmail via MCP server. Emails are polled every 60s, converted to Markdown action files, triaged by Claude (urgent/routine/ignore), and draft replies written to Pending_Approval. An approval watcher detects human sign-off and triggers execution. No email is sent without explicit human approval."
+        },
+        {
+          "phase": "T3",
+          "title": "Gold — Autonomous Business Operations",
+          "tech": "Odoo XML-RPC, Playwright, JSON Audit Log, CEO Briefing",
+          "points": 75,
+          "description": "Added Odoo invoice processing (NLP extraction → draft creation → HITL → confirm), social media automation via Playwright (LinkedIn, Instagram, X), weekly CEO briefing generator, financial BI dashboard, structured JSON Lines audit trail with 100MB auto-rotation, and a watchdog process for sentinel auto-restart."
+        },
+        {
+          "phase": "T4",
+          "title": "Platinum — Cloud Executive + Multi-Model Brain",
+          "tech": "Groq, OpenRouter, PM2, Git Vault Sync, Atomic Claims",
+          "points": 100,
+          "description": "Distributed dual-agent architecture: cloud VM runs Groq Llama-3 (always-on via PM2) for triage; local machine runs Claude for sensitive execution. Agents coordinate via atomic os.rename() — no broker needed. Heartbeat TTL reclaims stale tasks. LLM_PROVIDER env var switches between Anthropic/Groq/OpenRouter with zero code changes. 13/13 tests pass."
+        }
+      ],
+      "gallery": [
+        {
+          "src": "/projects/personal-ai-employee-architecture.png",
+          "caption": "4-tier architecture overview: phases, orchestrator modules, and vault structure"
+        },
+        {
+          "src": "/projects/personal-ai-employee-tests.png",
+          "caption": "13/13 unit tests passing — Brain routing, atomic claim, domain handoff, vault sync"
+        },
+        {
+          "src": "/projects/personal-ai-employee-vault-before.png",
+          "caption": "Needs_Action/ folder before task drop — clean slate, ready for autonomous processing"
+        },
+        {
+          "src": "/projects/personal-ai-employee-task-drop.png",
+          "caption": "Human drops email task with YAML front-matter — task_type, domain, priority fields"
+        },
+        {
+          "src": "/projects/personal-ai-employee-e2e-flow.png",
+          "caption": "Live E2E: agent startup (3/3 validation) → claimed → Groq API call → Pending_Approval in <2s"
+        },
+        {
+          "src": "/projects/personal-ai-employee-ai-output.png",
+          "caption": "AI-generated triage result: TRIAGE: routine, DRAFT reply, signed 'Processed by AI Employee v0.1 — Verified by Human'"
+        }
+      ],
       "metrics": [
-        "168 hours/week uptime (24/7) vs 40 hours for a human VA",
-        "85–90% cost reduction — $500–2,000/month vs $4,000–8,000/month human VA",
-        "4 tiers completed: Bronze (Vault) → Silver (Gmail) → Gold (Odoo + Social) → Platinum (Cloud Brain)",
-        "22 emails auto-triaged in one week; 10 tasks completed autonomously",
-        "LinkedIn post published live via Playwright — zero manual steps",
-        "Atomic task claiming via os.rename() — safe multi-agent coordination without a message broker"
+        "Operates 168 hours/week (24/7) vs 40 hrs/week for a human VA",
+        "~90% cost reduction: $50–200/month LLM costs vs $4,000–8,000/month human",
+        "End-to-end email triage completed in under 2 seconds via Groq Llama-3",
+        "13/13 unit tests pass — Brain routing, atomic claim, domain handoff, vault sync",
+        "Zero double-processing across 2 agents — guaranteed by os.rename() atomicity",
+        "Stale task auto-reclaim in 30 minutes via heartbeat TTL thread"
       ],
       "highlights": [
-        "9-folder Obsidian vault pipeline: every task flows Inbox → Needs_Action → In_Progress → Pending_Approval → Done — full audit trail in plain Markdown",
-        "HITL approval gate: agent halts at Pending_Approval/ before any irreversible action — email send, invoice confirm, social post publish",
-        "Dual-brain architecture: Groq cloud (llama-3.1-8b-instant) for fast triage + Claude local (claude-sonnet-4-6) for complex reasoning",
-        "Playwright social automation: agent opens LinkedIn/X/Facebook sessions, drafts posts, and publishes — proved live with real posts",
-        "Odoo XML-RPC integration: invoice drafted automatically from a natural language email request ($3,500 Ahmad Ali — Development Services)",
-        "Monday Morning CEO Briefing: auto-generated every week — pipeline metrics, email counts, financial overview, system health across all 4 tiers"
+        "Atomic multi-agent coordination via os.rename() — no database, no message broker, pure filesystem",
+        "Provider-agnostic Brain class: swap Claude ↔ Groq ↔ OpenRouter via single LLM_PROVIDER env var",
+        "Domain-based security routing: cloud VM holds only Groq key — Odoo and Gmail credentials never leave local machine",
+        "Human-in-the-Loop as architectural guarantee: no code path bypasses the Pending_Approval gate",
+        "Heartbeat TTL thread: background thread writes Unix timestamp every 30s; stale claims auto-reclaimed after 30 min",
+        "Structured JSON Lines audit trail: every external action logged with timestamp, actor, target, and outcome"
       ]
     },
     {
@@ -197,10 +189,9 @@
       "status": "completed",
       "featured": true,
       "category": "Full-Stack + AI",
-      "context": "Panaversity Hackathon I submission — 100 base points + 150 bonus points. Goal: build a production-grade AI-native textbook for the Physical AI & Humanoid Robotics course. Top submissions were invited to join the Panaversity core team as startup founders.",
       "description": "Panaversity Hackathon I submission: a production-grade AI-native textbook platform teaching Physical AI and Humanoid Robotics across 13 weeks. Covers ROS 2, Gazebo, NVIDIA Isaac Sim, and a Conversational Humanoid capstone. Built with Docusaurus v3, FastAPI, Neon PostgreSQL, Qdrant Cloud, LangChain, and Groq LLaMA 3.3 70B.",
-      "problem": "Physical AI — AI systems that operate in the real physical world — is the next frontier after LLMs, yet no structured, accessible textbook exists for it. Existing robotics courses are scattered, assume identical hardware for every learner, and offer zero in-context AI help when a student gets stuck. Pakistani learners face an additional barrier: dense English-only material with no mechanism to get real-time clarification in their native language.",
-      "solution": "A full-stack AI-native textbook platform with 4 progressive modules (ROS 2 → Gazebo → NVIDIA Isaac → VLA Capstone). RAG chatbot built with LangChain + Qdrant + Groq LLaMA 3.3 70B — highlight any text → Ask AI instantly. Hardware-aware personalization across 3 rig profiles. One-click Roman Urdu chapter translation.",
+      "problem": "Physical AI — AI systems that operate in the real physical world — is the next frontier after LLMs, yet no structured, accessible textbook exists for it. Existing robotics courses are scattered across dozens of resources, assume identical hardware for every learner, and offer zero in-context AI help when a student gets stuck. The challenge is compounded by three simultaneously heavy computational domains: Physics Simulation (Isaac Sim / Gazebo), Visual Perception (SLAM / Computer Vision), and Generative AI (LLMs). A student with an RTX 4080 workstation and one with a Jetson Orin Nano edge kit need entirely different guidance — but every existing resource gives them the same content. Pakistani learners face an additional barrier: dense English-only material with no mechanism to get real-time clarification in their native language.",
+      "solution": "A full-stack AI-native textbook platform with four progressive modules: (1) ROS 2 — the Robotic Nervous System, covering nodes, topics, services, URDF, and Python-ROS controllers; (2) Gazebo & Unity — physics simulation with LiDAR, depth cameras, and IMUs; (3) NVIDIA Isaac — photorealistic sim, Isaac ROS, hardware-accelerated VSLAM, Nav2 path planning, and sim-to-real RL; (4) Conversational Humanoid capstone — integrating LLMs for natural language robot interaction. Platform features: RAG chatbot built with LangChain + Qdrant + Groq LLaMA 3.3 70B with FastEmbed (any highlighted text → Ask AI instantly); hardware-aware personalization at signup across 3 rig profiles (RTX Sim Workstation / Jetson Edge Kit / Unitree G1 Robot); one-click Roman Urdu chapter translation; JWT auth with 3-step hardware onboarding; admin dashboard for curriculum ingestion and Qdrant reindexing.",
       "tech": [
         "Docusaurus v3",
         "React 19",
@@ -224,47 +215,16 @@
       "live_url": "https://Murad-Hasil.github.io/physical-ai-humanoid-robotics-textbook/",
       "github_url": "https://github.com/Murad-Hasil/physical-ai-humanoid-robotics-textbook",
       "image": "/projects/physical-ai-textbook.png",
-      "gallery": [
-        { "src": "/projects/physical-ai-textbook.png", "caption": "Home — Full platform overview with core technologies and stats" },
-        { "src": "/projects/physical-ai-textbook-hero.png", "caption": "Hero — 13-week program, 50+ lessons, Edge AI + RAG + Sim-to-Real" },
-        { "src": "/projects/physical-ai-textbook-auth.png", "caption": "Auth gate — Hardware-aware onboarding with RTX / Jetson / Unitree G1 profiles" }
-      ],
-      "modules": [
-        {
-          "number": 1,
-          "title": "The Robotic Nervous System (ROS 2)",
-          "weeks": "Weeks 1–5",
-          "description": "ROS 2 architecture, nodes, topics, services, and actions. Building ROS 2 packages with Python. URDF robot description format for humanoids. Bridging Python AI agents to ROS controllers via rclpy."
-        },
-        {
-          "number": 2,
-          "title": "The Digital Twin (Gazebo & Unity)",
-          "weeks": "Weeks 6–7",
-          "description": "Physics simulation with gravity, collisions, and rigid body dynamics. Simulating sensors: LiDAR, depth cameras, and IMUs. High-fidelity rendering and human-robot interaction in Unity."
-        },
-        {
-          "number": 3,
-          "title": "The AI-Robot Brain (NVIDIA Isaac)",
-          "weeks": "Weeks 8–10",
-          "description": "NVIDIA Isaac Sim for photorealistic simulation and synthetic data generation. Isaac ROS with hardware-accelerated VSLAM. Nav2 path planning for bipedal movement. Sim-to-real RL transfer techniques."
-        },
-        {
-          "number": 4,
-          "title": "Vision-Language-Action (VLA) Capstone",
-          "weeks": "Weeks 11–13",
-          "description": "Integrating LLMs for natural language robot control. Voice commands → ROS 2 action sequences. Capstone: a simulated humanoid receives a voice command, plans a path, navigates obstacles, identifies an object using computer vision, and manipulates it."
-        }
-      ],
       "metrics": [
-        "13-week curriculum across 4 modules (ROS 2 → Gazebo → Isaac → VLA)",
+        "13-week curriculum across 4 modules (ROS 2 → Gazebo → Isaac → Conversational Humanoid)",
         "180 vectors indexed in Qdrant Cloud for RAG across all 13 weeks",
         "12-table Neon PostgreSQL schema (users, profiles, sessions, curriculum)",
         "3 hardware profiles with fully personalized content paths",
-        "All hackathon bonus deliverables: Auth + Personalization + Urdu Translation"
+        "All hackathon bonus deliverables completed: Auth + Personalization + Urdu Translation"
       ],
       "highlights": [
-        "RAG chatbot: highlight any text → Ask AI for instant clarification (LangChain + Qdrant + Groq LLaMA 3.3 70B)",
-        "Hardware-aware onboarding: content adapts to RTX workstation, Jetson edge kit, or Unitree G1 robot",
+        "RAG chatbot with LangChain + Qdrant: highlight any text → Ask AI for instant clarification",
+        "Hardware-aware onboarding at signup: content adapts to RTX workstation, Jetson edge kit, or Unitree G1",
         "One-click Roman Urdu translation for every chapter — built for Pakistani learners",
         "Admin dashboard with curriculum ingestion pipeline and Qdrant reindexing",
         "Full CI/CD: GitHub Actions auto-deploys to GitHub Pages on every push"

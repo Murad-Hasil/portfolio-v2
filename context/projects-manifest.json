@@ -81,38 +81,105 @@
     },
     {
       "id": "personal-ai-employee",
-      "title": "Personal AI Employee \u2014 Autonomous Digital FTE",
+      "title": "Personal AI Employee — Autonomous Digital FTE",
       "slug": "personal-ai-employee",
       "status": "completed",
       "featured": true,
       "category": "AI Automation",
-      "description": "A 24/7 autonomous AI agent managing personal and business affairs using Claude Code + Obsidian. Monitors Gmail and WhatsApp, processes incoming messages, generates weekly business reports, and handles routine tasks with human-in-the-loop safety.",
-      "problem": "Repetitive personal and business tasks consume hours weekly. A human VA costs $4,000-$8,000/month and only works 40 hours/week.",
-      "solution": "Local-first autonomous agent with Python watchers, MCP servers, HITL approval workflow, and weekly CEO briefing reports.",
+      "description": "A production-grade, local-first autonomous AI system built in 4 progressive tiers — from a file-watching foundation to a distributed dual-agent cloud executive. Handles email triage, Odoo invoicing, social media drafting, and CEO briefings with atomic multi-agent coordination and Human-in-the-Loop safety gates.",
+      "problem": "Small business owners spend 15-20 hours/week on repetitive administrative tasks — email triage, invoice entry, social media, financial reporting. A human VA costs $4,000–$8,000/month and works 40 hrs/week. Autonomous AI tools either lack safety controls or require expensive cloud infrastructure.",
+      "solution": "A 4-tier autonomous agent system: lightweight Groq cloud agent handles high-frequency triage 24/7 while a local Claude agent executes sensitive operations (Odoo, Gmail). Two agents coordinate via atomic os.rename() filesystem claims — no message broker, no database. Every irreversible action requires explicit human approval.",
       "tech": [
-        "Claude Code",
-        "Python",
-        "MCP Servers",
+        "Python 3.12",
+        "Claude Sonnet 4.6",
+        "Groq Llama-3",
+        "OpenRouter",
+        "Anthropic SDK",
         "Playwright",
-        "Obsidian",
+        "Obsidian Vault",
         "Gmail API",
-        "WhatsApp API"
+        "Odoo XML-RPC",
+        "PM2",
+        "uv",
+        "pytest",
+        "Git"
       ],
       "live_url": null,
       "github_url": "https://github.com/Murad-Hasil/personal-ai-employee",
       "image": "/projects/personal-ai-employee.png",
-      "demo_note": "Local deployment \u2014 GitHub repo + architecture walkthrough available",
+      "demo_note": "Local deployment — GitHub repo + live E2E demo available",
+      "context": "Built as a real production tool for autonomous business operations. All 13 unit tests pass. Live E2E verified: task dropped into Obsidian vault → Groq API triage → AI-drafted reply surfaced in Pending_Approval within 60 seconds.",
+      "phases": [
+        {
+          "phase": "T1",
+          "title": "Bronze — Foundation & Vault",
+          "tech": "Python 3.12, watchdog, Obsidian Markdown",
+          "points": 25,
+          "description": "Established the Obsidian vault with 9 canonical folders (Needs_Action, In_Progress, Pending_Approval, Done, Logs, Plans, Briefings, Approved, Rejected). Built a filesystem watcher that detects new task files, parses YAML front-matter, and routes to skill handlers. All state is plain Markdown — no external database."
+        },
+        {
+          "phase": "T2",
+          "title": "Silver — Intelligent Assistant",
+          "tech": "Gmail API, MCP Servers, Claude Sonnet, HITL Workflow",
+          "points": 50,
+          "description": "Integrated Gmail via MCP server. Emails are polled every 60s, converted to Markdown action files, triaged by Claude (urgent/routine/ignore), and draft replies written to Pending_Approval. An approval watcher detects human sign-off and triggers execution. No email is sent without explicit human approval."
+        },
+        {
+          "phase": "T3",
+          "title": "Gold — Autonomous Business Operations",
+          "tech": "Odoo XML-RPC, Playwright, JSON Audit Log, CEO Briefing",
+          "points": 75,
+          "description": "Added Odoo invoice processing (NLP extraction → draft creation → HITL → confirm), social media automation via Playwright (LinkedIn, Instagram, X), weekly CEO briefing generator, financial BI dashboard, structured JSON Lines audit trail with 100MB auto-rotation, and a watchdog process for sentinel auto-restart."
+        },
+        {
+          "phase": "T4",
+          "title": "Platinum — Cloud Executive + Multi-Model Brain",
+          "tech": "Groq, OpenRouter, PM2, Git Vault Sync, Atomic Claims",
+          "points": 100,
+          "description": "Distributed dual-agent architecture: cloud VM runs Groq Llama-3 (always-on via PM2) for triage; local machine runs Claude for sensitive execution. Agents coordinate via atomic os.rename() — no broker needed. Heartbeat TTL reclaims stale tasks. LLM_PROVIDER env var switches between Anthropic/Groq/OpenRouter with zero code changes. 13/13 tests pass."
+        }
+      ],
+      "gallery": [
+        {
+          "src": "/projects/personal-ai-employee-architecture.png",
+          "caption": "4-tier architecture overview: phases, orchestrator modules, and vault structure"
+        },
+        {
+          "src": "/projects/personal-ai-employee-tests.png",
+          "caption": "13/13 unit tests passing — Brain routing, atomic claim, domain handoff, vault sync"
+        },
+        {
+          "src": "/projects/personal-ai-employee-vault-before.png",
+          "caption": "Needs_Action/ folder before task drop — clean slate, ready for autonomous processing"
+        },
+        {
+          "src": "/projects/personal-ai-employee-task-drop.png",
+          "caption": "Human drops email task with YAML front-matter — task_type, domain, priority fields"
+        },
+        {
+          "src": "/projects/personal-ai-employee-e2e-flow.png",
+          "caption": "Live E2E: agent startup (3/3 validation) → claimed → Groq API call → Pending_Approval in <2s"
+        },
+        {
+          "src": "/projects/personal-ai-employee-ai-output.png",
+          "caption": "AI-generated triage result: TRIAGE: routine, DRAFT reply, signed 'Processed by AI Employee v0.1 — Verified by Human'"
+        }
+      ],
       "metrics": [
-        "Works 168 hours/week (24/7)",
-        "Costs $500-$2,000/month vs $4,000-$8,000 for human",
-        "85-90% cost savings per task",
-        "HITL safety for sensitive operations"
+        "Operates 168 hours/week (24/7) vs 40 hrs/week for a human VA",
+        "~90% cost reduction: $50–200/month LLM costs vs $4,000–8,000/month human",
+        "End-to-end email triage completed in under 2 seconds via Groq Llama-3",
+        "13/13 unit tests pass — Brain routing, atomic claim, domain handoff, vault sync",
+        "Zero double-processing across 2 agents — guaranteed by os.rename() atomicity",
+        "Stale task auto-reclaim in 30 minutes via heartbeat TTL thread"
       ],
       "highlights": [
-        "Watchers pattern for Gmail and WhatsApp monitoring",
-        "Human-in-the-Loop approval workflow",
-        "Weekly 'Monday Morning CEO Briefing' reports",
-        "Subscription audit for cost optimization"
+        "Atomic multi-agent coordination via os.rename() — no database, no message broker, pure filesystem",
+        "Provider-agnostic Brain class: swap Claude ↔ Groq ↔ OpenRouter via single LLM_PROVIDER env var",
+        "Domain-based security routing: cloud VM holds only Groq key — Odoo and Gmail credentials never leave local machine",
+        "Human-in-the-Loop as architectural guarantee: no code path bypasses the Pending_Approval gate",
+        "Heartbeat TTL thread: background thread writes Unix timestamp every 30s; stale claims auto-reclaimed after 30 min",
+        "Structured JSON Lines audit trail: every external action logged with timestamp, actor, target, and outcome"
       ]
     },
     {
