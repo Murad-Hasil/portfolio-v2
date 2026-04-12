@@ -25,6 +25,24 @@
       "live_url": "[your deployed URL]",
       "github_url": "[your GitHub repo URL]",
       "image": "/projects/crm-digital-fte.png",
+      "gallery": [
+        {
+          "src": "/projects/crm-fte-swagger.png",
+          "caption": "FastAPI Swagger UI: 3 channel webhooks (Gmail, WhatsApp, Web Form) + health endpoint"
+        },
+        {
+          "src": "/projects/crm-fte-webform-filled.png",
+          "caption": "Support ticket submission: Technical issue with High-Urgent priority routing"
+        },
+        {
+          "src": "/projects/crm-fte-ticket-success.png",
+          "caption": "Ticket submitted — unique tracking ID generated, AI agent responds within minutes"
+        },
+        {
+          "src": "/projects/crm-fte-github.png",
+          "caption": "GitHub repository: full project structure with specs, FastAPI backend, and K8s configs"
+        }
+      ],
       "metrics": [
         "Handles 3 channels simultaneously",
         "P95 response time < 3 seconds",
