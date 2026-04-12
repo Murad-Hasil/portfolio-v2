@@ -31,12 +31,14 @@
       ],
       "live_url": "https://web-form-rouge.vercel.app",
       "github_url": "https://github.com/Murad-Hasil/crm-digital-fte",
-      "image": "/projects/crm-digital-fte.png",
+      "image": "/projects/crm-fte-webform.png",
       "gallery": [
-        { "src": "/projects/crm-fte-webform.png", "caption": "Web Support Form — glassmorphism UI (Next.js 15 + Tailwind)" },
-        { "src": "/projects/crm-fte-ticket-success.png", "caption": "Ticket created — AI agent queued and processing" },
-        { "src": "/projects/crm-fte-health.png", "caption": "Live health check — all 3 channels active on HF Spaces" },
-        { "src": "/projects/crm-fte-swagger.png", "caption": "Swagger UI — 6 endpoints across Email, WhatsApp, Web Form" }
+        { "src": "/projects/crm-fte-webform.png", "caption": "Web Support Form — glassmorphism UI (Next.js 15 + Tailwind, deployed on Vercel)" },
+        { "src": "/projects/crm-fte-webform-filled.png", "caption": "Form filled — Technical Support ticket, High priority, real submission" },
+        { "src": "/projects/crm-fte-ticket-success.png", "caption": "Ticket submitted — AI agent queued, ticket ID returned in < 200ms" },
+        { "src": "/projects/crm-fte-swagger.png", "caption": "Swagger UI — 6 live endpoints across Email, WhatsApp, and Web Form channels" },
+        { "src": "/projects/crm-fte-health.png", "caption": "Health check — local_queue mode, all 3 channels active on Hugging Face Spaces" },
+        { "src": "/projects/crm-fte-github.png", "caption": "GitHub repo — full source: FastAPI backend, Next.js frontend, Kubernetes manifests, 45 tests" }
       ],
       "metrics": [
         "3 channels handled simultaneously — Email, WhatsApp, Web Form — from a single agent",
