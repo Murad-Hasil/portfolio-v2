@@ -172,12 +172,15 @@
       "github_url": "https://github.com/Murad-Hasil/personal-ai-employee",
       "image": "/projects/personal-ai-employee-linkedin-live.png",
       "gallery": [
-        { "src": "/projects/personal-ai-employee-linkedin-published.png", "caption": "LinkedIn post published live — 'Post successful!' confirmation after autonomous Playwright execution" },
-        { "src": "/projects/personal-ai-employee-linkedin-live.png", "caption": "Live post on Murad's LinkedIn profile — agent-drafted and published without manual intervention" },
-        { "src": "/projects/personal-ai-employee-linkedin-preview.png", "caption": "Agent drafting the post — Playwright session active, content reviewed before publish" },
-        { "src": "/projects/personal-ai-employee-hitl.png", "caption": "HITL approval gate — $3,500 invoice drafted in Odoo, awaiting human approval in Pending_Approval/" },
-        { "src": "/projects/personal-ai-employee-briefing.png", "caption": "Monday Morning CEO Briefing — auto-generated: pipeline metrics, channel status, system health across all 4 tiers" },
-        { "src": "/projects/personal-ai-employee.png", "caption": "GitHub repo — 4-tier architecture: Bronze → Silver → Gold → Platinum, fully documented" }
+        { "src": "/projects/personal-ai-employee-obsidian-dashboard.png", "caption": "Obsidian Vault — GOLD TIER: 100% OPERATIONAL. Live dashboard showing all 4 tiers active, vault pipeline folders, and real task files" },
+        { "src": "/projects/personal-ai-employee-linkedin-published.png", "caption": "LinkedIn — 'Post successful!' Playwright automation confirmed. Agent drafted and published without any manual steps" },
+        { "src": "/projects/personal-ai-employee-linkedin-live.png", "caption": "LinkedIn live post on Murad's profile — agent-drafted content published autonomously via Playwright session" },
+        { "src": "/projects/personal-ai-employee-facebook-live.png", "caption": "Facebook — live post on Mb-Murad Hasil's profile. Agent posted to LinkedIn and Facebook in the same run" },
+        { "src": "/projects/personal-ai-employee-email-triage.png", "caption": "Email triage in action — agent processed email via Gmail MCP, classified as TRIAGE: urgent, result saved to vault" },
+        { "src": "/projects/personal-ai-employee-hitl.png", "caption": "HITL approval gate — $3,500 Odoo invoice drafted for Ahmad Ali, halted at Pending_Approval/ awaiting human sign-off" },
+        { "src": "/projects/personal-ai-employee-briefing.png", "caption": "Monday Morning CEO Briefing — auto-generated weekly: 10 tasks done, 22 emails triaged, all 4 tiers green" },
+        { "src": "/projects/personal-ai-employee-linkedin-preview.png", "caption": "Playwright drafting session — agent composing the LinkedIn post before publish, content visible in composer" },
+        { "src": "/projects/personal-ai-employee.png", "caption": "GitHub — 4-tier architecture documented: Bronze (Vault) → Silver (Gmail) → Gold (Odoo + Social) → Platinum (Cloud Brain)" }
       ],
       "demo_note": "Local-first deployment — no public URL. GitHub repo + live proof screenshots above.",
       "metrics": [
