@@ -23,7 +23,7 @@
         "Gmail API (Pub/Sub push)",
         "sentence-transformers"
       ],
-      "live_url": null,
+      "live_url": "https://web-form-rouge.vercel.app/",
       "github_url": "https://github.com/Murad-Hasil/crm-digital-fte",
       "image": "/projects/crm-fte-swagger.png",
       "gallery": [
