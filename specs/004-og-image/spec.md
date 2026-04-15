@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| **Status** | In Progress (v1.4) |
+| **Status** | ✅ Shipped (2026-04-02) |
 | **Priority** | High — every share on LinkedIn/WhatsApp/Twitter shows this |
 | **Portfolio-Spec ref** | Section 23, FR-015 |
 | **Constitution ref** | Principle III (Design System — OG Images) |
@@ -39,17 +39,17 @@ So that the client knows what the link is about without clicking.
 
 ## 3. Acceptance Criteria
 
-- [ ] `GET /opengraph-image` returns 1200×630 PNG with skills from
+- [x] `GET /opengraph-image` returns 1200×630 PNG with skills from
   `skills-manifest.json` (all `advanced`-level, max 6).
-- [ ] `GET /projects/[slug]/opengraph-image` returns unique 1200×630 PNG
+- [x] `GET /projects/[slug]/opengraph-image` returns unique 1200×630 PNG
   for every slug in `projects-manifest.json`.
-- [ ] Per-project image shows: title, category badge, first 4 tech tags,
+- [x] Per-project image shows: title, category badge, first 4 tech tags,
   first metric — all sourced from `projects-manifest.json`.
-- [ ] No skill name, project title, or tech string is hardcoded in any
+- [x] No skill name, project title, or tech string is hardcoded in any
   `opengraph-image.tsx` file.
-- [ ] Only portfolio design tokens are used (no new colours).
-- [ ] `next build` completes with zero TypeScript/lint errors.
-- [ ] `next.config.ts` has `outputFileTracingRoot` set to repo root.
+- [x] Only portfolio design tokens are used (no new colours).
+- [x] `next build` completes with zero TypeScript/lint errors.
+- [x] `next.config.ts` has `outputFileTracingRoot` set to repo root.
 
 ---
 

@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| **Status** | In Progress (v1.4) |
+| **Status** | ✅ Shipped (2026-04-02) |
 | **Priority** | High — first thing a client's eye hits in Hero |
 | **Portfolio-Spec ref** | Section 22, FR-014 |
 | **Constitution ref** | Principle II (Content Authenticity) |
@@ -33,18 +33,18 @@ reading body text or scrolling.
 
 ### Acceptance Criteria
 
-- [ ] A badge is visible in the Hero section at all three breakpoints (375px,
+- [x] A badge is visible in the Hero section at all three breakpoints (375px,
   768px, 1440px) without scrolling.
-- [ ] Badge shows a coloured dot + label text sourced from
+- [x] Badge shows a coloured dot + label text sourced from
   `context/murad-profile.md` → `## Availability`.
-- [ ] `Status: available` → green pulsing dot + green-tinted badge.
-- [ ] `Status: busy` → amber static dot + amber-tinted badge.
-- [ ] `Status: unavailable` → red static dot + red-tinted badge.
-- [ ] Changing the status in `murad-profile.md` and restarting the backend
+- [x] `Status: available` → green pulsing dot + green-tinted badge.
+- [x] `Status: busy` → amber static dot + amber-tinted badge.
+- [x] `Status: unavailable` → red static dot + red-tinted badge.
+- [x] Changing the status in `murad-profile.md` and restarting the backend
   changes the badge with zero frontend code changes.
-- [ ] `prefers-reduced-motion` stops the pulse animation (Tailwind
+- [x] `prefers-reduced-motion` stops the pulse animation (Tailwind
   `motion-safe:animate-pulse`).
-- [ ] No status string is hardcoded in any component or API route.
+- [x] No status string is hardcoded in any component or API route.
 
 ---
 

@@ -6,7 +6,7 @@
 | Field | Value |
 |---|---|
 | **Feature ID** | 002-chatbot-rag |
-| **Status** | In Progress |
+| **Status** | ✅ Shipped (2026-04-01) |
 | **Author** | Murad Hasil |
 | **Date** | 2026-04-01 |
 | **Constitution Version** | 1.2.0 |

@@ -6,7 +6,7 @@
 | Field | Value |
 |---|---|
 | **Feature ID** | 002-chatbot-rag |
-| **Status** | In Progress |
+| **Status** | ✅ Shipped (2026-04-01) |
 | **Date** | 2026-04-01 |
 | **Spec** | specs/002-chatbot-rag/spec.md |
 | **Plan** | specs/002-chatbot-rag/plan.md |
@@ -31,7 +31,7 @@ pricing, methodology, education.
 
 ## Task 2 — Add Streaming to LLM Providers
 
-**Status:** 🔲 Pending
+**Status:** ✅ Completed (2026-04-01)
 **File:** `backend/app/providers/llm.py`
 
 ### What
@@ -54,16 +54,16 @@ async def stream_llm_response(messages: list[dict]) -> AsyncGenerator[str, None]
 ```
 
 ### Acceptance Checks
-- [ ] Groq provider yields tokens in chunks
-- [ ] OpenAI provider yields tokens in chunks
-- [ ] Empty/None delta content handled gracefully (skip, don't yield)
-- [ ] Generator exhausts cleanly (no dangling connections)
+- [x] Groq provider yields tokens in chunks
+- [x] OpenAI provider yields tokens in chunks
+- [x] Empty/None delta content handled gracefully (skip, don't yield)
+- [x] Generator exhausts cleanly (no dangling connections)
 
 ---
 
 ## Task 3 — Change /chat Endpoint to StreamingResponse
 
-**Status:** 🔲 Pending
+**Status:** ✅ Completed (2026-04-01)
 **File:** `backend/app/routers/chat.py`
 
 ### What
@@ -85,19 +85,19 @@ data: {"token": "", "done": true, "session_id": "uuid", "sources": ["projects.md
 - `tokens_used` = approximate word count of full response
 
 ### Acceptance Checks
-- [ ] `Content-Type: text/event-stream` in response headers
-- [ ] `Cache-Control: no-cache` in response headers
-- [ ] Each data event is valid JSON
-- [ ] Final event has `done: true` with session_id and sources
-- [ ] chat_messages row saved to PostgreSQL after stream ends
-- [ ] Rate limiter still applies (20/hour)
-- [ ] Invalid session_id still returns 400 (before streaming starts)
+- [x] `Content-Type: text/event-stream` in response headers
+- [x] `Cache-Control: no-cache` in response headers
+- [x] Each data event is valid JSON
+- [x] Final event has `done: true` with session_id and sources
+- [x] chat_messages row saved to PostgreSQL after stream ends
+- [x] Rate limiter still applies (20/hour)
+- [x] Invalid session_id still returns 400 (before streaming starts)
 
 ---
 
 ## Task 4 — Update Next.js API Route to Proxy Stream
 
-**Status:** 🔲 Pending
+**Status:** ✅ Completed (2026-04-01)
 **File:** `frontend/src/app/api/chat/route.ts`
 
 ### What
@@ -124,16 +124,16 @@ export async function POST(request: Request) {
 ```
 
 ### Acceptance Checks
-- [ ] Response has `Content-Type: text/event-stream`
-- [ ] Stream is proxied correctly (not buffered)
-- [ ] Backend errors (400, 422) are still forwarded with correct status codes
-- [ ] BACKEND_URL env var used (not hardcoded)
+- [x] Response has `Content-Type: text/event-stream`
+- [x] Stream is proxied correctly (not buffered)
+- [x] Backend errors (400, 422) are still forwarded with correct status codes
+- [x] BACKEND_URL env var used (not hardcoded)
 
 ---
 
 ## Task 5 — Update ChatWidget to Consume SSE Stream
 
-**Status:** 🔲 Pending
+**Status:** ✅ Completed (2026-04-01)
 **File:** `frontend/src/components/chat/ChatWidget.tsx`
 
 ### What
@@ -171,20 +171,20 @@ while (true) {
 ```
 
 ### Acceptance Checks
-- [ ] Tokens appear word by word in the chat panel
-- [ ] Typing indicator (3 dots) shows until first token arrives
-- [ ] Typing indicator disappears on first token (not on done)
-- [ ] Partial message visible during streaming (not blank then full)
-- [ ] No layout jump when message grows
-- [ ] Works on mobile 375px
-- [ ] Handles stream interruption gracefully (shows partial, no white screen)
-- [ ] Suggested questions still show on first load
+- [x] Tokens appear word by word in the chat panel
+- [x] Typing indicator (3 dots) shows until first token arrives
+- [x] Typing indicator disappears on first token (not on done)
+- [x] Partial message visible during streaming (not blank then full)
+- [x] No layout jump when message grows
+- [x] Works on mobile 375px
+- [x] Handles stream interruption gracefully (shows partial, no white screen)
+- [x] Suggested questions still show on first load
 
 ---
 
 ## Task 6 — Playwright MCP Verification
 
-**Status:** 🔲 Pending
+**Status:** ✅ Completed (2026-04-01)
 
 ### What
 Use Playwright MCP to verify the streaming chatbot end-to-end on the live site.
@@ -200,10 +200,10 @@ Use Playwright MCP to verify the streaming chatbot end-to-end on the live site.
 8. Screenshot: desktop (1440px) and mobile (375px)
 
 ### Acceptance Checks
-- [ ] Streaming visible (tokens arrive progressively)
-- [ ] Typing indicator behaves correctly
-- [ ] Answers accurate from updated FAQ
-- [ ] Mobile layout intact
+- [x] Streaming visible (tokens arrive progressively)
+- [x] Typing indicator behaves correctly
+- [x] Answers accurate from updated FAQ
+- [x] Mobile layout intact
 
 ---
 
