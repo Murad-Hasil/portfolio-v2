@@ -8,9 +8,9 @@ With 2+ years of hands-on experience, Murad has built production-grade systems t
 
 ## Professional Background
 
-Murad is an AI Engineering graduate with a focus on Applied AI, Cloud-Native Development, and Autonomous Agents.
+Murad started his AI engineering journey in 2023 through GIAIC (Governor's Initiative for AI & Computing), with a focus on building practical, real-world systems. His workflow is spec-driven — he defines clear requirements and system architecture before writing code.
 
-He has completed 4 major hackathons, each resulting in a production-deployed project rather than a prototype.
+He has completed 4 major projects, each production-deployed with live infrastructure, test suites, and documented specs.
 
 ## Why Hire Murad?
 
@@ -21,9 +21,9 @@ He has completed 4 major hackathons, each resulting in a production-deployed pro
 ## Career Stats
 
 - **2+ years** of experience with AI and full-stack development
-- **5+ projects** completed across AI agents, web apps, and automation
+- **5+ hackathons** completed through GIAIC (Governor's Initiative for AI & Computing)
 - **20+ technologies** used in production
-- **4 hackathons** completed (all with production deployments)
+- **4 portfolio projects** — production-deployed with live infrastructure and documented specs
 
 ## Contact
 

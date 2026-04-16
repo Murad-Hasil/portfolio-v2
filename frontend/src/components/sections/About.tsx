@@ -11,7 +11,7 @@ const ease: Transition = { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] };
 /* ── Data sourced from context/murad-profile.md ───────────────────────────── */
 const stats = [
   { value: "2+", label: "Years Experience" },
-  { value: "5+", label: "Projects Completed" },
+  { value: "5+", label: "Hackathons" },
   { value: "20+", label: "Technologies" },
   { value: "4", label: "Projects" },
 ] as const;

@@ -65,7 +65,7 @@ Every project Murad has built (Hackathon 0, II, 5) used spec-driven development.
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                    FRONTEND (Vercel)                     │
-│            Next.js 16.2.1 + TypeScript + Tailwind        │
+│              Next.js + TypeScript + Tailwind             │
 │   Hero | Projects | Skills | Services | About | Contact  │
 │                  + RAG Chatbot Widget                    │
 └─────────────────────┬───────────────────────────────────┘
@@ -98,7 +98,7 @@ Every project Murad has built (Hackathon 0, II, 5) used spec-driven development.
 
 | Layer | Technology | Reason |
 |---|---|---|
-| Frontend Framework | Next.js 16.2.1 (App Router) | SSR + SEO + App Router conventions |
+| Frontend Framework | Next.js (App Router) | SSR + SEO + App Router conventions |
 | Language | TypeScript (strict mode) | Type safety, professional code |
 | Styling | Tailwind CSS 4 + shadcn/ui | Rapid, consistent UI |
 | Animations | Framer Motion | Smooth, professional UX |
@@ -254,9 +254,9 @@ Focus: Applied AI, Cloud-Native Development, Autonomous Agents
 
 ## Stats (Accurate)
 - Experience: 2+ Years
-- Projects Completed: 10+
+- Hackathons Completed: 5+
 - Technologies Used: 20+
-- Hackathons Completed: 4
+- Portfolio Projects: 4
 
 ## Freelancing Goals
 - Platform: Upwork and Fiverr (international clients)
@@ -278,14 +278,15 @@ Focus: Applied AI, Cloud-Native Development, Autonomous Agents
         { "name": "MCP (Model Context Protocol)", "level": "advanced" },
         { "name": "RAG Systems", "level": "advanced" },
         { "name": "Qdrant Vector DB", "level": "intermediate" },
-        { "name": "LangChain", "level": "intermediate" },
+        { "name": "Prompt Engineering", "level": "advanced" },
+        { "name": "Context Engineering", "level": "intermediate" },
         { "name": "Autonomous AI Agents", "level": "advanced" }
       ]
     },
     "frontend": {
       "label": "Frontend",
       "items": [
-        { "name": "Next.js 15", "level": "advanced" },
+        { "name": "Next.js", "level": "advanced" },
         { "name": "React 19", "level": "advanced" },
         { "name": "TypeScript", "level": "advanced" },
         { "name": "Tailwind CSS", "level": "advanced" },
@@ -468,7 +469,7 @@ WRONG: "I am a passionate developer who loves solving problems."
 RIGHT: "I build AI systems that run 24/7 — at a fraction of the cost of a human employee."
 
 WRONG: "I have experience in various technologies."
-RIGHT: "I've built production Kubernetes deployments, RAG chatbots, and autonomous agents across 4 major projects."
+RIGHT: "I started my AI engineering journey in 2023 through GIAIC, with a focus on building practical, real-world systems. I've worked on autonomous agents, RAG pipelines with live data, and full-stack applications containerized with Docker and deployed on Kubernetes."
 ```
 
 ---
@@ -965,7 +966,7 @@ Read context/murad-profile.md.
 Build the About section with:
 - Profile photo (public/profile/murad.jpg)
 - Bio paragraph (from brand-voice.md — results-focused, no fluff)
-- 4 stats: 2+ Years | 10+ Projects | 20+ Technologies | 4 Hackathons
+- 4 stats: 2+ Years Experience | 5+ Hackathons | 20+ Technologies | 4 Projects
 - Education: GIAIC badge
 - Location: Karachi, Pakistan
 - Buttons: Download Resume | View Projects
@@ -1474,7 +1475,8 @@ The portfolio itself demonstrates competency:
 | 1.1 | 2026-03-20 | Added UI/UX Design System (Section 8) |
 | 1.2 | 2026-03-31 | **SHIPPED** — Corrected backend platform (HF Spaces, not Railway), Next.js 16.2.1, added email (Resend), platform constraints, CI/CD auto-deploy, production hardening (error pages, rate limits, error states) |
 | 1.3 | 2026-04-01 | **SHIPPED** — Phase 8: chatbot streaming SSE + FAQ expansion. Constitution v1.2.0. Spec: `specs/002-chatbot-rag/` |
-| 1.4 | 2026-04-02 | **IN PROGRESS** — Phase 9: availability badge (FR-014) ✅ + Phase 10: dynamic OG image (FR-015). Specs: `specs/003-availability-badge/`, `specs/004-og-image/` |
+| 1.4 | 2026-04-02 | **SHIPPED** — Phase 9: availability badge (FR-014) ✅ + Phase 10: dynamic OG image (FR-015). Specs: `specs/003-availability-badge/`, `specs/004-og-image/` |
+| 1.5 | 2026-04-16 | **SHIPPED** — About bio rewrite (GIAIC origin, spec-driven, production-focused). Badge: "AI Engineer". Stats: 5+ Hackathons / 4 Projects. Skills: LangChain removed, Prompt Engineering + Context Engineering added. Next.js version-agnostic. Spec: `specs/005-about-bio-skills-update/`. Root cause fix: `frontend/context/` manifests must stay in sync with `context/` — Vercel reads from `frontend/`. |
 | 2.0 | TBD | After 5+ freelance projects completed |
 
 ---

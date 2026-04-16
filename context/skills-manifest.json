@@ -17,7 +17,7 @@
     "frontend": {
       "label": "Frontend",
       "items": [
-        { "name": "Next.js 15", "level": "advanced" },
+        { "name": "Next.js", "level": "advanced" },
         { "name": "React 19", "level": "advanced" },
         { "name": "TypeScript", "level": "advanced" },
         { "name": "Tailwind CSS", "level": "advanced" },

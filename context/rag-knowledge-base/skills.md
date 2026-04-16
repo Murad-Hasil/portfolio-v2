@@ -10,12 +10,13 @@ Murad's primary specialisation. He builds autonomous AI agents and RAG systems p
 - **MCP (Model Context Protocol)** — Advanced. Built custom MCP servers for portfolio management and the CRM Digital FTE project. Understands the full tool-calling lifecycle.
 - **RAG Systems** — Advanced. End-to-end RAG pipelines: document ingestion, chunking strategies, embedding generation, vector search, context injection, and grounded response generation.
 - **Qdrant Vector DB** — Intermediate. Used in production for storing and querying embeddings. Familiar with collection management, cosine similarity search, and payload filtering.
-- **LangChain** — Intermediate. Used for chain composition and tool integration in earlier projects.
+- **Prompt Engineering** — Advanced. Practised extensively through GIAIC and applied across all projects — system prompts, few-shot examples, output formatting, and guardrail instructions.
+- **Context Engineering** — Intermediate. Structuring and managing context windows for multi-turn agents, RAG pipelines, and long-running task agents.
 - **Autonomous AI Agents** — Advanced. Builds agents with HITL (Human-in-the-Loop) safety, multi-channel awareness, and structured output handling.
 
 ## Frontend (Advanced)
 
-- **Next.js 15** — Advanced. App Router, Server Components, Route Handlers, dynamic routes, static generation, and API proxying. This portfolio is built with Next.js 15.
+- **Next.js** — Advanced. App Router, Server Components, Route Handlers, dynamic routes, static generation, and API proxying. This portfolio is built with Next.js.
 - **React 19** — Advanced. Hooks, context, suspense, and server/client component boundaries.
 - **TypeScript** — Advanced. Strict mode, typed API clients, Zod validation, zero `any` tolerance.
 - **Tailwind CSS** — Advanced. Tailwind CSS 4 with custom design tokens and responsive utilities.
