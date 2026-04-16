@@ -9,7 +9,8 @@
         { "name": "MCP (Model Context Protocol)", "level": "advanced" },
         { "name": "RAG Systems", "level": "advanced" },
         { "name": "Qdrant Vector DB", "level": "intermediate" },
-        { "name": "LangChain", "level": "intermediate" },
+        { "name": "Prompt Engineering", "level": "advanced" },
+        { "name": "Context Engineering", "level": "intermediate" },
         { "name": "Autonomous AI Agents", "level": "advanced" }
       ]
     },

@@ -13,7 +13,7 @@ const stats = [
   { value: "2+", label: "Years Experience" },
   { value: "5+", label: "Projects Completed" },
   { value: "20+", label: "Technologies" },
-  { value: "4", label: "Hackathons" },
+  { value: "4", label: "Projects" },
 ] as const;
 
 const socials = [
@@ -140,17 +140,30 @@ export function About() {
                 className="text-base leading-relaxed mb-3"
                 style={{ color: "var(--text-secondary)" }}
               >
-                I build AI systems that run 24/7 — at a fraction of the cost
-                of a human employee. I&apos;ve built production Kubernetes
-                deployments, RAG chatbots, and autonomous agents across 4
-                major projects.
+                I started my AI engineering journey in 2023 through GIAIC,
+                with a focus on building practical, real-world systems. I&apos;ve
+                worked on autonomous agents, RAG pipelines with live data, and
+                full-stack applications containerized with Docker and deployed
+                on Kubernetes.
+              </p>
+              <p
+                className="text-base leading-relaxed mb-3"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                My workflow is spec-driven — I define clear requirements and
+                system architecture before writing code. This ensures
+                everything I build is reliable, scalable, and maintainable
+                from day one.
               </p>
               <p
                 className="text-base leading-relaxed"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Specialising in AI automation, autonomous agents, and
-                production-grade web applications for businesses worldwide.
+                I care about the problem as much as the solution. Whether
+                it&apos;s reducing operational costs through automation or
+                building AI that answers from your company&apos;s own data,
+                the goal is always the same: a system that works in
+                production, not just in a demo.
               </p>
             </motion.div>
 
@@ -175,7 +188,7 @@ export function About() {
                   border: "1px solid rgba(99,102,241,0.2)",
                 }}
               >
-                AI Engineering Graduate
+                AI Engineer
               </span>
             </motion.div>
 
