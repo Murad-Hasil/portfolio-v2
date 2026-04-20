@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React from "react";
 import { motion, type Variants, type Transition } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { Mail, MessageCircle, ArrowDown } from "lucide-react";
@@ -73,17 +73,11 @@ const socialLinks = [
   },
 ] as const;
 
-export function Hero() {
-  const [availability, setAvailability] = useState<Availability | null>(null);
-
-  useEffect(() => {
-    fetch("/api/profile")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => {
-        if (data?.availability) setAvailability(data.availability);
-      })
-      .catch(() => {});
-  }, []);
+export function Hero({
+  availability = null,
+}: {
+  availability?: Availability | null;
+}) {
 
   return (
     <section

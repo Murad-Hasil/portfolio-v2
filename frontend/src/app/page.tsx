@@ -17,18 +17,34 @@ function readJson<T>(filename: string): T {
   return JSON.parse(fs.readFileSync(filePath, "utf-8")) as T;
 }
 
+function readAvailability(): { status: string; label: string } | null {
+  try {
+    const filePath = path.resolve(process.cwd(), "context", "murad-profile.md");
+    const content = fs.readFileSync(filePath, "utf-8");
+    const match = (field: string) =>
+      content.match(new RegExp(`^- ${field}:\\s*(.+)$`, "m"))?.[1]?.trim();
+    const status = match("Status");
+    const label = match("Label");
+    if (!status || !label) return null;
+    return { status, label };
+  } catch {
+    return null;
+  }
+}
+
 export default function Home() {
   const projectsRaw = readJson<{ projects: Project[] }>("projects-manifest.json");
   const projects: Project[] = (projectsRaw.projects ?? []).sort((a, b) =>
     a.featured === b.featured ? 0 : a.featured ? -1 : 1
   );
   const skillsData = readJson<SkillsData>("skills-manifest.json");
+  const availability = readAvailability();
 
   return (
     <>
       <Navbar />
       <main id="main-content">
-        <Hero />
+        <Hero availability={availability} />
         <Projects initialProjects={projects} />
         <Skills initialData={skillsData} />
         <Services />

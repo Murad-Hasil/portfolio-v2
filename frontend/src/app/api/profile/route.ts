@@ -40,6 +40,8 @@ function readProfile(): ProfileData {
   return { name, title, availability: { status, label, note, hours_per_week } };
 }
 
+export const dynamic = "force-static";
+
 export async function GET() {
   try {
     const data = readProfile();
