@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -8,17 +8,17 @@ import {
   type Transition,
 } from "framer-motion";
 
-type SkillItem = {
+export type SkillItem = {
   name: string;
   level: "advanced" | "intermediate";
 };
 
-type SkillCategory = {
+export type SkillCategory = {
   label: string;
   items: SkillItem[];
 };
 
-type SkillsData = {
+export type SkillsData = {
   skills: Record<string, SkillCategory>;
 };
 
@@ -51,38 +51,16 @@ function ProficiencyDots({ level }: { level: "advanced" | "intermediate" }) {
   );
 }
 
-export function Skills() {
-  const [data, setData] = useState<SkillsData | null>(null);
-  const [activeTab, setActiveTab] = useState<string>("");
-  const [error, setError] = useState(false);
+interface SkillsProps {
+  initialData: SkillsData;
+}
 
-  useEffect(() => {
-    fetch("/api/skills")
-      .then((r) => r.json())
-      .then((d: SkillsData) => {
-        if (!d.skills) return;
-        setData(d);
-        const firstKey = Object.keys(d.skills)[0];
-        if (firstKey) setActiveTab(firstKey);
-      })
-      .catch(() => setError(true));
-  }, []);
+export function Skills({ initialData }: SkillsProps) {
+  const firstKey = Object.keys(initialData.skills)[0] ?? "";
+  const [activeTab, setActiveTab] = useState<string>(firstKey);
 
-  const tabs = data?.skills ? Object.entries(data.skills) : [];
-  const activeItems = data?.skills[activeTab]?.items ?? [];
-
-  if (error) {
-    return (
-      <section id="skills" className="py-24 px-4 sm:px-6">
-        <div
-          className="max-w-4xl mx-auto text-center text-sm"
-          style={{ color: "var(--text-muted)", fontFamily: "var(--font-jetbrains-mono)" }}
-        >
-          Failed to load skills. Please refresh the page.
-        </div>
-      </section>
-    );
-  }
+  const tabs = Object.entries(initialData.skills);
+  const activeItems = initialData.skills[activeTab]?.items ?? [];
 
   return (
     <section id="skills" className="py-24 px-4 sm:px-6">

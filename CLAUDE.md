@@ -212,6 +212,10 @@ See `.specify/memory/constitution.md` for code quality, testing, performance, se
 ## Active Technologies
 - Python 3.12 (backend), TypeScript / Node.js 22 (frontend) (001-portfolio-vision)
 - Neon PostgreSQL (relational data), Qdrant Cloud (vector embeddings) (001-portfolio-vision)
+- TypeScript 5.x (strict mode) + Next.js 16.2.1 (App Router), React 19, Framer Motion (006-fix-static-load)
+- `context/projects-manifest.json`, `context/skills-manifest.json` (static JSON files, read via `fs.readFileSync` at build time) (006-fix-static-load)
+- TypeScript 5.x / Node.js 22 + Next.js 16.2.1 (App Router), `fs`, `path` (Node built-ins) (006-fix-static-load)
+- `context/*.json` files at repo root (read-only at build/request time) (006-fix-static-load)
 
 ## Recent Changes
 - 001-portfolio-vision: Added Python 3.12 (backend), TypeScript / Node.js 22 (frontend)

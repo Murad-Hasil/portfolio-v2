@@ -24,7 +24,6 @@ function parseField(content: string, field: string): string {
 function readProfile(): ProfileData {
   const profilePath = path.resolve(
     process.cwd(),
-    "..",
     "context",
     "murad-profile.md"
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -12,7 +12,7 @@ import {
 import { ExternalLink, FolderOpen } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 
-type Project = {
+export type Project = {
   id: string;
   title: string;
   slug: string;
@@ -47,32 +47,17 @@ const fadeUp: Variants = {
   show: { opacity: 1, y: 0, transition: ease },
 };
 
-export function Projects() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [activeFilter, setActiveFilter] = useState<Filter>("All");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+interface ProjectsProps {
+  initialProjects: Project[];
+}
 
-  useEffect(() => {
-    fetch("/api/projects")
-      .then((r) => r.json())
-      .then((data: { projects?: Project[] } | Project[]) => {
-        const list: Project[] = Array.isArray(data)
-          ? data
-          : (data.projects ?? []);
-        list.sort((a, b) =>
-          a.featured === b.featured ? 0 : a.featured ? -1 : 1
-        );
-        setProjects(list);
-      })
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, []);
+export function Projects({ initialProjects }: ProjectsProps) {
+  const [activeFilter, setActiveFilter] = useState<Filter>("All");
 
   const filtered =
     activeFilter === "All"
-      ? projects
-      : projects.filter((p) => p.category === activeFilter);
+      ? initialProjects
+      : initialProjects.filter((p) => p.category === activeFilter);
 
   return (
     <section id="projects" className="py-24 px-4 sm:px-6">
@@ -137,41 +122,19 @@ export function Projects() {
         </motion.div>
 
         {/* Cards grid */}
-        {loading ? (
-          <div
-            className="text-center py-16 text-sm"
-            style={{
-              color: "var(--text-muted)",
-              fontFamily: "var(--font-jetbrains-mono)",
-            }}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            Loading projects...
-          </div>
-        ) : error ? (
-          <div
-            className="text-center py-16 text-sm"
-            style={{
-              color: "var(--text-muted)",
-              fontFamily: "var(--font-jetbrains-mono)",
-            }}
-          >
-            Failed to load projects. Please refresh the page.
-          </div>
-        ) : (
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeFilter}
-              variants={container}
-              initial="hidden"
-              animate="show"
-              className="grid grid-cols-1 md:grid-cols-2 gap-6"
-            >
-              {filtered.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </motion.div>
-          </AnimatePresence>
-        )}
+            {filtered.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

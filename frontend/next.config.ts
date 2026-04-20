@@ -2,8 +2,7 @@ import path from "path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Include context/ files (one level above frontend/) in Vercel serverless bundle
-  outputFileTracingRoot: path.join(__dirname, "../"),
+  outputFileTracingRoot: path.resolve(__dirname, ".."),
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "github.com" },

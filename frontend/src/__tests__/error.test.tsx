@@ -7,10 +7,10 @@ vi.mock("react", async () => {
   return { ...actual, useEffect: vi.fn() };
 });
 
-import Error from "@/app/error";
+import ErrorPage from "@/app/error";
 
 describe("Error page", () => {
-  const mockError = new Error("Test error");
+  const mockError = new globalThis.Error("Test error") as Error & { digest?: string };
   const mockReset = vi.fn();
 
   beforeEach(() => {
@@ -18,23 +18,23 @@ describe("Error page", () => {
   });
 
   it("renders error heading", () => {
-    render(<Error error={mockError} reset={mockReset} />);
+    render(<ErrorPage error={mockError} reset={mockReset} />);
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
   });
 
   it("renders Try Again button", () => {
-    render(<Error error={mockError} reset={mockReset} />);
+    render(<ErrorPage error={mockError} reset={mockReset} />);
     expect(screen.getByRole("button", { name: /try again/i })).toBeInTheDocument();
   });
 
   it("calls reset when Try Again is clicked", () => {
-    render(<Error error={mockError} reset={mockReset} />);
+    render(<ErrorPage error={mockError} reset={mockReset} />);
     fireEvent.click(screen.getByRole("button", { name: /try again/i }));
     expect(mockReset).toHaveBeenCalledOnce();
   });
 
   it("renders Return Home link", () => {
-    render(<Error error={mockError} reset={mockReset} />);
+    render(<ErrorPage error={mockError} reset={mockReset} />);
     const link = screen.getByRole("link", { name: /return home/i });
     expect(link).toHaveAttribute("href", "/");
   });
