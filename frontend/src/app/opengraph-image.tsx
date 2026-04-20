@@ -23,7 +23,7 @@ interface SkillsManifest {
 function getTopSkills(): string[] {
   try {
     const raw = fs.readFileSync(
-      path.resolve(process.cwd(), "..", "context", "skills-manifest.json"),
+      path.resolve(process.cwd(), "context", "skills-manifest.json"),
       "utf-8"
     );
     const manifest: SkillsManifest = JSON.parse(raw);

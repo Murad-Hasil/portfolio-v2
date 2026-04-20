@@ -2,7 +2,7 @@
 
 **Feature**: 006-fix-static-load
 **Date**: 2026-04-17
-**Status**: Complete — no open questions
+**Status**: Updated 2026-04-20 — stale claims corrected; OG image path inconsistency documented
 
 ## Decision 1: Data Loading Strategy
 
@@ -10,8 +10,9 @@
 
 **Rationale**:
 - `page.tsx` is already a Server Component (no `"use client"` directive). It can use Node.js `fs` directly with zero additional setup.
-- `next.config.ts` already sets `outputFileTracingRoot` to the repo root, which bundles `context/` files into the Vercel serverless function. The same config that enables `/api/projects` also enables `page.tsx` to read the same files.
 - Passing pre-loaded data as props is the standard Next.js App Router pattern for hydrating Client Components with server-fetched data — no additional libraries needed.
+
+**⚠️ Correction (2026-04-20)**: Original research incorrectly stated "next.config.ts already sets `outputFileTracingRoot` to the repo root." **This is false.** `frontend/next.config.ts` has no `outputFileTracingRoot` setting. The constitution mandates it; it was never implemented. Plan now includes adding it.
 
 **Alternatives Considered**:
 
@@ -46,6 +47,14 @@
 - Other potential consumers (OG image routes, future pages) may depend on them.
 - Removing them would be a breaking change with no benefit to this feature.
 
-## Resolved: No Open Questions
+## Decision 4: OG Image Path Inconsistency (discovered 2026-04-20)
 
-All decisions above were clear from existing codebase context. No external research was required.
+**Finding**: `opengraph-image.tsx` and `projects/[slug]/opengraph-image.tsx` use `path.resolve(process.cwd(), "..", "context", file)` — they go one directory UP from CWD. This was written assuming Vercel CWD = `frontend/`, so `..` reaches the repo root. This works on Vercel today but fails locally when running `next dev` from the repo root.
+
+**Decision**: After the `vercel.json` fix shifts CWD to repo root, the `..` in OG image paths MUST be removed. Both files must use `path.resolve(process.cwd(), "context", file)` — identical to the pattern in `page.tsx` and API routes.
+
+**Scope impact**: 2 additional files changed (both OG image routes). Plan updated accordingly.
+
+## Resolved: All Questions Answered
+
+All path resolution decisions are documented above. The `vercel.json` approach + `outputFileTracingRoot` + OG path corrections form a complete, consistent fix.

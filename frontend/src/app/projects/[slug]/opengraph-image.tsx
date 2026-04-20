@@ -23,7 +23,7 @@ interface ProjectsManifest {
 function getProjects(): Project[] {
   try {
     const raw = fs.readFileSync(
-      path.resolve(process.cwd(), "..", "context", "projects-manifest.json"),
+      path.resolve(process.cwd(), "context", "projects-manifest.json"),
       "utf-8"
     );
     return (JSON.parse(raw) as ProjectsManifest).projects;

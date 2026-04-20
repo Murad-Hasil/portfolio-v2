@@ -1,39 +1,41 @@
-# Implementation Plan: Fix Projects & Skills Instant Load
+# Implementation Plan: Fix Static Load — Vercel Path Resolution
 
-**Branch**: `006-fix-static-load` | **Date**: 2026-04-17 | **Spec**: [spec.md](./spec.md)
-**Input**: Feature specification from `/specs/006-fix-static-load/spec.md`
+**Branch**: `006-fix-static-load` | **Date**: 2026-04-20 | **Spec**: [spec.md](./spec.md)  
+**Input**: Feature specification from `specs/006-fix-static-load/spec.md`
 
 ## Summary
 
-Projects and Skills sections were Client Components fetching static JSON via `useEffect + fetch()` on every page load, causing visible loading spinners. The fix moves data reading to the Server Component (`page.tsx`) at build time and passes pre-loaded data as props — eliminating all loading states and converting the homepage to a fully static prerendered page.
+Five Next.js files read `context/*.json` using `path.resolve(process.cwd(), ...)`, but the path anchor differs inconsistently across files. On Vercel with Root Directory = `frontend/`, `process.cwd()` = `frontend/` at runtime, causing `page.tsx` and the API routes to resolve `context/` inside `frontend/` (doesn't exist). OG image routes happen to work on Vercel because they add `..` to climb to the repo root — but this breaks local runs from repo root.
+
+Fix: shift Vercel's root to the repo root via `vercel.json` + dashboard change, unify all five path calls to `process.cwd(), "context"`, and add `outputFileTracingRoot` in `next.config.ts` so Vercel bundles `context/` into serverless function packages.
 
 ## Technical Context
 
-**Language/Version**: TypeScript 5.x (strict mode)
-**Primary Dependencies**: Next.js 16.2.1 (App Router), React 19, Framer Motion
-**Storage**: `context/projects-manifest.json`, `context/skills-manifest.json` (static JSON files, read via `fs.readFileSync` at build time)
-**Testing**: Playwright MCP (visual verification), `npx tsc --noEmit` (type check), `npm run build` (build classification)
-**Target Platform**: Vercel (static export, `○ Static` classification)
-**Project Type**: Web application — frontend only (`/frontend/`)
-**Performance Goals**: Homepage Projects and Skills sections visible with zero additional network requests on page load
-**Constraints**: Filter interactivity (Projects) and tab interactivity (Skills) must remain fully functional — cannot convert to pure Server Components
-**Scale/Scope**: Single-page portfolio; 4–5 projects, ~20 skills across 4 categories
+**Language/Version**: TypeScript 5.x / Node.js 22  
+**Primary Dependencies**: Next.js 16.2.1 (App Router), `fs`, `path` (Node built-ins)  
+**Storage**: `context/*.json` files at repo root (read-only at build/request time)  
+**Testing**: Manual verification — load Vercel preview URL, confirm 4 project cards + skills data visible  
+**Target Platform**: Vercel (serverless + static, repo root as build root after fix)  
+**Project Type**: Monorepo — frontend at `frontend/`, context data at repo root `context/`  
+**Performance Goals**: No regression — static pages remain static; API routes remain < 200ms  
+**Constraints**: `context/` must NOT move; `page.tsx` must remain a Server Component; no client-side fetching  
+**Scale/Scope**: 5 files changed; 1 new file (`vercel.json`); 1 manual Vercel dashboard step
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-checked after Phase 1 design.*
 
-| Principle | Check | Status |
-|-----------|-------|--------|
-| I. Spec-First Mandate | Plan backed by spec.md ✓ | ✅ PASS |
-| II. Content Authenticity | Data still sourced from `context/` JSON files — no hardcoding ✓ | ✅ PASS |
-| III. Design System Compliance | No UI changes — existing components unchanged ✓ | ✅ PASS |
-| IV. Type Safety | Exported `Project` and `SkillsData` types; no `any` used ✓ | ✅ PASS |
-| V. Accessibility | No HTML structure changes ✓ | ✅ PASS |
-| VI. RAG Chatbot | `/api/projects` and `/api/skills` routes untouched — chatbot unaffected ✓ | ✅ PASS |
-| VII. Secrets & Env | No environment variables involved ✓ | ✅ PASS |
+| Principle | Status | Notes |
+|-----------|--------|-------|
+| I. Spec-First Mandate | ✅ Pass | Spec updated and approved before any code |
+| II. Content Authenticity | ✅ Pass | Data still sourced from `context/` files — no hardcoding |
+| III. Design System / OG Images | ⚠️ Requires action | Constitution mandates `outputFileTracingRoot` in `next.config.ts`; currently missing. Also: OG image path calls use `..` which will break when CWD shifts to repo root |
+| IV. Type Safety | ✅ Pass | No type changes; `any` not introduced |
+| V. Accessibility | ✅ Pass | No UI changes |
+| VI. RAG Chatbot | ✅ Pass | `/api/projects` and `/api/skills` routes preserved |
+| VII. Secrets Hygiene | ✅ Pass | No secrets involved |
 
-**Result**: All gates pass. No violations.
+**Gate result**: Proceed — violation in Principle III is the bug being fixed by this plan.
 
 ## Project Structure
 
@@ -41,28 +43,189 @@ Projects and Skills sections were Client Components fetching static JSON via `us
 
 ```text
 specs/006-fix-static-load/
-├── plan.md              ← This file
-├── research.md          ← Phase 0 output
-├── data-model.md        ← Phase 1 output (N/A — no new entities)
-├── checklists/
-│   └── requirements.md  ← Spec quality checklist (complete)
-└── tasks.md             ← Phase 2 output (/sp.tasks)
+├── plan.md              ← this file
+├── research.md          ← updated (corrects stale outputFileTracingRoot claim)
+├── spec.md              ← updated 2026-04-20 (FR-008, SC-006, SC-007)
+└── tasks.md             ← to be generated by /sp.tasks
 ```
 
-### Source Code (affected files only)
+### Source Code (files touched)
 
 ```text
+vercel.json                                              ← CREATE (repo root)
 frontend/
-├── src/
-│   ├── app/
-│   │   └── page.tsx                          ← MODIFIED: async, reads manifests, passes props
-│   └── components/
-│       └── sections/
-│           ├── Projects.tsx                  ← MODIFIED: prop-driven, no useEffect
-│           └── Skills.tsx                    ← MODIFIED: prop-driven, no useEffect
-└── context/
-    ├── projects-manifest.json                ← READ at build time (unchanged)
-    └── skills-manifest.json                  ← READ at build time (unchanged)
+├── next.config.ts                                       ← MODIFY (add outputFileTracingRoot)
+└── src/app/
+    ├── page.tsx                                         ← VERIFY (no change needed)
+    ├── opengraph-image.tsx                              ← FIX path (remove "..")
+    ├── api/
+    │   ├── projects/route.ts                            ← VERIFY (no change needed)
+    │   └── skills/route.ts                              ← VERIFY (no change needed)
+    └── projects/[slug]/
+        └── opengraph-image.tsx                          ← FIX path (remove "..")
 ```
 
-**Structure Decision**: Frontend-only change. Backend and API routes untouched. No new files created — only three existing files modified.
+**Manual step (Vercel dashboard)**:  
+Settings → General → Root Directory: `frontend` → `.` → Save
+
+## Phase 0: Research Findings
+
+> `research.md` has been updated to correct a stale claim and document the new findings.
+
+### Decision 1: Path Anchor Strategy — Use `vercel.json` to Shift Build Root
+
+**Decision**: Add `vercel.json` at repo root to move Vercel's build context from `frontend/` to repo root. All path calls then use `path.resolve(process.cwd(), "context", filename)` consistently across all files.
+
+**Rationale**:
+- Zero code changes to `page.tsx` or API routes (already correct for repo-root CWD).
+- Eliminates the entire class of CWD ambiguity — `process.cwd()` = repo root everywhere (build time, runtime serverless functions, OG image generation).
+- Alternative (normalize all paths to `..` like OG images do now) would require editing `page.tsx` + 2 API routes and would still break if ever run locally from repo root.
+
+**Alternatives Considered**:
+
+| Option | Description | Rejected Because |
+|--------|-------------|-----------------|
+| Normalize all paths to `..` | Change page.tsx + API routes to use `process.cwd(), ".."` | Breaks local dev from repo root; propagates the wrong assumption |
+| `INIT_CWD` env var | Detect and use `process.env.INIT_CWD` | Not reliable across all Vercel runner versions |
+| Copy `context/` into `frontend/` at build | Pre-build script to cp files | Duplication, drift risk; violates Content Authenticity principle |
+| Move `context/` to `frontend/context/` | Restructure the repo | Out of scope per spec; breaks backend references |
+
+### Decision 2: OG Image Path Correction Required
+
+**Decision**: Update both OG image files to remove the `..` segment — change `path.resolve(process.cwd(), "..", "context", file)` to `path.resolve(process.cwd(), "context", file)`.
+
+**Rationale**:
+- OG images currently use `..` because they were written assuming Vercel CWD = `frontend/`.
+- After the `vercel.json` fix, CWD = repo root — the `..` would resolve to the *parent of the repo*, breaking OG image generation.
+- The `..` pattern was a workaround, not an intentional design.
+
+### Decision 3: `outputFileTracingRoot` Is Missing and Must Be Added
+
+**Decision**: Add `outputFileTracingRoot: path.resolve(__dirname, "..")` to `frontend/next.config.ts`.
+
+**Rationale**:
+- Without this, Next.js file tracing starts from `frontend/` and does not include `context/` (which lives one level above) in the serverless function bundles.
+- This means API routes and OG image routes would fail at runtime on Vercel even after the build-time CWD fix, because `context/*.json` files would not be deployed alongside the functions.
+- The constitution (Principle III) explicitly mandates this setting. It was documented but never implemented.
+- `__dirname` in `frontend/next.config.ts` = `<repo>/frontend`, so `path.resolve(__dirname, "..")` = repo root.
+
+### Decision 4: `vercel.json` Shape
+
+**Decision**: Use the following `vercel.json` at repo root:
+
+```json
+{
+  "buildCommand": "npm run build --prefix frontend",
+  "outputDirectory": "frontend/.next",
+  "installCommand": "npm install --prefix frontend",
+  "framework": "nextjs"
+}
+```
+
+**Rationale**: These are the exact Vercel settings that tell the platform how to build a Next.js project located in a subdirectory. The `--prefix frontend` flag runs npm in the `frontend/` directory while keeping the shell's CWD at repo root, so `process.cwd()` remains the repo root during build.
+
+## Phase 1: Design
+
+### No Data Model Changes
+
+All data entities (`projects-manifest.json`, `skills-manifest.json`) are unchanged. No schema evolution required.
+
+### No New API Contracts
+
+`/api/projects` and `/api/skills` interfaces are unchanged. No contract documents needed.
+
+### Change Specifications
+
+#### 1. `vercel.json` (CREATE at repo root)
+
+```json
+{
+  "buildCommand": "npm run build --prefix frontend",
+  "outputDirectory": "frontend/.next",
+  "installCommand": "npm install --prefix frontend",
+  "framework": "nextjs"
+}
+```
+
+#### 2. `frontend/next.config.ts` (MODIFY — add `outputFileTracingRoot`)
+
+```ts
+import path from "path";
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  outputFileTracingRoot: path.resolve(__dirname, ".."),
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "github.com" },
+      { protocol: "https", hostname: "avatars.githubusercontent.com" },
+      { protocol: "https", hostname: "raw.githubusercontent.com" },
+    ],
+  },
+};
+
+export default nextConfig;
+```
+
+#### 3. `frontend/src/app/opengraph-image.tsx` (FIX path call)
+
+Line 26 change:
+```ts
+// Before (assumes CWD = frontend/)
+path.resolve(process.cwd(), "..", "context", "skills-manifest.json")
+// After (works when CWD = repo root)
+path.resolve(process.cwd(), "context", "skills-manifest.json")
+```
+
+#### 4. `frontend/src/app/projects/[slug]/opengraph-image.tsx` (FIX path call)
+
+Line 26 change:
+```ts
+// Before
+path.resolve(process.cwd(), "..", "context", "projects-manifest.json")
+// After
+path.resolve(process.cwd(), "context", "projects-manifest.json")
+```
+
+#### 5. Manual step (Vercel dashboard)
+
+> Settings → General → Root Directory: change from `frontend` to `.` → Save
+
+This must be done **before** the next production deployment. Without it, `vercel.json` has no effect — Vercel still uses `frontend/` as the root.
+
+### Verification Matrix
+
+| File | Change | Vercel (after fix) | Local (`npm run dev` from `frontend/`) |
+|------|--------|--------------------|--------------------------------------|
+| `page.tsx` | None | ✅ CWD = repo root, `context/` found | ✅ CWD = repo root via `next dev` |
+| `api/projects/route.ts` | None | ✅ CWD = repo root, file traced | ✅ Same |
+| `api/skills/route.ts` | None | ✅ Same | ✅ Same |
+| `opengraph-image.tsx` | Remove `..` | ✅ CWD = repo root, `context/` found | ✅ Same |
+| `projects/[slug]/opengraph-image.tsx` | Remove `..` | ✅ Same | ✅ Same |
+
+## Quickstart: How to Apply
+
+```bash
+# 1. Create vercel.json at repo root
+# 2. Add outputFileTracingRoot to frontend/next.config.ts
+# 3. Fix OG image path calls (remove "..")
+# 4. Manually: Vercel dashboard → Root Directory → "."
+# 5. Push to branch → verify preview deployment
+# 6. Merge to main → verify production
+```
+
+**Test the fix locally:**
+```bash
+cd frontend
+npm run build     # should complete with no "ENOENT context/" errors
+npm run start     # verify http://localhost:3000 shows all project cards
+```
+
+## Risk Register
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|-----------|
+| Vercel dashboard Root Directory not changed | High | Critical — fix has no effect | Explicit manual step in tasks.md; verify via Vercel project settings before merging |
+| OG images break (path not updated) | Medium | High — 4 project OG cards broken | Fix is part of this plan; Playwright verification after deploy |
+| `outputFileTracingRoot` causes build error | Low | Medium — build fails | `path.resolve(__dirname, "..")` is documented Next.js API; tested locally first |
+| Other files using `process.cwd()` not identified | Low | Medium | `grep -rn "process.cwd" frontend/src` passes before shipping |

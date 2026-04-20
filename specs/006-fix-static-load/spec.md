@@ -2,8 +2,8 @@
 
 **Feature Branch**: `006-fix-static-load`
 **Created**: 2026-04-17
-**Status**: Implemented
-**Input**: Fix projects and skills section loading spinners by eliminating client-side data fetching.
+**Status**: In Progress
+**Input**: Fix projects and skills section loading spinners by eliminating client-side data fetching. Follow-up: Vercel production still shows blank Projects section — manifest files are not found at deploy time due to monorepo working-directory mismatch.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -42,6 +42,7 @@ A visitor scrolls to the Skills section. Skill category tabs and the default tab
 ### Edge Cases
 
 - What happens if `projects-manifest.json` is missing or malformed at build time? → Build fails immediately with a clear error — better than a broken production page showing a spinner indefinitely.
+- What if the build environment's working directory is not the repository root? → The manifest-reading code must resolve file paths relative to the source file itself (not the working directory), so that the correct manifest is found regardless of where the build process is launched from.
 - What if a new project is added to the manifest? → The next deployment picks it up automatically — no component code changes required.
 - What if the visitor has JavaScript disabled? → Static HTML already contains all project and skills data, so both sections remain fully visible — no JS required for initial content.
 - Do the `/api/projects` and `/api/skills` routes need to stay? → Yes — the RAG chatbot and any other runtime consumers still use them. These routes are unaffected by this change.
@@ -57,6 +58,7 @@ A visitor scrolls to the Skills section. Skill category tabs and the default tab
 - **FR-005**: Project data MUST remain sourced from `projects-manifest.json` — no project content hardcoded in component files.
 - **FR-006**: Skills data MUST remain sourced from `skills-manifest.json` — no skills content hardcoded in component files.
 - **FR-007**: The homepage MUST be classified as static (prerendered at build time) — not dynamically server-rendered on each request.
+- **FR-008**: The manifest file resolution MUST succeed regardless of the working directory at build time — the correct files MUST be found whether the build is run from the repository root, the `frontend/` subdirectory, or any other location.
 
 ### Key Entities
 
@@ -75,9 +77,13 @@ A visitor scrolls to the Skills section. Skill category tabs and the default tab
 - **SC-003**: Homepage build output is classified as `Static` (prerendered) — verified in Next.js build output on every deployment.
 - **SC-004**: Zero additional network requests fire on page load for projects or skills data — confirmed via browser DevTools Network tab.
 - **SC-005**: Filter and tab interactions respond in under 100ms perceived time — no loading states triggered by any user interaction within these sections.
+- **SC-006**: The production deployment on Vercel shows all 4 project cards and all skill data with zero blank sections — verified by loading the live URL after deployment.
+- **SC-007**: Manifest file resolution succeeds when the build is triggered from the `frontend/` subdirectory — no "file not found" build errors on any hosting environment.
 
 ## Assumptions
 
 - Both manifest JSON files are valid and present at build time. The build pipeline is responsible for this guarantee.
 - Project categories in `projects-manifest.json` match the filter label values defined in the Projects section component.
 - The `/api/projects` and `/api/skills` API routes remain in the codebase for the RAG chatbot and any other runtime consumers.
+- The `context/` folder stays at the repository root — no structural reorganisation is in scope.
+- On Vercel, the build is launched from the `frontend/` subdirectory, so `process.cwd()` returns `frontend/` rather than the repository root. File path resolution must account for this deployment constraint.

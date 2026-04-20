@@ -31,5 +31,8 @@
 
 ## Notes
 
-- All items pass. Feature is implemented — spec is retroactive documentation.
+- All content-quality and completeness items pass.
+- Status updated to **In Progress**: Vercel production still shows blank Projects section due to working-directory mismatch in monorepo builds.
+- FR-008, SC-006, SC-007 added to cover the Vercel path resolution gap.
+- Assumptions section updated to document the `process.cwd()` = `frontend/` constraint on Vercel.
 - API routes (/api/projects, /api/skills) intentionally kept in scope note — chatbot depends on them.
