@@ -27,7 +27,7 @@ International freelance clients on Upwork and Fiverr. Typically:
 ## Copy Examples
 
 WRONG: "I am a passionate developer who loves solving problems."
-RIGHT: "I build AI systems that run 24/7 — at a fraction of the cost of a human employee."
+RIGHT: "I help businesses save time and cut costs by replacing repetitive work with AI systems that run automatically—so you can stop managing manual tasks and focus on growing your business."
 
 WRONG: "I have experience in various technologies."
-RIGHT: "I've built production Kubernetes deployments, RAG chatbots, and autonomous agents across 4 major projects."
+RIGHT: "I've built production Kubernetes deployments, RAG chatbots, and autonomous agents across 4 featured projects — each with live infrastructure, test suites, and documented specs."

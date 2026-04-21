@@ -11,11 +11,11 @@
 | **Primary Tool** | Claude Code CLI |
 | **Author** | Murad Hasil |
 | **Target** | International Freelancing (Upwork / Fiverr) |
-| **Status** | Version 1.3 — **IN PROGRESS 🔧** (chatbot improvements) |
+| **Status** | Version 1.7 — **LIVE ✅** (content copy update complete) |
 | **Live Frontend** | https://murad-hasil-portfolio-v2-xi.vercel.app |
 | **Live Backend** | https://mb-murad-portfolio-v2.hf.space |
 | **Development Environment** | WSL Ubuntu (required — see Phase 0) |
-| **Last Updated** | 2026-04-01 |
+| **Last Updated** | 2026-04-21 |
 
 ---
 
@@ -466,10 +466,10 @@ International freelance clients on Upwork and Fiverr. Typically:
 ## Copy Examples
 
 WRONG: "I am a passionate developer who loves solving problems."
-RIGHT: "I build AI systems that run 24/7 — at a fraction of the cost of a human employee."
+RIGHT: "I help businesses save time and cut costs by replacing repetitive work with AI systems that run automatically—so you can stop managing manual tasks and focus on growing your business."
 
 WRONG: "I have experience in various technologies."
-RIGHT: "I started my AI engineering journey in 2023 through GIAIC, with a focus on building practical, real-world systems. I've worked on autonomous agents, RAG pipelines with live data, and full-stack applications containerized with Docker and deployed on Kubernetes."
+RIGHT: "I've built production Kubernetes deployments, RAG chatbots, and autonomous agents across 4 featured projects — each with live infrastructure, test suites, and documented specs."
 ```
 
 ---
@@ -966,7 +966,7 @@ Read context/murad-profile.md.
 Build the About section with:
 - Profile photo (public/profile/murad.jpg)
 - Bio paragraph (from brand-voice.md — results-focused, no fluff)
-- 4 stats: 2+ Years Experience | 5+ Hackathons | 20+ Technologies | 4 Projects
+- 4 stats: 2+ Years Experience | 5+ Hackathons | 20+ Technologies | 100% Self-Taught
 - Education: GIAIC badge
 - Location: Karachi, Pakistan
 - Buttons: Download Resume | View Projects
@@ -1477,6 +1477,8 @@ The portfolio itself demonstrates competency:
 | 1.3 | 2026-04-01 | **SHIPPED** — Phase 8: chatbot streaming SSE + FAQ expansion. Constitution v1.2.0. Spec: `specs/002-chatbot-rag/` |
 | 1.4 | 2026-04-02 | **SHIPPED** — Phase 9: availability badge (FR-014) ✅ + Phase 10: dynamic OG image (FR-015). Specs: `specs/003-availability-badge/`, `specs/004-og-image/` |
 | 1.5 | 2026-04-16 | **SHIPPED** — About bio rewrite (GIAIC origin, spec-driven, production-focused). Badge: "AI Engineer". Stats: 5+ Hackathons / 4 Projects. Skills: LangChain removed, Prompt Engineering + Context Engineering added. Next.js version-agnostic. Spec: `specs/005-about-bio-skills-update/`. Root cause fix: `frontend/context/` manifests must stay in sync with `context/` — Vercel reads from `frontend/`. |
+| 1.6 | 2026-04-16 | **SHIPPED** — Static load fix: `outputFileTracingRoot` + `outputFileTracingIncludes` so Vercel bundles `context/` into serverless functions. Availability badge reads `murad-profile.md` at build time. Spec: `specs/006-fix-static-load/`. |
+| 1.7 | 2026-04-21 | **SHIPPED** — Content copy update (007): hero subtext → human-centric value prop, About bio → 4 paragraphs (spec-driven narrative), 4th stat → 100% Self-Taught, OG/Twitter metadata + siteUrl fallback updated. Spec: `specs/007-content-copy-update/`. |
 | 2.0 | TBD | After 5+ freelance projects completed |
 
 ---

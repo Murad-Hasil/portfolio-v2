@@ -8,9 +8,13 @@ With 2+ years of hands-on experience, Murad has built production-grade systems t
 
 ## Professional Background
 
-Murad started his AI engineering journey in 2023 through GIAIC (Governor's Initiative for AI & Computing), with a focus on building practical, real-world systems. His workflow is spec-driven — he defines clear requirements and system architecture before writing code.
+Murad started his journey as a full-stack developer, but kept noticing a recurring problem: businesses didn't just need more apps — they needed their work done faster and without the manual headache. That's what pushed him into the world of AI automation.
 
-He has completed 4 major projects, each production-deployed with live infrastructure, test suites, and documented specs.
+Since 2023, he has been building production-ready AI systems that handle real tasks — like customer support, internal workflows, and data processing. His focus is simple: build something that actually works in the real world, not just a demo.
+
+What makes his approach different is how he plans before building. He follows a spec-driven workflow where requirements, architecture, and edge cases are defined upfront. This reduces surprises, keeps systems clean, and makes them easier to scale.
+
+He has completed 4 featured portfolio projects, each production-deployed with live infrastructure, test suites, and documented specs.
 
 ## Why Hire Murad?
 
@@ -21,9 +25,9 @@ He has completed 4 major projects, each production-deployed with live infrastruc
 ## Career Stats
 
 - **2+ years** of experience with AI and full-stack development
-- **5+ hackathons** completed through GIAIC (Governor's Initiative for AI & Computing)
+- **5+ hackathons** completed (including 4 major Panaversity hackathons)
 - **20+ technologies** used in production
-- **4 portfolio projects** — production-deployed with live infrastructure and documented specs
+- **4 featured portfolio projects** — production-deployed with live infrastructure and documented specs
 
 ## Contact
 
