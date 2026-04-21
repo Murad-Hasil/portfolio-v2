@@ -21,13 +21,13 @@ Focus: Applied AI, Cloud-Native Development, Autonomous Agents
 
 ## Current Learning
 - Enrolled: Clawdbot Crash Course (3 months — in progress)
-- Completed: 4 Major Hackathons (details in projects-manifest.json)
+- Completed: 5+ Major Hackathons (details in projects-manifest.json)
 
 ## Stats (Accurate)
 - Experience: 2+ Years
 - Projects Completed: 5+
 - Technologies Used: 20+
-- Hackathons Completed: 4
+- Hackathons Completed: 5+
 
 ## Availability
 - Status: available
