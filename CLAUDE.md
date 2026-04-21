@@ -216,6 +216,8 @@ See `.specify/memory/constitution.md` for code quality, testing, performance, se
 - `context/projects-manifest.json`, `context/skills-manifest.json` (static JSON files, read via `fs.readFileSync` at build time) (006-fix-static-load)
 - TypeScript 5.x / Node.js 22 + Next.js 16.2.1 (App Router), `fs`, `path` (Node built-ins) (006-fix-static-load)
 - `context/*.json` files at repo root (read-only at build/request time) (006-fix-static-load)
+- TypeScript 5.x / Next.js 16.2.1 (App Router) + React 19, Framer Motion (no changes to dependencies) (007-content-copy-update)
+- N/A — no data layer involved (007-content-copy-update)
 
 ## Recent Changes
 - 001-portfolio-vision: Added Python 3.12 (backend), TypeScript / Node.js 22 (frontend)
