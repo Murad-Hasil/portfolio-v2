@@ -13,7 +13,7 @@ const stats = [
   { value: "2+", label: "Years Experience" },
   { value: "5+", label: "Hackathons" },
   { value: "20+", label: "Technologies" },
-  { value: "4", label: "Projects" },
+  { value: "100%", label: "Self-Taught" },
 ] as const;
 
 const socials = [
@@ -140,30 +140,38 @@ export function About() {
                 className="text-base leading-relaxed mb-3"
                 style={{ color: "var(--text-secondary)" }}
               >
-                I started my AI engineering journey in 2023 through GIAIC,
-                with a focus on building practical, real-world systems. I&apos;ve
-                worked on autonomous agents, RAG pipelines with live data, and
-                full-stack applications containerized with Docker and deployed
-                on Kubernetes.
+                I started my journey as a full-stack developer, but I kept
+                noticing a recurring problem: businesses didn&apos;t just need
+                more apps, they needed their work done faster and without the
+                manual headache. That&apos;s what pushed me into the world of
+                AI automation.
               </p>
               <p
                 className="text-base leading-relaxed mb-3"
                 style={{ color: "var(--text-secondary)" }}
               >
-                My workflow is spec-driven — I define clear requirements and
-                system architecture before writing code. This ensures
-                everything I build is reliable, scalable, and maintainable
-                from day one.
+                Since 2023, I&apos;ve been building production-ready AI systems
+                that handle real tasks—like customer support, internal
+                workflows, and data processing. My focus is simple: build
+                something that actually works in the real world, not just a
+                demo.
+              </p>
+              <p
+                className="text-base leading-relaxed mb-3"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                What makes my approach different is how I plan before building.
+                I follow a &apos;spec-driven&apos; workflow where requirements,
+                architecture, and edge cases are defined upfront. This reduces
+                surprises, keeps systems clean, and makes them easier to scale.
               </p>
               <p
                 className="text-base leading-relaxed"
                 style={{ color: "var(--text-secondary)" }}
               >
-                I care about the problem as much as the solution. Whether
-                it&apos;s reducing operational costs through automation or
-                building AI that answers from your company&apos;s own data,
-                the goal is always the same: a system that works in
-                production, not just in a demo.
+                I care about keeping things simple, reliable, and genuinely
+                useful. If repetitive work is slowing your team down or you
+                want to add AI to your workflow, let&apos;s talk.
               </p>
             </motion.div>
 

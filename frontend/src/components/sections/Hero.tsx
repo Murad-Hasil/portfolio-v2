@@ -192,9 +192,9 @@ export function Hero({
           className="text-base sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
           style={{ color: "var(--text-secondary)" }}
         >
-          I build AI systems that run 24/7 — at a fraction of the cost of a
-          human employee. From autonomous agents to RAG pipelines and
-          production-grade web applications for businesses worldwide.
+          I help businesses save time and cut costs by replacing repetitive
+          work with AI systems that run automatically—so you can stop managing
+          manual tasks and focus on growing your business.
         </motion.p>
 
         {/* Tech pills */}
