@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://muradhasil.dev";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://murad-hasil-portfolio-v2-xi.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     siteName: "Murad Hasil Portfolio",
     title: "Murad Hasil — AI Automation Engineer & Full-Stack Developer",
     description:
-      "I build AI systems that run 24/7 — at a fraction of the cost of a human employee.",
+      "I help businesses save time and cut costs by replacing repetitive work with AI systems that run automatically—so you can stop managing manual tasks and focus on growing your business.",
     images: [
       {
         url: `${siteUrl}/opengraph-image`,
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Murad Hasil — AI Automation Engineer & Full-Stack Developer",
     description:
-      "I build AI systems that run 24/7 — at a fraction of the cost of a human employee.",
+      "I help businesses save time and cut costs by replacing repetitive work with AI systems that run automatically—so you can stop managing manual tasks and focus on growing your business.",
     images: [`${siteUrl}/opengraph-image`],
   },
   robots: { index: true, follow: true },
