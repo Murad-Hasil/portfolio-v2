@@ -200,7 +200,7 @@ export function About() {
                   border: "1px solid rgba(99,102,241,0.2)",
                 }}
               >
-                AI Engineer
+                AI Automation Engineer
               </span>
             </motion.div>
 
