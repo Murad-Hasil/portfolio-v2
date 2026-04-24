@@ -134,7 +134,7 @@ export default function OgImage() {
               letterSpacing: 1,
             }}
           >
-            {"// AI Automation Engineer & Full-Stack Developer"}
+            {"// AI Automation Engineer"}
           </div>
 
           {/* Name */}

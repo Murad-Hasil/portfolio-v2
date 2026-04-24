@@ -2,7 +2,7 @@
 
 ## Who Is Murad Hasil?
 
-Murad Hasil is an AI Automation Engineer and Full-Stack Developer based in Karachi, Pakistan. He specialises in building autonomous AI systems, intelligent chatbots, and scalable full-stack web applications for businesses worldwide.
+Murad Hasil is an AI Automation Engineer based in Karachi, Pakistan. He specialises in building autonomous AI systems that replace repetitive business work — from 24/7 customer support agents to full workflow automation — for businesses worldwide.
 
 With 2+ years of hands-on experience, Murad has built production-grade systems that handle real business workloads — from a 24/7 omnichannel AI customer support agent to a cloud-native todo app evolved through 5 Kubernetes phases. His work is grounded in spec-driven development, meaning every project starts with a clear specification before any code is written.
 
@@ -12,7 +12,7 @@ Murad started his journey as a full-stack developer, but kept noticing a recurri
 
 Since 2023, he has been building production-ready AI systems that handle real tasks — like customer support, internal workflows, and data processing. His focus is simple: build something that actually works in the real world, not just a demo.
 
-What makes his approach different is how he plans before building. He follows a spec-driven workflow where requirements, architecture, and edge cases are defined upfront. This reduces surprises, keeps systems clean, and makes them easier to scale.
+What makes his approach different is how he plans before building anything. Before writing code, he breaks the project down step-by-step — starting with a clear understanding of the problem, then defining how the system should work, and finally turning that into a structured build plan. This includes mapping different scenarios so nothing breaks later. This approach reduces confusion, avoids rework, and ensures the system runs reliably once it's live.
 
 He has completed 4 featured portfolio projects, each production-deployed with live infrastructure, test suites, and documented specs.
 
@@ -24,10 +24,10 @@ He has completed 4 featured portfolio projects, each production-deployed with li
 
 ## Career Stats
 
-- **2+ years** of experience with AI and full-stack development
-- **5+ hackathons** completed (including 4 major Panaversity hackathons)
-- **20+ technologies** used in production
-- **4 featured portfolio projects** — production-deployed with live infrastructure and documented specs
+- **$75K→$1K** — annual cost of one AI system vs. a human FTE (from CRM Digital FTE project)
+- **20 hrs** — weekly admin work automated per system (from Personal AI Employee project)
+- **4 production systems** — deployed with live infrastructure and documented specs
+- **24/7 uptime** — no sick days, no downtime in production deployments
 
 ## Contact
 

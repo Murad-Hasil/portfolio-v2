@@ -11,11 +11,11 @@
 | **Primary Tool** | Claude Code CLI |
 | **Author** | Murad Hasil |
 | **Target** | International Freelancing (Upwork / Fiverr) |
-| **Status** | Version 1.7 — **LIVE ✅** (content copy update complete) |
+| **Status** | Version 1.9 — **LIVE ✅** (services & CTA update complete) |
 | **Live Frontend** | https://murad-hasil-portfolio-v2-xi.vercel.app |
 | **Live Backend** | https://mb-murad-portfolio-v2.hf.space |
 | **Development Environment** | WSL Ubuntu (required — see Phase 0) |
-| **Last Updated** | 2026-04-21 |
+| **Last Updated** | 2026-04-24 |
 
 ---
 
@@ -943,12 +943,12 @@ After building, use Playwright MCP to verify all 5 category tabs work.
 
 **4 Services to Show:**
 
-| Service | Target Client | Key Deliverable |
+| Service | Target Client | Outcome |
 |---|---|---|
-| AI Chatbot & Agent Development | Businesses wanting 24/7 AI support | Custom chatbot with memory, tools, MCP |
-| Business Automation | Operations teams | Workflow automation, AI agents, Python scripts |
-| Full-Stack Web Apps | Startups, SMBs | Next.js + FastAPI + PostgreSQL, deployed |
-| RAG / Knowledge Base Systems | Businesses with documents | Document Q&A, knowledge chatbot |
+| Customer Support Automation | Businesses tired of answering the same customer questions every day | Faster responses, lower support workload, and consistent customer experience |
+| Business Process Automation | Teams spending hours on repetitive tasks like data entry, follow-ups, or reports | Save hours every week, reduce errors, and free up your team's time |
+| AI Knowledge Base (answers from your data) | Businesses where people keep asking the same questions internally or externally | Faster access to information and less dependency on team members |
+| Custom AI Tools for Your Business | Businesses that need something built around how they actually work | A system that works exactly the way your business operates and scales with it |
 
 **Prompt for Claude Code:**
 ```
@@ -1479,6 +1479,8 @@ The portfolio itself demonstrates competency:
 | 1.5 | 2026-04-16 | **SHIPPED** — About bio rewrite (GIAIC origin, spec-driven, production-focused). Badge: "AI Engineer". Stats: 5+ Hackathons / 4 Projects. Skills: LangChain removed, Prompt Engineering + Context Engineering added. Next.js version-agnostic. Spec: `specs/005-about-bio-skills-update/`. Root cause fix: `frontend/context/` manifests must stay in sync with `context/` — Vercel reads from `frontend/`. |
 | 1.6 | 2026-04-16 | **SHIPPED** — Static load fix: `outputFileTracingRoot` + `outputFileTracingIncludes` so Vercel bundles `context/` into serverless functions. Availability badge reads `murad-profile.md` at build time. Spec: `specs/006-fix-static-load/`. |
 | 1.7 | 2026-04-21 | **SHIPPED** — Content copy update (007): hero subtext → human-centric value prop, About bio → 4 paragraphs (spec-driven narrative), 4th stat → 100% Self-Taught, OG/Twitter metadata + siteUrl fallback updated. Spec: `specs/007-content-copy-update/`. |
+| 1.8 | 2026-04-23 | **SHIPPED** — Portfolio copy conversion (008): Services cards redesigned (description + outcome format), About stats replaced with 4 outcome phrases, About bio para 3 rewritten to client-friendly voice. Spec: `specs/008-portfolio-copy-conversion/`. |
+| 1.9 | 2026-04-24 | **SHIPPED** — Services & CTA update (009): Hero primary CTA → WhatsApp, Fiverr CTA block added to Contact left panel, Fiverr link added to Footer, Services full card redesign (new names + descriptions + outcomes), RAG context files synced. Spec: `specs/009-services-cta-update/`. |
 | 2.0 | TBD | After 5+ freelance projects completed |
 
 ---

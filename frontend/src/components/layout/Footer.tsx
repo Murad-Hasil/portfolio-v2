@@ -1,4 +1,4 @@
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle, ExternalLink } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 
 const socialLinks = [
@@ -21,6 +21,11 @@ const socialLinks = [
     label: "Email",
     href: "mailto:mbmuradhasil@gmail.com",
     Icon: Mail,
+  },
+  {
+    label: "Fiverr",
+    href: "https://www.fiverr.com/murad_hasil",
+    Icon: ExternalLink,
   },
 ] as const;
 
@@ -45,7 +50,7 @@ export function Footer() {
               </span>
             </div>
             <p className="text-xs text-[var(--text-muted)] mt-1">
-              AI Automation Engineer &amp; Full-Stack Developer
+              AI Automation for Small Businesses
             </p>
           </div>
 
@@ -71,8 +76,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="mt-8 pt-6 border-t border-[var(--border-subtle)] text-center">
           <p className="text-xs text-[var(--text-muted)]">
-            &copy; {year} Murad Hasil. Built with Next.js, FastAPI &amp; a RAG
-            chatbot that actually knows the code.
+            &copy; {year} Murad Hasil. Built with the same AI stack I sell — Next.js, FastAPI, and an AI assistant that knows the full codebase.
           </p>
         </div>
       </div>

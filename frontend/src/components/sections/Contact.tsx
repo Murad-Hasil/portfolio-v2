@@ -118,7 +118,7 @@ export function Contact() {
               color: "var(--text-primary)",
             }}
           >
-            Let&apos;s Work Together
+            Let&apos;s Automate Your Workflow
           </h2>
           <p
             className="mt-3 text-base max-w-xl mx-auto"
@@ -127,7 +127,7 @@ export function Contact() {
               color: "var(--text-secondary)",
             }}
           >
-            Have a project in mind? Reach out directly or use the form below.
+            Tell me what your team does repeatedly — I&apos;ll tell you if it can be automated, and I&apos;ll be honest if it can&apos;t.
           </p>
         </motion.div>
 
@@ -183,6 +183,17 @@ export function Contact() {
                         {value}
                       </p>
                     )}
+                    {label === "WhatsApp" && (
+                      <p
+                        className="text-xs mt-1"
+                        style={{
+                          fontFamily: "var(--font-space-grotesk)",
+                          color: "var(--text-muted)",
+                        }}
+                      >
+                        Fastest way to reach me — most clients hear back within a few hours.
+                      </p>
+                    )}
                   </div>
                 </div>
               ))}
@@ -220,6 +231,47 @@ export function Contact() {
               ))}
             </div>
 
+            {/* Fiverr CTA */}
+            <div
+              className="rounded-lg px-4 py-4 mt-2"
+              style={{
+                background: "var(--bg-elevated)",
+                border: "1px solid var(--border-subtle)",
+              }}
+            >
+              <p
+                className="text-xs mb-3"
+                style={{
+                  fontFamily: "var(--font-jetbrains-mono)",
+                  color: "var(--accent-cyan)",
+                }}
+              >
+                {"// Or hire me directly"}
+              </p>
+              <a
+                href="https://www.fiverr.com/murad_hasil"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center py-2.5 rounded text-sm font-semibold transition-opacity duration-200 hover:opacity-90 mb-2"
+                style={{
+                  background: "var(--accent-cyan)",
+                  color: "#08080F",
+                  fontFamily: "var(--font-space-grotesk)",
+                }}
+              >
+                View My Fiverr Profile
+              </a>
+              <p
+                className="text-xs text-center"
+                style={{
+                  fontFamily: "var(--font-space-grotesk)",
+                  color: "var(--text-muted)",
+                }}
+              >
+                Browse packages, reviews, and fixed-price options.
+              </p>
+            </div>
+
             {/* Availability note */}
             <div
               className="rounded-lg px-4 py-3 mt-2"
@@ -244,7 +296,7 @@ export function Contact() {
                   color: "var(--text-secondary)",
                 }}
               >
-                Open to new projects. Typically responds within 24 hours.
+                Open to new projects. WhatsApp replies in a few hours — form replies within 24.
               </p>
             </div>
           </motion.div>
@@ -311,6 +363,7 @@ export function Contact() {
                   </div>
                 )}
                 <button
+                  suppressHydrationWarning
                   onClick={() => setStatus("idle")}
                   className="text-sm mt-2 underline"
                   style={{
@@ -389,6 +442,7 @@ export function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Field label="Name" error={errors.name?.message} id="contact-name">
                     <input
+                      suppressHydrationWarning
                       id="contact-name"
                       aria-required="true"
                       aria-invalid={!!errors.name}
@@ -400,6 +454,7 @@ export function Contact() {
                   </Field>
                   <Field label="Email" error={errors.email?.message} id="contact-email">
                     <input
+                      suppressHydrationWarning
                       id="contact-email"
                       type="email"
                       aria-required="true"
@@ -415,6 +470,7 @@ export function Contact() {
                 {/* Subject */}
                 <Field label="Subject" error={errors.subject?.message} id="contact-subject">
                   <input
+                    suppressHydrationWarning
                     id="contact-subject"
                     aria-required="true"
                     aria-invalid={!!errors.subject}
@@ -428,6 +484,7 @@ export function Contact() {
                 {/* Service */}
                 <Field label="Service" error={errors.service?.message} id="contact-service">
                   <select
+                    suppressHydrationWarning
                     id="contact-service"
                     aria-required="true"
                     aria-invalid={!!errors.service}
@@ -447,6 +504,7 @@ export function Contact() {
                 {/* Message */}
                 <Field label="Message" error={errors.message?.message} id="contact-message">
                   <textarea
+                    suppressHydrationWarning
                     id="contact-message"
                     aria-required="true"
                     aria-invalid={!!errors.message}
@@ -460,6 +518,7 @@ export function Contact() {
                 </Field>
 
                 <button
+                  suppressHydrationWarning
                   type="submit"
                   disabled={status === "loading"}
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-lg text-sm font-semibold transition-all duration-200 mt-1"

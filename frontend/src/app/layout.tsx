@@ -121,7 +121,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] antialiased">
+      <body suppressHydrationWarning className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] antialiased">
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>

@@ -15,10 +15,10 @@ type Message = {
 // ── Suggested questions ────────────────────────────────────────────────────────
 
 const SUGGESTED = [
-  "What AI projects have you built?",
+  "What can you automate for my business?",
   "What services do you offer?",
-  "What is your tech stack?",
-  "How can I hire you?",
+  "How much does a project cost?",
+  "How do we get started?",
 ];
 
 // ── Typing indicator ───────────────────────────────────────────────────────────
@@ -314,6 +314,7 @@ export function ChatWidget() {
                 </div>
               </div>
               <button
+                suppressHydrationWarning
                 onClick={() => setOpen(false)}
                 aria-label="Close chat"
                 className="p-1.5 rounded-lg transition-colors"
@@ -345,6 +346,7 @@ export function ChatWidget() {
                   <div className="flex flex-col gap-2">
                     {SUGGESTED.map((q) => (
                       <button
+                        suppressHydrationWarning
                         key={q}
                         onClick={() => sendMessage(q)}
                         className="text-left text-sm px-3 py-2 rounded-lg transition-all duration-150"
@@ -382,6 +384,7 @@ export function ChatWidget() {
               style={{ borderTop: "1px solid var(--border-subtle)" }}
             >
               <input
+                suppressHydrationWarning
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -397,6 +400,7 @@ export function ChatWidget() {
                 }}
               />
               <button
+                suppressHydrationWarning
                 onClick={() => sendMessage(input)}
                 disabled={!input.trim() || isDisabled}
                 aria-label="Send message"
@@ -416,6 +420,7 @@ export function ChatWidget() {
 
       {/* ── FAB ──────────────────────────────────────────────────────────────── */}
       <motion.button
+        suppressHydrationWarning
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close chat" : "Open chat"}
         title="Ask me anything"

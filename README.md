@@ -21,6 +21,8 @@
 - **Projects showcase** — Featured AI projects with filter tabs and case study pages
 - **RAG Chatbot** — Ask anything about my skills, projects, or services. Powered by Groq (Llama-3.3-70b) + Qdrant vector search
 - **Contact form** — Rate-limited (3/hour) with reference number tracking and email notifications via Resend
+- **Availability badge** — Reads `murad-profile.md` at build time; shows live/busy status in the hero
+- **Dynamic OG image** — Auto-generated Open Graph image for social sharing
 - **Dark/light mode** — Persistent theme toggle
 - **Mobile responsive** — Tested at 375px and 1280px
 - **Error boundaries** — Custom 404 and error pages
@@ -144,7 +146,9 @@ Every push to `main` triggers GitHub Actions:
 2. **Test** — pytest with real database/API connections
 3. **Deploy** — Backend subtree pushed to HF Spaces; frontend auto-deploys on Vercel
 
-Required GitHub Secrets: `DATABASE_URL`, `QDRANT_URL`, `QDRANT_API_KEY`, `OPENAI_API_KEY`, `GROQ_API_KEY`, `HUGGINGFACE_TOKEN`
+Required GitHub Secrets: `DATABASE_URL`, `QDRANT_URL`, `QDRANT_API_KEY`, `GROQ_API_KEY`, `HUGGINGFACE_TOKEN`
+
+> `OPENAI_API_KEY` is optional — only needed if `LLM_PROVIDER=openai` in your backend `.env`.
 
 ### Manual Backend Deploy
 
@@ -186,9 +190,10 @@ git push origin main
 
 ## Contact
 
-**Murad Hasil** — AI Automation Engineer & Full-Stack Developer
+**Murad Hasil** — AI Automation Engineer
 
 - Email: mbmuradhasil@gmail.com
 - LinkedIn: https://www.linkedin.com/in/muradhasil/
 - GitHub: https://github.com/Murad-Hasil
 - WhatsApp: +923142241393
+- Fiverr: https://www.fiverr.com/murad_hasil
