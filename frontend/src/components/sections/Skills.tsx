@@ -89,7 +89,7 @@ export function Skills({ initialData }: SkillsProps) {
               color: "var(--text-primary)",
             }}
           >
-            Technical Expertise
+            What I Build With
           </h2>
         </motion.div>
 
@@ -106,6 +106,7 @@ export function Skills({ initialData }: SkillsProps) {
         >
           {tabs.map(([key, cat]) => (
             <button
+              suppressHydrationWarning
               key={key}
               role="tab"
               id={`skills-tab-${key}`}

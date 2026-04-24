@@ -92,6 +92,7 @@ export function Navbar() {
           </a>
 
           <button
+            suppressHydrationWarning
             onClick={toggleTheme}
             aria-label="Toggle theme"
             className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
@@ -116,6 +117,7 @@ export function Navbar() {
         {/* Mobile: theme toggle + hamburger */}
         <div className="flex md:hidden items-center gap-3">
           <button
+            suppressHydrationWarning
             onClick={toggleTheme}
             aria-label="Toggle theme"
             className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"

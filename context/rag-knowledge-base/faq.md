@@ -3,7 +3,7 @@
 ## About Murad
 
 **Q: What does Murad do?**
-Murad Hasil is an AI Automation Engineer and Full-Stack Developer based in Karachi, Pakistan. He builds autonomous AI agents, RAG chatbots, business automation systems, and full-stack web applications. His specialisation is taking a business problem that currently requires human time and building an AI system that handles it automatically — cheaper, faster, and 24/7.
+Murad Hasil is an AI Automation Engineer based in Karachi, Pakistan. He builds autonomous AI agents, RAG chatbots, and business automation systems. His specialisation is taking a business problem that currently requires human time and building an AI system that handles it automatically — cheaper, faster, and 24/7.
 
 **Q: Where is Murad located and what is his timezone?**
 Murad is based in Karachi, Pakistan (UTC+5, Pakistan Standard Time). He works fully remotely with clients worldwide and is available for calls during his working hours. He regularly communicates with international clients on Upwork and Fiverr across different time zones.
@@ -98,10 +98,10 @@ Contact Murad directly for an accurate quote based on your specific requirements
 
 **Q: What services does Murad offer?**
 Murad offers four main services:
-1. **AI Chatbot & Agent Development** — custom AI agents and chatbots with RAG pipelines, tool use, and multi-channel integration
-2. **Business Automation** — Python and n8n automation replacing manual workflows, saving hours per week
-3. **Full-Stack Web Apps** — Next.js + FastAPI applications with PostgreSQL, deployed to cloud with CI/CD
-4. **RAG / Knowledge Base Systems** — vector search systems for company knowledge bases, document Q&A
+1. **Customer Support Automation** — AI systems that handle customer queries 24/7 across chat, email, or web so your team can focus on work that needs a human
+2. **Business Process Automation** — end-to-end automation of repetitive tasks like data entry, follow-ups, or reports, saving hours every week
+3. **AI Knowledge Base (answers from your data)** — AI systems that give instant answers from your documents, SOPs, and data — no searching, no delays
+4. **Custom AI Tools for Your Business** — custom AI systems designed around how your business actually works, not generic tools that don't fit
 
 **Q: What is Murad's availability?**
 Murad is available for freelance projects. He works remotely in UTC+5 (Pakistan Standard Time). Contact him via the form or email to discuss timeline and availability for your specific project.

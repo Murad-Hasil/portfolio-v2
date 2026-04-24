@@ -10,11 +10,11 @@ const ease: Transition = { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] };
 
 /* ── Data sourced from context/murad-profile.md ───────────────────────────── */
 const stats = [
-  { value: "2+", label: "Years Experience" },
-  { value: "5+", label: "Hackathons" },
-  { value: "20+", label: "Technologies" },
-  { value: "100%", label: "Self-Taught" },
-] as const;
+  "Saves hours of manual work every week",
+  "No extra hiring required",
+  "Built on real, working systems",
+  "Runs 24/7 without manual effort",
+];
 
 const socials = [
   {
@@ -160,10 +160,14 @@ export function About() {
                 className="text-base leading-relaxed mb-3"
                 style={{ color: "var(--text-secondary)" }}
               >
-                What makes my approach different is how I plan before building.
-                I follow a &apos;spec-driven&apos; workflow where requirements,
-                architecture, and edge cases are defined upfront. This reduces
-                surprises, keeps systems clean, and makes them easier to scale.
+                What makes my approach different is how I plan before building
+                anything. Before writing code, I break the project down
+                step-by-step — starting with a clear understanding of the
+                problem, then defining how the system should work, and finally
+                turning that into a structured build plan. This includes mapping
+                different scenarios so nothing breaks later. This approach reduces
+                confusion, avoids rework, and ensures the system runs reliably
+                once it&apos;s live.
               </p>
               <p
                 className="text-base leading-relaxed"
@@ -205,33 +209,24 @@ export function About() {
               variants={fadeUp}
               className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8"
             >
-              {stats.map(({ value, label }) => (
+              {stats.map((phrase) => (
                 <div
-                  key={label}
-                  className="rounded-lg p-4 text-center"
+                  key={phrase}
+                  className="rounded-lg p-4 text-center flex items-center justify-center"
                   style={{
                     background: "var(--bg-elevated)",
                     border: "1px solid var(--border-subtle)",
                   }}
                 >
-                  <div
-                    className="text-2xl font-bold mb-0.5"
+                  <p
+                    className="text-sm font-medium leading-snug"
                     style={{
                       fontFamily: "var(--font-space-grotesk)",
-                      color: "var(--accent-cyan)",
+                      color: "var(--text-primary)",
                     }}
                   >
-                    {value}
-                  </div>
-                  <div
-                    className="text-xs"
-                    style={{
-                      fontFamily: "var(--font-jetbrains-mono)",
-                      color: "var(--text-muted)",
-                    }}
-                  >
-                    {label}
-                  </div>
+                    {phrase}
+                  </p>
                 </div>
               ))}
             </motion.div>

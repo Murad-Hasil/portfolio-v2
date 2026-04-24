@@ -48,7 +48,7 @@ const BADGE_STYLES: Record<
 };
 
 /* ── Data (static — sourced from context/murad-profile.md) ──────────────── */
-const techPills = ["Next.js", "FastAPI", "OpenAI", "Kubernetes", "MCP"];
+const techPills = ["automates 20+ hrs/week", "runs while you sleep", "no extra headcount", "always on"];
 
 const socialLinks = [
   {
@@ -134,10 +134,10 @@ export function Hero({
             color: "var(--text-primary)",
           }}
         >
-          AI Automation Engineer
+          Automate the Work That&apos;s
           <br />
           <span style={{ color: "var(--accent-cyan)" }}>
-            &amp; Full-Stack Developer
+            Slowing Your Business Down
           </span>
         </motion.h1>
 
@@ -166,13 +166,13 @@ export function Hero({
         <motion.div variants={fadeUp} className="h-8 mb-6">
           <TypeAnimation
             sequence={[
-              "AI Agent Developer",
+              "handling support for you",
               2000,
-              "Full-Stack Developer",
+              "cutting your busywork",
               2000,
-              "Automation Engineer",
+              "freeing up your team's time",
               2000,
-              "RAG System Builder",
+              "turning your process into a system",
               2000,
             ]}
             wrapper="span"
@@ -224,7 +224,7 @@ export function Hero({
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
         >
           <a
-            href="https://www.fiverr.com/murad_hasil"
+            href="https://wa.me/923142241393"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto px-6 py-3 rounded-md font-semibold text-sm transition-all duration-200"
@@ -235,7 +235,7 @@ export function Hero({
               boxShadow: "0 0 20px rgba(0,212,255,0.25)",
             }}
           >
-            Hire Me on Fiverr
+            Chat on WhatsApp
           </a>
           <a
             href="#projects"

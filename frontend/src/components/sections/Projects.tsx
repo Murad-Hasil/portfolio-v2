@@ -100,6 +100,7 @@ export function Projects({ initialProjects }: ProjectsProps) {
         >
           {FILTERS.map((f) => (
             <button
+              suppressHydrationWarning
               key={f}
               onClick={() => setActiveFilter(f)}
               className="px-4 py-1.5 rounded text-sm transition-all duration-200"

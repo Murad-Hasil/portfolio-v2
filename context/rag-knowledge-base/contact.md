@@ -17,7 +17,7 @@ The contact form on this page asks for:
 - Your name
 - Your email address
 - Subject / project title
-- Service type (AI Chatbot & Agent Development, Business Automation, Full-Stack Web Apps, RAG / Knowledge Base Systems)
+- Service type (AI Chatbot & Agent Development, Business Automation, Full-Stack Web Apps, AI Knowledge Base)
 - Project description (minimum 20 characters)
 
 After submitting, you receive a unique reference number in YYYYMMDD-XXXX format confirming your enquiry was received and logged.
@@ -38,5 +38,5 @@ The contact form enforces a limit of 3 submissions per hour per IP address to pr
 - Custom AI chatbots and agents for customer support, internal tools, or automation
 - Business automation systems (email processing, report generation, workflow automation)
 - Full-stack web applications (SaaS dashboards, customer portals, internal tools)
-- RAG knowledge base systems (AI search over your company documents)
+- AI Knowledge Base systems (AI search over your company documents)
 - Technical consultation on AI architecture and implementation strategy
