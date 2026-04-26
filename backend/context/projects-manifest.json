@@ -2,70 +2,87 @@
   "projects": [
     {
       "id": "crm-digital-fte",
-      "title": "CRM Digital FTE \u2014 Omnichannel AI Customer Success Agent",
+      "title": "CRM Digital FTE — Omnichannel AI Customer Success Agent",
       "slug": "crm-digital-fte",
       "status": "completed",
       "featured": true,
       "category": "AI Agents",
-      "description": "Autonomous AI customer success agent handling Gmail, WhatsApp, and Web Form simultaneously. Built with OpenAI Agents SDK, FastAPI, PostgreSQL with pgvector, Kafka event streaming, and deployed on Kubernetes with auto-scaling.",
-      "problem": "A SaaS company needs 24/7 customer support across 3 channels but human FTEs cost $75,000/year. This Digital FTE operates at under $1,000/year.",
-      "solution": "MCP-powered agent with 5 specialized tools, cross-channel customer identity resolution, sentiment-based escalation, and production Kubernetes deployment.",
+      "description": "Production-grade AI employee handling 24/7 customer support across Gmail, WhatsApp, and Web Form — built in 48-72 hours following the Agent Maturity Model. OpenAI Agents SDK on Groq LLaMA 3.3 70B, FastAPI, Neon PostgreSQL + pgvector RAG, AIOKafka event streaming, and Kubernetes with dual HPA auto-scaling.",
+      "problem": "A growing SaaS company drowning in customer inquiries needs 24/7 support across Email, WhatsApp, and a Web Form — but a human FTE costs $75,000/year plus benefits, training, and management overhead. Every unanswered message after hours is a lost customer.",
+      "solution": "Built across two phases following the Agent Maturity Model: Phase 1 (Incubation) used Claude Code to prototype the system, crystallize requirements into a 5-tool MCP server, and define agent skills. Phase 2 (Specialization) transformed it into a production Custom Agent — OpenAI Agents SDK with pre-LLM guardrails, Kafka for decoupled event streaming (webhooks return in <200ms while AI processes async), Neon PostgreSQL + pgvector for semantic RAG, and Kubernetes with separate HPA policies for API and worker pods.",
       "tech": [
         "OpenAI Agents SDK",
+        "Groq LLaMA 3.3 70B",
         "FastAPI",
-        "PostgreSQL",
-        "Qdrant",
-        "Kafka",
-        "Next.js",
+        "Neon PostgreSQL + pgvector",
+        "AIOKafka",
+        "Next.js 15",
         "Docker",
         "Kubernetes",
-        "Twilio",
-        "Gmail API"
+        "Twilio WhatsApp",
+        "Gmail API + Google Pub/Sub",
+        "MCP Server",
+        "sentence-transformers"
       ],
-      "live_url": "[your deployed URL]",
-      "github_url": "[your GitHub repo URL]",
-      "image": "/projects/crm-digital-fte.png",
+      "live_url": "https://web-form-rouge.vercel.app/",
+      "github_url": "https://github.com/Murad-Hasil/crm-digital-fte",
+      "image": "/projects/crm-fte-swagger.png",
       "gallery": [
         {
-          "src": "/projects/crm-fte-swagger.png",
-          "caption": "FastAPI Swagger UI: 3 channel webhooks (Gmail, WhatsApp, Web Form) + health endpoint"
+          "src": "/projects/crm-fte-webform-v2.png",
+          "caption": "Web Form channel — customer submits a High-Urgent API issue; AI agent picks it up from Kafka within seconds"
         },
         {
-          "src": "/projects/crm-fte-webform-filled.png",
-          "caption": "Support ticket submission: Technical issue with High-Urgent priority routing"
+          "src": "/projects/crm-fte-ticket-v2.png",
+          "caption": "Ticket confirmed — UUID tracking ID generated instantly, AI response guaranteed within 5 minutes"
         },
         {
-          "src": "/projects/crm-fte-ticket-success.png",
-          "caption": "Ticket submitted — unique tracking ID generated, AI agent responds within minutes"
+          "src": "/projects/crm-fte-email-sent.png",
+          "caption": "Gmail channel — AI agent searches knowledge base, composes a formal reply, and sends it via Gmail API"
         },
         {
-          "src": "/projects/crm-fte-github.png",
-          "caption": "GitHub repository: full project structure with specs, FastAPI backend, and K8s configs"
+          "src": "/projects/crm-fte-email-received.png",
+          "caption": "End-to-end proof — customer receives the AI-generated reply with ticket reference in their inbox"
+        },
+        {
+          "src": "/projects/crm-fte-whatsapp.png",
+          "caption": "WhatsApp channel — Twilio Sandbox integration; AI responds conversationally in under 300 characters"
+        },
+        {
+          "src": "/projects/crm-fte-db-schema.png",
+          "caption": "Neon PostgreSQL schema — 8 tables: customers, customer_identifiers, conversations, messages, tickets, knowledge_base, channel_configs, agent_metrics"
+        },
+        {
+          "src": "/projects/crm-fte-docker-services.png",
+          "caption": "Production stack — FastAPI, Kafka, PostgreSQL, worker, and metrics containers all running simultaneously"
         }
       ],
       "metrics": [
-        "Handles 3 channels simultaneously",
-        "P95 response time < 3 seconds",
-        "Cross-channel identification > 95% accuracy",
-        "24/7 uptime with Kubernetes auto-scaling"
+        "$75,000/year human FTE → <$1,000/year AI FTE — 98% cost reduction with true 24/7 uptime and zero sick days",
+        "3 channels live end-to-end: Gmail (Google Pub/Sub push), WhatsApp (Twilio Sandbox), Web Form (Next.js + Vercel)",
+        "45-test suite — 18 guardrail tests, 21 channel formatter tests, 6 full E2E pipeline tests",
+        "Kafka decoupling: webhooks return in <200ms; AI processing happens async — Twilio and Gmail never timeout",
+        "Dual HPA: API pods 3→20, Worker pods 3→30 (70% CPU trigger) + idempotent Kafka producer (acks=all)"
       ],
       "highlights": [
-        "Built custom PostgreSQL CRM with pgvector",
-        "Kafka event streaming for decoupled channel processing",
-        "MCP Server exposing 5 tools to the agent",
-        "HPA auto-scaling: 3-30 pods based on load"
+        "Agent Maturity Model: Phase 1 (Incubation) built MCP server + agent skills using Claude Code; Phase 2 (Specialization) promoted to production @function_tool with Pydantic validation",
+        "Groq tool_use_failed fix — LLaMA 3.3 70B generated malformed XML tool calls; fixed with Literal types + 3-attempt retry with exponential backoff",
+        "Groq 429 handling — worker parses \"try again in Xm Ys\" from error message and sleeps the exact reset duration",
+        "Duplicate email prevention via contextvars — response_sent flag in ProcessingContext; agent calling send_response twice delivers only one email",
+        "asyncio.Queue fallback for HF Spaces — Kafka replaced at runtime (USE_LOCAL_QUEUE=true), same worker code, no Java needed",
+        "Cross-channel identity resolution — same customer on WhatsApp and Email unified via customer_identifiers table"
       ]
     },
     {
       "id": "todo-cloud-ai",
-      "title": "Todo App \u2192 Cloud-Native AI Agent (Spec-Driven Evolution)",
+      "title": "Todo App → Cloud-Native AI Agent (Spec-Driven Evolution)",
       "slug": "todo-cloud-ai",
       "status": "completed",
       "featured": true,
       "category": "Full-Stack + AI",
       "description": "5-phase evolution from a simple Python CLI todo list to a full cloud-native AI agent on Kubernetes. Demonstrates spec-driven development methodology from first principles to production.",
-      "problem": "Show a complete software evolution journey \u2014 from console CLI to AI-powered app to Kubernetes-deployed microservices.",
-      "solution": "5 progressive phases: CLI \u2192 Web App \u2192 AI Chatbot Interface \u2192 Local Kubernetes + HF Spaces with Kafka and Dapr.",
+      "problem": "Show a complete software evolution journey — from console CLI to AI-powered app to Kubernetes-deployed microservices.",
+      "solution": "5 progressive phases: CLI → Web App → AI Chatbot Interface → Local Kubernetes + HF Spaces with Kafka and Dapr.",
       "tech": [
         "Python",
         "Next.js",

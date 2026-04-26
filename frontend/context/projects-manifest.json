@@ -7,20 +7,21 @@
       "status": "completed",
       "featured": true,
       "category": "AI Agents",
-      "description": "Autonomous AI customer success agent handling Gmail, WhatsApp, and Web Form simultaneously. Built with OpenAI Agents SDK on Groq LLaMA 3.3 70B, FastAPI, PostgreSQL with pgvector for RAG, AIOKafka event streaming, and deployed on Kubernetes with dual HPA auto-scaling.",
-      "problem": "A SaaS company needs 24/7 customer support across 3 channels but human FTEs cost $75,000/year. This Digital FTE operates at under $1,000/year with no downtime and no sick days.",
-      "solution": "5-tool OpenAI Agents SDK agent with cross-channel customer identity resolution, pre-LLM guardrails for pricing/legal/aggression, idempotent Kafka pipeline, and production Kubernetes deployment with separate API and worker HPA policies.",
+      "description": "Production-grade AI employee handling 24/7 customer support across Gmail, WhatsApp, and Web Form — built in 48-72 hours following the Agent Maturity Model. OpenAI Agents SDK on Groq LLaMA 3.3 70B, FastAPI, Neon PostgreSQL + pgvector RAG, AIOKafka event streaming, and Kubernetes with dual HPA auto-scaling.",
+      "problem": "A growing SaaS company drowning in customer inquiries needs 24/7 support across Email, WhatsApp, and a Web Form — but a human FTE costs $75,000/year plus benefits, training, and management overhead. Every unanswered message after hours is a lost customer.",
+      "solution": "Built across two phases following the Agent Maturity Model: Phase 1 (Incubation) used Claude Code to prototype the system, crystallize requirements into a 5-tool MCP server, and define agent skills. Phase 2 (Specialization) transformed it into a production Custom Agent — OpenAI Agents SDK with pre-LLM guardrails, Kafka for decoupled event streaming (webhooks return in <200ms while AI processes async), Neon PostgreSQL + pgvector for semantic RAG, and Kubernetes with separate HPA policies for API and worker pods.",
       "tech": [
         "OpenAI Agents SDK",
         "Groq LLaMA 3.3 70B",
         "FastAPI",
-        "PostgreSQL + pgvector",
+        "Neon PostgreSQL + pgvector",
         "AIOKafka",
-        "Next.js",
+        "Next.js 15",
         "Docker",
         "Kubernetes",
-        "Twilio",
-        "Gmail API (Pub/Sub push)",
+        "Twilio WhatsApp",
+        "Gmail API + Google Pub/Sub",
+        "MCP Server",
         "sentence-transformers"
       ],
       "live_url": "https://web-form-rouge.vercel.app/",
@@ -28,39 +29,48 @@
       "image": "/projects/crm-fte-swagger.png",
       "gallery": [
         {
-          "src": "/projects/crm-fte-webform-filled.png",
-          "caption": "Customer submits a High-Urgent technical support ticket — AI agent picks it up within seconds"
+          "src": "/projects/crm-fte-webform-v2.png",
+          "caption": "Web Form channel — customer submits a High-Urgent API issue; AI agent picks it up from Kafka within seconds"
         },
         {
-          "src": "/projects/crm-fte-ticket-success.png",
-          "caption": "Ticket confirmed — unique tracking ID generated, AI response guaranteed within 5 minutes"
+          "src": "/projects/crm-fte-ticket-v2.png",
+          "caption": "Ticket confirmed — UUID tracking ID generated instantly, AI response guaranteed within 5 minutes"
         },
         {
-          "src": "/projects/crm-fte-api-response.png",
-          "caption": "Web Form webhook live — ticket_id created, AI response queued, estimated_response_time returned"
+          "src": "/projects/crm-fte-email-sent.png",
+          "caption": "Gmail channel — AI agent searches knowledge base, composes a formal reply, and sends it via Gmail API"
+        },
+        {
+          "src": "/projects/crm-fte-email-received.png",
+          "caption": "End-to-end proof — customer receives the AI-generated reply with ticket reference in their inbox"
+        },
+        {
+          "src": "/projects/crm-fte-whatsapp.png",
+          "caption": "WhatsApp channel — Twilio Sandbox integration; AI responds conversationally in under 300 characters"
         },
         {
           "src": "/projects/crm-fte-db-schema.png",
-          "caption": "Live PostgreSQL schema — all 8 tables: customers, conversations, messages, tickets, knowledge_base, and more"
+          "caption": "Neon PostgreSQL schema — 8 tables: customers, customer_identifiers, conversations, messages, tickets, knowledge_base, channel_configs, agent_metrics"
         },
         {
           "src": "/projects/crm-fte-docker-services.png",
-          "caption": "Production stack running: API, Kafka, PostgreSQL, metrics, and worker containers all live"
+          "caption": "Production stack — FastAPI, Kafka, PostgreSQL, worker, and metrics containers all running simultaneously"
         }
       ],
       "metrics": [
-        "3 channels handled simultaneously — Gmail (Pub/Sub push), WhatsApp (Twilio), Web Form",
-        "8-table PostgreSQL CRM schema with pgvector cosine similarity RAG",
-        "Dual HPA: API pods 3→20, Worker pods 3→30 (70% CPU trigger)",
-        "Idempotent Kafka producer (acks=all) — zero duplicate ticket processing"
+        "$75,000/year human FTE → <$1,000/year AI FTE — 98% cost reduction with true 24/7 uptime and zero sick days",
+        "3 channels live end-to-end: Gmail (Google Pub/Sub push), WhatsApp (Twilio Sandbox), Web Form (Next.js + Vercel)",
+        "45-test suite — 18 guardrail tests, 21 channel formatter tests, 6 full E2E pipeline tests (no live DB or LLM required)",
+        "Kafka decoupling: webhooks return in <200ms; AI processing happens async — Twilio and Gmail never timeout waiting for LLM",
+        "Dual HPA: API pods 3→20, Worker pods 3→30 (70% CPU trigger) + idempotent Kafka producer (acks=all, zero duplicates)"
       ],
       "highlights": [
-        "5 function_tools: search_knowledge_base (pgvector + ILIKE fallback), create_ticket, get_customer_history (cross-channel last 20 msgs), escalate_to_human, send_response",
-        "Pre-LLM guardrails: keyword check for pricing_inquiry, aggressive_language, legal_threat — agent never sees escalation-worthy messages",
-        "Cross-channel identity resolution via customer_identifiers table — same customer on email and WhatsApp recognized as one record",
-        "contextvars processing context: customer_id, conversation_id, channel set once per Kafka message — no parameter threading",
-        "asyncio.Queue fallback for Hugging Face Spaces deployment — no Java/Kafka required in cloud demo",
-        "Channel-aware response formatting: email gets formal greeting + sign-off, WhatsApp capped at 300 chars, web form triggers email notification"
+        "Agent Maturity Model: Phase 1 (Incubation) built an MCP server with 5 tools + agent skills manifest using Claude Code as the Agent Factory; Phase 2 (Specialization) promoted the same tools to production @function_tool with Pydantic validation and error handling",
+        "Groq tool_use_failed fix — LLaMA 3.3 70B generated malformed XML tool calls; fixed with Literal types on all enum parameters and a 3-attempt retry loop with exponential backoff",
+        "Groq 429 rate-limit handling — instead of fixed backoff, the worker parses 'try again in Xm Ys' from the error message and sleeps the exact reset duration",
+        "Duplicate email prevention via contextvars — response_sent flag stored in ProcessingContext using Python contextvars; even if the agent calls send_response twice, only one email is delivered",
+        "asyncio.Queue fallback for Hugging Face Spaces — Kafka replaced by asyncio.Queue at runtime (USE_LOCAL_QUEUE=true), same worker code, no Java dependency in cloud",
+        "Cross-channel identity resolution — same customer on WhatsApp and Email recognized as one record via customer_identifiers table; full conversation history loaded across channels"
       ]
     },
     {

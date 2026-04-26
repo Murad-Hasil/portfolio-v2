@@ -35,16 +35,14 @@ const fadeUp: Variants = {
 };
 
 function ProficiencyDots({ level }: { level: "advanced" | "intermediate" }) {
-  const count = level === "advanced" ? 3 : 2;
+  if (level !== "advanced") return null;
   return (
-    <div className="flex items-center gap-1" aria-label={level}>
+    <div className="flex items-center gap-1" aria-label="advanced">
       {[1, 2, 3].map((n) => (
         <div
           key={n}
           className="w-1.5 h-1.5 rounded-full"
-          style={{
-            background: n <= count ? "var(--accent-cyan)" : "var(--border-subtle)",
-          }}
+          style={{ background: "var(--accent-cyan)" }}
         />
       ))}
     </div>
@@ -163,18 +161,7 @@ export function Skills({ initialData }: SkillsProps) {
                 >
                   {skill.name}
                 </span>
-                <div className="flex items-center gap-3">
-                  <span
-                    className="text-xs hidden sm:inline"
-                    style={{
-                      fontFamily: "var(--font-jetbrains-mono)",
-                      color: "var(--text-muted)",
-                    }}
-                  >
-                    {skill.level}
-                  </span>
-                  <ProficiencyDots level={skill.level} />
-                </div>
+                <ProficiencyDots level={skill.level} />
               </motion.div>
             ))}
           </motion.div>
@@ -188,38 +175,26 @@ export function Skills({ initialData }: SkillsProps) {
           transition={{ ...ease, delay: 0.3 }}
           className="flex items-center justify-center gap-6 mt-8"
         >
-          {(
-            [
-              { label: "Advanced", count: 3 },
-              { label: "Intermediate", count: 2 },
-            ] as const
-          ).map(({ label, count }) => (
-            <div key={label} className="flex items-center gap-2">
-              <div className="flex gap-1">
-                {[1, 2, 3].map((n) => (
-                  <div
-                    key={n}
-                    className="w-1.5 h-1.5 rounded-full"
-                    style={{
-                      background:
-                        n <= count
-                          ? "var(--accent-cyan)"
-                          : "var(--border-subtle)",
-                    }}
-                  />
-                ))}
-              </div>
-              <span
-                className="text-xs"
-                style={{
-                  fontFamily: "var(--font-jetbrains-mono)",
-                  color: "var(--text-muted)",
-                }}
-              >
-                {label}
-              </span>
+          <div className="flex items-center gap-2">
+            <div className="flex gap-1">
+              {[1, 2, 3].map((n) => (
+                <div
+                  key={n}
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{ background: "var(--accent-cyan)" }}
+                />
+              ))}
             </div>
-          ))}
+            <span
+              className="text-xs"
+              style={{
+                fontFamily: "var(--font-jetbrains-mono)",
+                color: "var(--text-muted)",
+              }}
+            >
+              Advanced
+            </span>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -4,43 +4,73 @@
 
 **Category**: AI Agents | **Status**: Completed | **Featured**: Yes
 
+**Live Demo**: https://web-form-rouge.vercel.app/
+**Backend API**: https://mb-murad-crm-digital-fte-api.hf.space
 **GitHub**: https://github.com/Murad-Hasil/crm-digital-fte
 
 ### What It Does
-An autonomous AI customer success agent that handles Gmail, WhatsApp, and Web Form channels simultaneously — 24/7 without human intervention. It resolves customer queries, identifies the same customer across channels, escalates based on sentiment or keyword triggers, and logs everything to a custom PostgreSQL CRM with pgvector.
+A production-grade AI employee that handles 24/7 customer support across Gmail, WhatsApp, and a Web Support Form — simultaneously, without human intervention. A customer can submit a ticket via the web form, send an email to the Gmail inbox, or message on WhatsApp; the AI agent receives it within seconds, searches the knowledge base, creates a ticket, and sends a channel-appropriate reply. The same customer is recognized across all 3 channels via cross-channel identity resolution.
 
 ### The Business Problem
-A SaaS company needs 24/7 customer support across 3 channels but human FTEs cost $75,000/year each. This Digital FTE operates at under $1,000/year while handling the same volume with no downtime and no sick days.
+A growing SaaS company drowning in customer inquiries needs 24/7 support across Email, WhatsApp, and a Web Form — but a human FTE costs $75,000/year plus benefits, training, and management overhead. Every unanswered message after hours is a lost customer. This Digital FTE operates at under $1,000/year with zero sick days and no downtime.
+
+### How It Was Built — Agent Maturity Model
+Built in 48-72 development hours across two phases:
+
+**Phase 1 — Incubation (Hours 1-16):** Used Claude Code as the Agent Factory to explore the problem space, prototype the core customer interaction loop, and crystallize requirements. Built a working MCP (Model Context Protocol) server exposing 5 tools, defined agent skills (Knowledge Retrieval, Escalation Decision, Channel Adaptation, Customer Identification), and documented 10+ edge cases in a discovery log. Wrote transition checklist before moving to production.
+
+**Phase 2 — Specialization (Hours 17-72):** Transformed the prototype into a production Custom Agent. MCP server tools were promoted to OpenAI Agents SDK @function_tool with Pydantic input validation and try/catch error handling. In-memory state became PostgreSQL tables. Print statements became structured logging + Kafka events. Manual testing became a 45-test pytest suite.
 
 ### Technical Solution
-Built with the OpenAI Agents SDK, the agent uses Groq LLaMA 3.3 70B as the model and exposes 5 function_tools for CRM operations. AIOKafka event streaming (topic: fte.tickets.incoming, acks=all, idempotent producer) decouples the 3 input channels so they process independently. Customer identity resolution uses a customer_identifiers table to match the same person across Gmail, WhatsApp, and web form. Pre-LLM guardrails intercept pricing inquiries, aggressive language, and legal threats before they reach the AI model. Deployed on Kubernetes with dual HPA: API pods scale 3→20, worker pods scale 3→30, both triggered at 70% CPU.
+The agent uses OpenAI Agents SDK configured for Groq LLaMA 3.3 70B via base_url override (OpenAI-compatible API). AIOKafka event streaming (topic: fte.tickets.incoming, acks=all, idempotent producer) decouples the 3 input channels — webhooks return in under 200ms while AI processing happens asynchronously (5-20 seconds). Without Kafka, Twilio and Gmail would timeout waiting for the LLM response. Deployed on Kubernetes with dual HPA.
 
 ### Technologies Used
-OpenAI Agents SDK, Groq LLaMA 3.3 70B, FastAPI, PostgreSQL with pgvector, AIOKafka, Next.js, Docker, Kubernetes, Twilio, Gmail API (Pub/Sub push), sentence-transformers (all-MiniLM-L6-v2)
+OpenAI Agents SDK, Groq LLaMA 3.3 70B (with GPT-4o-mini fallback when Groq quota hit), FastAPI, Neon PostgreSQL + pgvector, AIOKafka, Next.js 15, Docker, Kubernetes, Twilio WhatsApp Sandbox, Gmail API + Google Pub/Sub, MCP Server, sentence-transformers (all-MiniLM-L6-v2)
 
-### The 5 Agent Tools
-1. **search_knowledge_base** — pgvector cosine similarity search with ILIKE keyword fallback; uses all-MiniLM-L6-v2 embeddings
-2. **create_ticket** — always called first; inserts into tickets table linked to conversation and customer
-3. **get_customer_history** — fetches last 20 messages across ALL channels for the same customer (cross-channel context)
+### The 5 Agent Tools (Always in This Order)
+1. **create_ticket** — always called FIRST; creates ticket in PostgreSQL linked to customer and conversation
+2. **get_customer_history** — fetches last 20 messages across ALL channels for the same customer (cross-channel context)
+3. **search_knowledge_base** — pgvector cosine similarity search over product docs with ILIKE keyword fallback
 4. **escalate_to_human** — triggers on pricing inquiry, aggressive language, or legal threats; updates ticket status to 'escalated'
-5. **send_response** — channel-aware formatting: email gets formal greeting + sign-off, WhatsApp capped at 300 chars, web form triggers email notification
+5. **send_response** — always called LAST; channel-aware: email gets formal greeting + 500-word limit, WhatsApp capped at 300 chars, web form sends email notification to customer
 
-### Database Schema
-8 PostgreSQL tables: customers, customer_identifiers, conversations, messages, tickets, knowledge_base (with VECTOR(1536) pgvector column), channel_configs, agent_metrics
+### Channel Flow Details
+- **Gmail**: Email received → Gmail API → Google Pub/Sub notification → FastAPI webhook → Kafka → Worker → Groq AI Agent → Gmail API reply
+- **WhatsApp**: WhatsApp message → Twilio → FastAPI webhook → Kafka → Worker → Groq AI Agent → Twilio reply
+- **Web Form**: User submits Next.js form → FastAPI webhook → Kafka → Worker → Groq AI Agent → ticket stored + email notification sent
+
+### Database Schema — 8 Neon PostgreSQL Tables
+customers, customer_identifiers (cross-channel matching by email/phone/whatsapp), conversations, messages, tickets (full lifecycle), knowledge_base (384-dim pgvector embeddings), channel_configs, agent_metrics (response latency tracking)
+
+### Real Engineering Challenges Solved
+- **Groq tool_use_failed**: LLaMA 3.3 70B generated malformed XML tool calls. Fixed with Literal types on all enum parameters and a 3-attempt retry loop with exponential backoff.
+- **Groq 429 rate limiting**: Instead of a fixed backoff, the worker parses "try again in Xm Ys" from the error message body and sleeps the exact reset duration.
+- **Duplicate emails**: Agent was calling send_response twice in some flows. Fixed with a response_sent flag stored in Python contextvars ProcessingContext — no matter how many times the agent calls send_response, only the first call delivers the email.
+- **asyncpg Python 3.14 bug**: search_path setting was not applying. Fixed by using fully qualified public.tablename in all queries.
+- **Groq role mapping**: Groq rejects 'customer' and 'agent' roles. Mapped to 'user' and 'assistant' in the history loader.
+- **HF Spaces deployment**: Kafka cannot run in Hugging Face free tier (no Java). Added USE_LOCAL_QUEUE=true env var — asyncio.Queue replaces Kafka at runtime, same worker code.
+- **Ticket ID mismatch**: DB was generating a new UUID ignoring the web form's ticket ID. Fixed by pre-seeding the ticket UUID from channel_message_id.
 
 ### Key Highlights
-- 5 function_tools via @function_tool decorator (OpenAI Agents SDK) — not MCP
+- Agent Maturity Model: Incubation prototype (MCP + Claude Code) → Production Custom Agent (OpenAI Agents SDK + Kafka + K8s) in one continuous build
 - Pre-LLM guardrails: keyword check for pricing_inquiry, aggressive_language, legal_threat — agent never sees escalation-worthy messages
-- Cross-channel identity resolution via customer_identifiers table — same customer on email and WhatsApp recognized as one record
-- contextvars processing context: customer_id, conversation_id, channel set once per Kafka message — no parameter threading
-- asyncio.Queue fallback for Hugging Face Spaces deployment — no Java/Kafka required in cloud demo
-- Dual HPA: API pods 3→20, Worker pods 3→30 (separate policies — workers scale more aggressively for LLM calls)
+- Cross-channel identity resolution: same customer on WhatsApp and Email recognized as one record via customer_identifiers table
+- contextvars processing context: customer_id, conversation_id, channel set once per Kafka message — no parameter threading needed
+- asyncio.Queue fallback for Hugging Face Spaces — no Java/Kafka required in cloud demo; same code path
+- MCP Server (mcp_server.py) exposes the same 5 tools for Claude Desktop / Cursor integration (incubation phase artifact kept)
+
+### Test Suite — 45 Tests
+- test_agent.py: 18 tests covering guardrail logic and edge cases (empty message, pricing inquiry, legal threat, profanity, angry customer)
+- test_channels.py: 21 tests covering channel formatters (email formal tone, WhatsApp 300-char limit, web form email trigger)
+- test_e2e.py: 6 full pipeline tests (mocked DB + Runner — no live DB, Kafka, or LLM required)
 
 ### Measurable Outcomes
-- 3 channels handled simultaneously — Gmail (Pub/Sub push), WhatsApp (Twilio), Web Form
+- $75,000/year human FTE → under $1,000/year AI FTE — 98% cost reduction with true 24/7 uptime
+- 3 channels live end-to-end: Gmail (Google Pub/Sub push), WhatsApp (Twilio Sandbox), Web Form (Next.js + Vercel)
+- Kafka webhooks return in under 200ms — AI processes async in 5-20 seconds, no channel timeout
+- Dual HPA: API pods 3→20, Worker pods 3→30 (70% CPU trigger)
 - Idempotent Kafka producer (acks=all) — zero duplicate ticket processing
-- API HPA: 3→20 pods, Worker HPA: 3→30 pods (70% CPU trigger)
-- Under $1,000/year operating cost vs $75,000/year for a human FTE
+- 45 tests pass with no live infrastructure required
 
 ---
 

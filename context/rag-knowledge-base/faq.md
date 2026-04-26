@@ -12,7 +12,7 @@ Murad is based in Karachi, Pakistan (UTC+5, Pakistan Standard Time). He works fu
 Murad has 2+ years of experience with AI and full-stack development. He has completed 10+ projects and 4 major hackathons, all with production deployments. He has been studying at the Governor Initiative for AI, Web3 & Metaverse (GIAIC) in Karachi.
 
 **Q: Where did Murad study?**
-Murad is enrolled at the Governor Initiative for AI, Web3 & Metaverse (GIAIC) in Karachi, Pakistan. This is a government-backed program focused on Applied AI, Cloud-Native Development, and Autonomous Agents. He is also enrolled in the Clawdbot Crash Course (3 months, in progress).
+Murad is enrolled at the Governor Initiative for AI, Web3 & Metaverse (GIAIC) in Karachi, Pakistan. This is a government-backed program focused on Applied AI, Cloud-Native Development, and Autonomous Agents. He is also learning OpenClaw — a local-first Personal AI Agent Platform (in progress).
 
 **Q: Is Murad a GIAIC student?**
 Yes. Murad is a student at GIAIC (Governor Initiative for AI, Web3 & Metaverse) in Karachi, Pakistan — a government-backed AI education program.

@@ -19,15 +19,15 @@ He has completed 4 featured portfolio projects, each production-deployed with li
 ## Why Hire Murad?
 
 1. **The portfolio proves the product.** This portfolio itself is built with the same technologies Murad sells: Next.js, FastAPI, RAG pipeline, MCP server, and Kubernetes. Every claim is demonstrated in the live codebase.
-2. **Results over resumes.** His projects include measurable outcomes: 85-90% cost savings on automation tasks, P95 response times under 3 seconds, and 24/7 autonomous operation.
+2. **Results over resumes.** His projects include measurable outcomes: 98% cost reduction (CRM Digital FTE: $75K/year human FTE → under $1K/year AI system), 168 hrs/week autonomous operation, and 45 automated tests with zero regressions.
 3. **Spec-driven methodology.** Projects are planned before coded, which means fewer surprises, better documentation, and maintainable systems that clients can take over.
 
 ## Career Stats
 
-- **$75K→$1K** — annual cost of one AI system vs. a human FTE (from CRM Digital FTE project)
-- **20 hrs** — weekly admin work automated per system (from Personal AI Employee project)
-- **4 production systems** — deployed with live infrastructure and documented specs
-- **24/7 uptime** — no sick days, no downtime in production deployments
+- **4 AI systems deployed** — all with live infrastructure, test suites, and documented specs
+- **3 channels automated live** — Gmail (Google Pub/Sub), WhatsApp (Twilio), Web Form (Next.js + Vercel) running simultaneously in CRM Digital FTE
+- **45 automated tests written** — 18 guardrail, 21 channel formatter, 6 E2E pipeline tests (no live DB or LLM required)
+- **168 hrs/week autonomous runtime** — Personal AI Employee runs 24/7 with zero sick days and no downtime
 
 ## Contact
 

@@ -8,9 +8,9 @@
         { "name": "Gemini API", "level": "advanced" },
         { "name": "MCP (Model Context Protocol)", "level": "advanced" },
         { "name": "RAG Systems", "level": "advanced" },
-        { "name": "Qdrant Vector DB", "level": "intermediate" },
+        { "name": "Qdrant Vector DB", "level": "advanced" },
         { "name": "Prompt Engineering", "level": "advanced" },
-        { "name": "Context Engineering", "level": "intermediate" },
+        { "name": "Context Engineering", "level": "advanced" },
         { "name": "Autonomous AI Agents", "level": "advanced" }
       ]
     },
@@ -21,7 +21,7 @@
         { "name": "React 19", "level": "advanced" },
         { "name": "TypeScript", "level": "advanced" },
         { "name": "Tailwind CSS", "level": "advanced" },
-        { "name": "Framer Motion", "level": "intermediate" },
+        { "name": "Framer Motion", "level": "advanced" },
         { "name": "shadcn/ui", "level": "advanced" }
       ]
     },
@@ -42,7 +42,7 @@
         { "name": "Docker", "level": "intermediate" },
         { "name": "Kubernetes", "level": "intermediate" },
         { "name": "Helm Charts", "level": "intermediate" },
-        { "name": "GitHub Actions CI/CD", "level": "intermediate" },
+        { "name": "GitHub Actions CI/CD", "level": "advanced" },
         { "name": "Vercel", "level": "advanced" },
         { "name": "Railway", "level": "intermediate" }
       ]
@@ -50,8 +50,8 @@
     "automation": {
       "label": "Automation",
       "items": [
-        { "name": "n8n", "level": "intermediate" },
-        { "name": "Playwright", "level": "intermediate" },
+        { "name": "OpenClaw (Personal AI Agent)", "level": "intermediate" },
+        { "name": "Playwright", "level": "advanced" },
         { "name": "Python Scripting", "level": "advanced" },
         { "name": "Webhook Integrations", "level": "advanced" }
       ]

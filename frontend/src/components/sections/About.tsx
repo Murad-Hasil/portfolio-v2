@@ -10,10 +10,10 @@ const ease: Transition = { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] };
 
 /* ── Data sourced from context/murad-profile.md ───────────────────────────── */
 const stats = [
-  "Saves hours of manual work every week",
-  "No extra hiring required",
-  "Built on real, working systems",
-  "Runs 24/7 without manual effort",
+  "4 AI systems deployed",
+  "3 channels automated live",
+  "45 automated tests written",
+  "168 hrs/week autonomous runtime",
 ];
 
 const socials = [

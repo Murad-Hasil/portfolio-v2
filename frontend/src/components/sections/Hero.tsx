@@ -224,9 +224,7 @@ export function Hero({
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
         >
           <a
-            href="https://wa.me/923142241393"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#projects"
             className="w-full sm:w-auto px-6 py-3 rounded-md font-semibold text-sm transition-all duration-200"
             style={{
               fontFamily: "var(--font-space-grotesk)",
@@ -235,10 +233,12 @@ export function Hero({
               boxShadow: "0 0 20px rgba(0,212,255,0.25)",
             }}
           >
-            Chat on WhatsApp
+            See My Projects
           </a>
           <a
-            href="#projects"
+            href="https://wa.me/923142241393"
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full sm:w-auto px-6 py-3 rounded-md font-semibold text-sm transition-all duration-200 hover:border-[var(--accent-cyan)] hover:text-[var(--accent-cyan)]"
             style={{
               fontFamily: "var(--font-space-grotesk)",
@@ -246,7 +246,7 @@ export function Hero({
               border: "1px solid var(--border-subtle)",
             }}
           >
-            See My Work
+            Chat on WhatsApp
           </a>
         </motion.div>
 

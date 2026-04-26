@@ -20,7 +20,7 @@ Governor Initiative for AI, Web3 & Metaverse (GIAIC) — Karachi, Pakistan
 Focus: Applied AI, Cloud-Native Development, Autonomous Agents
 
 ## Current Learning
-- Enrolled: Clawdbot Crash Course (3 months — in progress)
+- Enrolled: OpenClaw — Personal AI Agent Platform (in progress)
 - Completed: 5+ Major Hackathons (details in projects-manifest.json)
 
 ## Stats (Accurate)

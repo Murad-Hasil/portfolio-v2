@@ -22,7 +22,7 @@ The CRM Digital FTE project: an omnichannel AI agent handling Gmail, WhatsApp, a
 **Best for**: Teams spending hours on repetitive tasks like data entry, follow-ups, or reports.
 
 ### What It Does
-Murad maps your workflow and automates it end-to-end — using Python scripting, n8n workflows, and AI agents where appropriate — so the same work gets done without manual effort.
+Murad maps your workflow and automates it end-to-end — using Python scripting, AI agents, and automation tools where appropriate — so the same work gets done without manual effort.
 
 ### Outcome
 Save hours every week, reduce errors, and free up your team's time.
