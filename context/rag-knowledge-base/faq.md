@@ -6,7 +6,7 @@
 Murad Hasil is an AI Automation Engineer based in Karachi, Pakistan. He builds autonomous AI agents, RAG chatbots, and business automation systems. His specialisation is taking a business problem that currently requires human time and building an AI system that handles it automatically — cheaper, faster, and 24/7.
 
 **Q: Where is Murad located and what is his timezone?**
-Murad is based in Karachi, Pakistan (UTC+5, Pakistan Standard Time). He works fully remotely with clients worldwide and is available for calls during his working hours. He regularly communicates with international clients on Upwork and Fiverr across different time zones.
+Murad is based in Karachi, Pakistan (UTC+5, Pakistan Standard Time). He works fully remotely with clients worldwide and is available for calls during his working hours. He regularly communicates with worldwide clients on Upwork and Fiverr across different time zones.
 
 **Q: How long has Murad been building AI systems?**
 Murad has 2+ years of experience with AI and full-stack development. He has completed 10+ projects and 4 major hackathons, all with production deployments. He has been studying at the Governor Initiative for AI, Web3 & Metaverse (GIAIC) in Karachi.
@@ -87,7 +87,7 @@ Yes. Murad is a Claude Code specialist. The Todo Cloud-Native AI Agent (Panavers
 ## Hiring & Collaboration
 
 **Q: How do I hire Murad?**
-Submit a project inquiry via the contact form on this page. You can also reach Murad at mbmuradhasil@gmail.com or WhatsApp at +923142241393. He is available on international freelancing platforms.
+Submit a project inquiry via the contact form on this page. You can also reach Murad at mbmuradhasil@gmail.com or WhatsApp at +923142241393. He is available on worldwide freelancing platforms.
 
 **Q: What is Murad's rate / pricing?**
 Pricing depends on project scope. Typical ranges (rough estimates):
@@ -106,8 +106,8 @@ Murad offers four main services:
 **Q: What is Murad's availability?**
 Murad is available for freelance projects. He works remotely in UTC+5 (Pakistan Standard Time). Contact him via the form or email to discuss timeline and availability for your specific project.
 
-**Q: Does Murad work with international clients?**
-Yes. Murad works with international clients on Upwork and Fiverr. He communicates in English and is available for video calls. His projects have been built for international audiences — all copy and documentation is in English.
+**Q: Does Murad work with worldwide clients?**
+Yes. Murad works with worldwide clients on Upwork and Fiverr. He communicates in English and is available for video calls. His projects have been built for worldwide audiences — all copy and documentation is in English.
 
 **Q: Does Murad work with startups?**
 Yes. Murad builds systems designed for production from day one — not demos that break at scale. He uses spec-driven development so requirements are clear before coding begins, reducing scope creep and surprises. The CRM Digital FTE project was built to production-grade standards with Kubernetes auto-scaling and Kafka event streaming.

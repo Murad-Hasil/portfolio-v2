@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | Murad Hasil",
   },
   description:
-    "AI Automation Engineer and Full-Stack Developer specialising in autonomous AI agents, RAG chatbots, and scalable web applications. Available for international freelance projects.",
+    "AI Automation Engineer and Full-Stack Developer specialising in autonomous AI agents, RAG chatbots, and scalable web applications. Available for worldwide freelance projects.",
   keywords: [
     "AI Automation Engineer",
     "AI Agent Developer",

@@ -34,4 +34,4 @@ He has completed 4 featured portfolio projects, each production-deployed with li
 - **Email**: mbmuradhasil@gmail.com
 - **WhatsApp**: +923142241393
 - **GitHub**: https://github.com/Murad-Hasil
-- **Location**: Karachi, Pakistan (works with international clients remotely)
+- **Location**: Karachi, Pakistan (works with worldwide clients remotely)
