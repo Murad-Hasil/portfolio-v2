@@ -8,11 +8,13 @@ With 2+ years of hands-on experience, Murad has built production-grade systems t
 
 ## Professional Background
 
-Murad started his journey as a full-stack developer, but kept noticing a recurring problem: businesses didn't just need more apps — they needed their work done faster and without the manual headache. That's what pushed him into the world of AI automation.
+Murad builds AI systems that help businesses automate repetitive work, reduce operational overhead, and improve how they handle customer support, internal workflows, and data processing.
 
-Since 2023, he has been building production-ready AI systems that handle real tasks — like customer support, internal workflows, and data processing. His focus is simple: build something that actually works in the real world, not just a demo.
+His journey started in full-stack development, but he quickly realized most businesses didn't just need more software — they needed systems that could actually do the work automatically. That shift led him into AI automation.
 
-What makes his approach different is how he plans before building anything. Before writing code, he breaks the project down step-by-step — starting with a clear understanding of the problem, then defining how the system should work, and finally turning that into a structured build plan. This includes mapping different scenarios so nothing breaks later. This approach reduces confusion, avoids rework, and ensures the system runs reliably once it's live.
+Since 2023, he has focused on building production-ready AI systems designed for real business use, not just demos. His work includes custom AI chatbots, RAG knowledge systems, and workflow automation built to solve practical operational problems.
+
+What makes his approach different is spec-driven execution. Before writing code, he defines requirements, workflows, edge cases, and system architecture clearly so every build is reliable, scalable, and structured for real-world deployment. The result: fewer surprises, less rework, and AI systems that genuinely save businesses time and money.
 
 He has completed 4 featured portfolio projects, each production-deployed with live infrastructure, test suites, and documented specs.
 

@@ -10,8 +10,8 @@
 - LinkedIn: https://www.linkedin.com/in/muradhasil/
 
 ## Professional Summary
-AI Automation Engineer specializing in building autonomous AI systems that replace
-repetitive business work. 2+ years building production-grade systems — from 24/7
+AI Automation Engineer specializing in custom AI chatbots, RAG knowledge systems,
+and business automation. 2+ years building production-grade systems — from 24/7
 customer support agents to cloud-native automation — using OpenAI Agents SDK, MCP,
 RAG pipelines, and Kubernetes.
 

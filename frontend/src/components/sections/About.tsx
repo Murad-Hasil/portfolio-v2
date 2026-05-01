@@ -140,42 +140,51 @@ export function About() {
                 className="text-base leading-relaxed mb-3"
                 style={{ color: "var(--text-secondary)" }}
               >
-                I started my journey as a full-stack developer, but I kept
-                noticing a recurring problem: businesses didn&apos;t just need
-                more apps, they needed their work done faster and without the
-                manual headache. That&apos;s what pushed me into the world of
-                AI automation.
+                I build AI systems that help businesses automate repetitive
+                work, reduce operational overhead, and improve how they handle
+                customer support, internal workflows, and data processing.
               </p>
               <p
                 className="text-base leading-relaxed mb-3"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Since 2023, I&apos;ve been building production-ready AI systems
-                that handle real tasks—like customer support, internal
-                workflows, and data processing. My focus is simple: build
-                something that actually works in the real world, not just a
-                demo.
+                My journey started in full-stack development, but I quickly
+                realized most businesses didn&apos;t just need more software,
+                they needed systems that could actually do the work
+                automatically. That shift led me into AI automation.
               </p>
               <p
                 className="text-base leading-relaxed mb-3"
                 style={{ color: "var(--text-secondary)" }}
               >
-                What makes my approach different is how I plan before building
-                anything. Before writing code, I break the project down
-                step-by-step — starting with a clear understanding of the
-                problem, then defining how the system should work, and finally
-                turning that into a structured build plan. This includes mapping
-                different scenarios so nothing breaks later. This approach reduces
-                confusion, avoids rework, and ensures the system runs reliably
-                once it&apos;s live.
+                Since 2023, I&apos;ve focused on building production-ready AI
+                systems designed for real business use, not just demos. My work
+                includes custom AI chatbots, RAG knowledge systems, and
+                workflow automation built to solve practical operational
+                problems.
+              </p>
+              <p
+                className="text-base leading-relaxed mb-3"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                What makes my approach different is spec-driven execution.
+                Before writing code, I define requirements, workflows, edge
+                cases, and system architecture clearly so every build is
+                reliable, scalable, and structured for real-world deployment.
+              </p>
+              <p
+                className="text-base leading-relaxed mb-3"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                The result: fewer surprises, less rework, and AI systems that
+                genuinely save businesses time and money.
               </p>
               <p
                 className="text-base leading-relaxed"
                 style={{ color: "var(--text-secondary)" }}
               >
-                I care about keeping things simple, reliable, and genuinely
-                useful. If repetitive work is slowing your team down or you
-                want to add AI to your workflow, let&apos;s talk.
+                If repetitive manual work is slowing your business down, I
+                build systems designed to fix that. Let&apos;s talk.
               </p>
             </motion.div>
 
