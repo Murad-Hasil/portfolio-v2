@@ -249,7 +249,7 @@ export function Contact() {
                 {"// Or hire me directly"}
               </p>
               <a
-                href="https://www.fiverr.com/murad_hasil"
+                href="https://www.fiverr.com/s/Ldjqx5Y"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full text-center py-2.5 rounded text-sm font-semibold transition-opacity duration-200 hover:opacity-90 mb-2"
